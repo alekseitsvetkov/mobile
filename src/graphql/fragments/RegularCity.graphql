@@ -1,0 +1,26 @@
+fragment RegularCity on City {
+  id     
+  name         
+  overview     
+  wantedCount  
+  visitedCount 
+  latitude     
+  longitude
+  images {
+    ...RegularImage
+  }  
+  userWanted {
+    ...RegularUser
+  }
+  userVisited {
+    ...RegularUser
+  }
+  alternateName {
+    id
+    isoLang
+    alternateName
+    isPreferredName
+    isShortName
+    isHistoric
+  }
+}

@@ -1,0 +1,5 @@
+mutation removeCity($input: ActionCityInput!) {
+  removeCity(input: $input) {
+    ...RegularCity
+  }
+}

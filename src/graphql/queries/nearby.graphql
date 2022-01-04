@@ -1,0 +1,28 @@
+query Nearby(
+  $after: String,
+  $before: String,
+  $first: Int!,
+  $last: Int,
+  $orderBy: CityOrder,
+  $skip: Int
+) {
+  nearby(
+    after: $after,
+    before: $before,
+    first: $first,
+    last: $last,
+    orderBy: $orderBy,
+    skip: $skip
+  ) {
+    edges {
+      cursor
+      node {
+        ...RegularCity
+      }
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
+    totalCount
+  }
+}

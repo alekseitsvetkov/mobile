@@ -1,0 +1,7 @@
+export const Errors: ErrorsType = {
+  SIGN_IN: 'SIGN_IN',
+  SIGN_OUT: 'SIGN_OUT',
+  LOAD_THEME: 'LOAD_THEME',
+  INITIALIZE_FCM: 'INITIALIZE_FCM',
+  UPDATE_FCM_TOKEN: 'UPDATE_FCM_TOKEN',
+};

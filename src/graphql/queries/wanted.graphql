@@ -1,0 +1,30 @@
+query Wanted(
+  $after: String,
+  $before: String,
+  $first: Int!,
+  $last: Int,
+  $orderBy: CityOrder,
+  $skip: Int,
+  $userId: String,
+) {
+  wanted(
+    after: $after,
+    before: $before,
+    first: $first,
+    last: $last,
+    orderBy: $orderBy,
+    skip: $skip,
+    userId: $userId
+  ) {
+    edges {
+      cursor
+      node {
+        ...RegularCity
+      }
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
+    totalCount
+  }
+}

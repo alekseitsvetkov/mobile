@@ -1,0 +1,5 @@
+query Tags {
+  tags {
+    ...RegularTag
+  }
+}

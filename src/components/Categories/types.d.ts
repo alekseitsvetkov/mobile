@@ -1,0 +1,3 @@
+type TCategoryProps = {
+  item: any;
+};

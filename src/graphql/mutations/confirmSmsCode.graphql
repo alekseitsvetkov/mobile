@@ -1,0 +1,3 @@
+mutation confirmSmsCode($phone: String!, $code: String!) {
+  confirmSmsCode(phone: $phone, code: $code)
+}

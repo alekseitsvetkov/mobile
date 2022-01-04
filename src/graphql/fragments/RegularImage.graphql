@@ -1,0 +1,4 @@
+fragment RegularImage on Image {
+  id
+  url
+}

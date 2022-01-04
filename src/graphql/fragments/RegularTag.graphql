@@ -1,0 +1,8 @@
+fragment RegularTag on Tag {
+  id
+  name
+  emoji
+  localizations {
+    ...RegularTagLocalization
+  }
+}

@@ -1,0 +1,5 @@
+fragment RegularTagLocalization on TagLocalization {
+  id
+  name
+  locale
+}

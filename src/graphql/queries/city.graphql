@@ -1,0 +1,5 @@
+query City($id: String!) {
+  city(id: $id) {
+    ...RegularCity
+  }
+}

@@ -1,0 +1,3 @@
+type GalleryProps = {
+  images: string[];
+};

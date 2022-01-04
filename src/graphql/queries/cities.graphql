@@ -1,0 +1,32 @@
+query Cities(
+  $after: String,
+  $before: String,
+  $first: Int!,
+  $input: CitiesInput,
+  $last: Int,
+  $orderBy: CityOrder,
+  $query: String,
+  $skip: Int
+) {
+  cities(
+    after: $after,
+    before: $before,
+    first: $first,
+    input: $input,
+    last: $last,
+    orderBy: $orderBy,
+    query: $query,
+    skip: $skip
+  ) {
+    edges {
+      cursor
+      node {
+        ...RegularCity
+      }
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
+    totalCount
+  }
+}

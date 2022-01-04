@@ -1,0 +1,30 @@
+query Users(
+  $after: String,
+  $before: String,
+  $first: Int!,
+  $last: Int,
+  $orderBy: UserOrder,
+  $query: String,
+  $skip: Int
+) {
+  users(
+    after: $after,
+    before: $before,
+    first: $first,
+    last: $last,
+    orderBy: $orderBy,
+    query: $query,
+    skip: $skip
+  ) {
+    edges {
+      cursor
+      node {
+        ...RegularUser
+      }
+    }
+    pageInfo {
+      ...RegularPageInfo
+    }
+    totalCount
+  }
+}
