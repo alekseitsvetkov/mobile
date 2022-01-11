@@ -1,14 +1,13 @@
 fragment RegularUser on User {
   id
-  phone
-  email
-  username
   name
   avatar
   bio
-  rating
   wantedCount
   visitedCount
   createdAt
   updatedAt
+  profiles {
+    ...RegularProfile
+  }
 }

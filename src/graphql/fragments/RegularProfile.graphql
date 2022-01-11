@@ -1,0 +1,6 @@
+fragment RegularProfile on Profile {
+  id
+  name
+  avatar
+  provider
+}

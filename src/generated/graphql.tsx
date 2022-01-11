@@ -1,6 +1,7 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -97,40 +98,20 @@ export enum Locale {
   Ru = 'RU'
 }
 
-export type LoginInput = {
-  password: Scalars['String'];
-  username: Scalars['String'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   addCity: City;
-  confirmSmsCode: Scalars['Boolean'];
   deletePhoto: Scalars['Boolean'];
-  login: Auth;
   moveCity: City;
   refreshToken: Token;
   removeCity: City;
-  sendSmsCode: Scalars['Boolean'];
-  signup: Auth;
-  updateProfile: Scalars['Boolean'];
+  signInWithGoogle: Auth;
   uploadPhoto: Scalars['Boolean'];
 };
 
 
 export type MutationAddCityArgs = {
   input: ActionCityInput;
-};
-
-
-export type MutationConfirmSmsCodeArgs = {
-  code: Scalars['String'];
-  phone: Scalars['String'];
-};
-
-
-export type MutationLoginArgs = {
-  input: LoginInput;
 };
 
 
@@ -144,18 +125,8 @@ export type MutationRemoveCityArgs = {
 };
 
 
-export type MutationSendSmsCodeArgs = {
-  phone: Scalars['String'];
-};
-
-
-export type MutationSignupArgs = {
-  input: SignupInput;
-};
-
-
-export type MutationUpdateProfileArgs = {
-  input: UpdateProfileInput;
+export type MutationSignInWithGoogleArgs = {
+  idToken: Scalars['String'];
 };
 
 
@@ -177,6 +148,14 @@ export type PageInfo = {
   startCursor?: Maybe<Scalars['String']>;
 };
 
+export type Profile = {
+  __typename?: 'Profile';
+  avatar?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  provider: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   cities: CityConnection;
@@ -194,14 +173,14 @@ export type Query = {
 
 
 export type QueryCitiesArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  input?: Maybe<CitiesInput>;
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  query?: Maybe<Scalars['String']>;
-  skip?: Maybe<Scalars['Int']>;
+  input?: InputMaybe<CitiesInput>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  query?: InputMaybe<Scalars['String']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -211,22 +190,22 @@ export type QueryCityArgs = {
 
 
 export type QueryNearbyArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  skip?: Maybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type QueryPopularArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  skip?: Maybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -236,43 +215,35 @@ export type QueryUserArgs = {
 
 
 export type QueryUsersArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<UserOrder>;
-  query?: Maybe<Scalars['String']>;
-  skip?: Maybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<UserOrder>;
+  query?: InputMaybe<Scalars['String']>;
+  skip?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type QueryVisitedArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  skip?: Maybe<Scalars['Int']>;
-  userId?: Maybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  skip?: InputMaybe<Scalars['Int']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 
 export type QueryWantedArgs = {
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  skip?: Maybe<Scalars['Int']>;
-  userId?: Maybe<Scalars['String']>;
-};
-
-export type SignupInput = {
-  code: Scalars['String'];
-  name: Scalars['String'];
-  password: Scalars['String'];
-  phone: Scalars['String'];
-  username: Scalars['String'];
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  skip?: InputMaybe<Scalars['Int']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 export type Story = {
@@ -317,26 +288,17 @@ export type Token = {
   refreshToken: Scalars['String'];
 };
 
-export type UpdateProfileInput = {
-  bio: Scalars['String'];
-  name: Scalars['String'];
-  username: Scalars['String'];
-};
-
 export type User = {
   __typename?: 'User';
   avatar?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
-  /** Identifies the date and time when the object was created. */
   createdAt: Scalars['DateTime'];
-  email?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  followersCount: Scalars['Int'];
+  followingCount: Scalars['Int'];
+  id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
-  phone: Scalars['String'];
-  rating: Scalars['Int'];
-  /** Identifies the date and time when the object was last updated. */
+  profiles?: Maybe<Array<Profile>>;
   updatedAt: Scalars['DateTime'];
-  username: Scalars['String'];
   visitedCount: Scalars['Int'];
   wantedCount: Scalars['Int'];
 };
@@ -358,51 +320,38 @@ export type UserOrder = {
   direction: OrderDirection;
 };
 
-export type RegularCityFragment = { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined };
+export type RegularCityFragment = { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined };
 
 export type RegularImageFragment = { __typename?: 'Image', id: string, url: string };
 
 export type RegularPageInfoFragment = { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined };
 
+export type RegularProfileFragment = { __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string };
+
 export type RegularTagFragment = { __typename?: 'Tag', id: string, name: string, emoji: string, localizations?: Array<{ __typename?: 'TagLocalization', id: string, name: string, locale: Locale }> | null | undefined };
 
 export type RegularTagLocalizationFragment = { __typename?: 'TagLocalization', id: string, name: string, locale: Locale };
 
-export type RegularUserFragment = { __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any };
+export type RegularUserFragment = { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined };
 
 export type AddCityMutationVariables = Exact<{
   input: ActionCityInput;
 }>;
 
 
-export type AddCityMutation = { __typename?: 'Mutation', addCity: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } };
-
-export type ConfirmSmsCodeMutationVariables = Exact<{
-  phone: Scalars['String'];
-  code: Scalars['String'];
-}>;
-
-
-export type ConfirmSmsCodeMutation = { __typename?: 'Mutation', confirmSmsCode: boolean };
+export type AddCityMutation = { __typename?: 'Mutation', addCity: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } };
 
 export type DeletePhotoMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type DeletePhotoMutation = { __typename?: 'Mutation', deletePhoto: boolean };
 
-export type LoginMutationVariables = Exact<{
-  input: LoginInput;
-}>;
-
-
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'Auth', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any } } };
-
 export type MoveCityMutationVariables = Exact<{
   input: ActionCityInput;
 }>;
 
 
-export type MoveCityMutation = { __typename?: 'Mutation', moveCity: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } };
+export type MoveCityMutation = { __typename?: 'Mutation', moveCity: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } };
 
 export type RefreshTokenMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -414,28 +363,14 @@ export type RemoveCityMutationVariables = Exact<{
 }>;
 
 
-export type RemoveCityMutation = { __typename?: 'Mutation', removeCity: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } };
+export type RemoveCityMutation = { __typename?: 'Mutation', removeCity: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } };
 
-export type SendSmsCodeMutationVariables = Exact<{
-  phone: Scalars['String'];
+export type SignInWithGoogleMutationVariables = Exact<{
+  idToken: Scalars['String'];
 }>;
 
 
-export type SendSmsCodeMutation = { __typename?: 'Mutation', sendSmsCode: boolean };
-
-export type SignupMutationVariables = Exact<{
-  input: SignupInput;
-}>;
-
-
-export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'Auth', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any } } };
-
-export type UpdateProfileMutationVariables = Exact<{
-  input: UpdateProfileInput;
-}>;
-
-
-export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile: boolean };
+export type SignInWithGoogleMutation = { __typename?: 'Mutation', signInWithGoogle: { __typename?: 'Auth', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined } } };
 
 export type UploadPhotoMutationVariables = Exact<{
   file: Scalars['Upload'];
@@ -445,54 +380,54 @@ export type UploadPhotoMutationVariables = Exact<{
 export type UploadPhotoMutation = { __typename?: 'Mutation', uploadPhoto: boolean };
 
 export type CitiesQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  input?: Maybe<CitiesInput>;
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  query?: Maybe<Scalars['String']>;
-  skip?: Maybe<Scalars['Int']>;
+  input?: InputMaybe<CitiesInput>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  query?: InputMaybe<Scalars['String']>;
+  skip?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type CitiesQuery = { __typename?: 'Query', cities: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
+export type CitiesQuery = { __typename?: 'Query', cities: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
 
 export type CityQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type CityQuery = { __typename?: 'Query', city: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } };
+export type CityQuery = { __typename?: 'Query', city: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any } };
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined } };
 
 export type NearbyQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  skip?: Maybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  skip?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type NearbyQuery = { __typename?: 'Query', nearby: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
+export type NearbyQuery = { __typename?: 'Query', nearby: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
 
 export type PopularQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  skip?: Maybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  skip?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type PopularQuery = { __typename?: 'Query', popular: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
+export type PopularQuery = { __typename?: 'Query', popular: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
 
 export type TagsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -504,46 +439,46 @@ export type UserQueryVariables = Exact<{
 }>;
 
 
-export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any } };
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined } };
 
 export type UsersQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<UserOrder>;
-  query?: Maybe<Scalars['String']>;
-  skip?: Maybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<UserOrder>;
+  query?: InputMaybe<Scalars['String']>;
+  skip?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type UsersQuery = { __typename?: 'Query', users: { __typename?: 'UserConnection', totalCount: number, edges?: Array<{ __typename?: 'UserEdge', cursor: string, node: { __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
+export type UsersQuery = { __typename?: 'Query', users: { __typename?: 'UserConnection', totalCount: number, edges?: Array<{ __typename?: 'UserEdge', cursor: string, node: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
 
 export type VisitedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  skip?: Maybe<Scalars['Int']>;
-  userId?: Maybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  skip?: InputMaybe<Scalars['Int']>;
+  userId?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type VisitedQuery = { __typename?: 'Query', visited: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
+export type VisitedQuery = { __typename?: 'Query', visited: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
 
 export type WantedQueryVariables = Exact<{
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   first: Scalars['Int'];
-  last?: Maybe<Scalars['Int']>;
-  orderBy?: Maybe<CityOrder>;
-  skip?: Maybe<Scalars['Int']>;
-  userId?: Maybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<CityOrder>;
+  skip?: InputMaybe<Scalars['Int']>;
+  userId?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type WantedQuery = { __typename?: 'Query', wanted: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, phone: string, email?: string | null | undefined, username: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, rating: number, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
+export type WantedQuery = { __typename?: 'Query', wanted: { __typename?: 'CityConnection', totalCount: number, edges?: Array<{ __typename?: 'CityEdge', cursor: string, node: { __typename?: 'City', id: string, name: string, overview?: string | null | undefined, wantedCount: number, visitedCount: number, latitude?: number | null | undefined, longitude?: number | null | undefined, images?: Array<{ __typename?: 'Image', id: string, url: string }> | null | undefined, userWanted?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, userVisited?: Array<{ __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, wantedCount: number, visitedCount: number, createdAt: any, updatedAt: any, profiles?: Array<{ __typename?: 'Profile', id: string, name?: string | null | undefined, avatar?: string | null | undefined, provider: string }> | null | undefined }> | null | undefined, alternateName?: Array<{ __typename?: 'AlternateName', id: string, isoLang?: string | null | undefined, alternateName?: string | null | undefined, isPreferredName?: boolean | null | undefined, isShortName?: boolean | null | undefined, isHistoric?: boolean | null | undefined }> | null | undefined } }> | null | undefined, pageInfo: { __typename?: 'PageInfo', endCursor?: string | null | undefined, hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined } } };
 
 export const RegularImageFragmentDoc = gql`
     fragment RegularImage on Image {
@@ -551,22 +486,29 @@ export const RegularImageFragmentDoc = gql`
   url
 }
     `;
+export const RegularProfileFragmentDoc = gql`
+    fragment RegularProfile on Profile {
+  id
+  name
+  avatar
+  provider
+}
+    `;
 export const RegularUserFragmentDoc = gql`
     fragment RegularUser on User {
   id
-  phone
-  email
-  username
   name
   avatar
   bio
-  rating
   wantedCount
   visitedCount
   createdAt
   updatedAt
+  profiles {
+    ...RegularProfile
+  }
 }
-    `;
+    ${RegularProfileFragmentDoc}`;
 export const RegularCityFragmentDoc = gql`
     fragment RegularCity on City {
   id
@@ -654,38 +596,6 @@ export function useAddCityMutation(baseOptions?: Apollo.MutationHookOptions<AddC
 export type AddCityMutationHookResult = ReturnType<typeof useAddCityMutation>;
 export type AddCityMutationResult = Apollo.MutationResult<AddCityMutation>;
 export type AddCityMutationOptions = Apollo.BaseMutationOptions<AddCityMutation, AddCityMutationVariables>;
-export const ConfirmSmsCodeDocument = gql`
-    mutation confirmSmsCode($phone: String!, $code: String!) {
-  confirmSmsCode(phone: $phone, code: $code)
-}
-    `;
-export type ConfirmSmsCodeMutationFn = Apollo.MutationFunction<ConfirmSmsCodeMutation, ConfirmSmsCodeMutationVariables>;
-
-/**
- * __useConfirmSmsCodeMutation__
- *
- * To run a mutation, you first call `useConfirmSmsCodeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useConfirmSmsCodeMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [confirmSmsCodeMutation, { data, loading, error }] = useConfirmSmsCodeMutation({
- *   variables: {
- *      phone: // value for 'phone'
- *      code: // value for 'code'
- *   },
- * });
- */
-export function useConfirmSmsCodeMutation(baseOptions?: Apollo.MutationHookOptions<ConfirmSmsCodeMutation, ConfirmSmsCodeMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<ConfirmSmsCodeMutation, ConfirmSmsCodeMutationVariables>(ConfirmSmsCodeDocument, options);
-      }
-export type ConfirmSmsCodeMutationHookResult = ReturnType<typeof useConfirmSmsCodeMutation>;
-export type ConfirmSmsCodeMutationResult = Apollo.MutationResult<ConfirmSmsCodeMutation>;
-export type ConfirmSmsCodeMutationOptions = Apollo.BaseMutationOptions<ConfirmSmsCodeMutation, ConfirmSmsCodeMutationVariables>;
 export const DeletePhotoDocument = gql`
     mutation deletePhoto {
   deletePhoto
@@ -716,43 +626,6 @@ export function useDeletePhotoMutation(baseOptions?: Apollo.MutationHookOptions<
 export type DeletePhotoMutationHookResult = ReturnType<typeof useDeletePhotoMutation>;
 export type DeletePhotoMutationResult = Apollo.MutationResult<DeletePhotoMutation>;
 export type DeletePhotoMutationOptions = Apollo.BaseMutationOptions<DeletePhotoMutation, DeletePhotoMutationVariables>;
-export const LoginDocument = gql`
-    mutation login($input: LoginInput!) {
-  login(input: $input) {
-    accessToken
-    refreshToken
-    user {
-      ...RegularUser
-    }
-  }
-}
-    ${RegularUserFragmentDoc}`;
-export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
-
-/**
- * __useLoginMutation__
- *
- * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useLoginMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [loginMutation, { data, loading, error }] = useLoginMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
-      }
-export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
-export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
-export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const MoveCityDocument = gql`
     mutation moveCity($input: ActionCityInput!) {
   moveCity(input: $input) {
@@ -852,40 +725,9 @@ export function useRemoveCityMutation(baseOptions?: Apollo.MutationHookOptions<R
 export type RemoveCityMutationHookResult = ReturnType<typeof useRemoveCityMutation>;
 export type RemoveCityMutationResult = Apollo.MutationResult<RemoveCityMutation>;
 export type RemoveCityMutationOptions = Apollo.BaseMutationOptions<RemoveCityMutation, RemoveCityMutationVariables>;
-export const SendSmsCodeDocument = gql`
-    mutation sendSmsCode($phone: String!) {
-  sendSmsCode(phone: $phone)
-}
-    `;
-export type SendSmsCodeMutationFn = Apollo.MutationFunction<SendSmsCodeMutation, SendSmsCodeMutationVariables>;
-
-/**
- * __useSendSmsCodeMutation__
- *
- * To run a mutation, you first call `useSendSmsCodeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSendSmsCodeMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [sendSmsCodeMutation, { data, loading, error }] = useSendSmsCodeMutation({
- *   variables: {
- *      phone: // value for 'phone'
- *   },
- * });
- */
-export function useSendSmsCodeMutation(baseOptions?: Apollo.MutationHookOptions<SendSmsCodeMutation, SendSmsCodeMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<SendSmsCodeMutation, SendSmsCodeMutationVariables>(SendSmsCodeDocument, options);
-      }
-export type SendSmsCodeMutationHookResult = ReturnType<typeof useSendSmsCodeMutation>;
-export type SendSmsCodeMutationResult = Apollo.MutationResult<SendSmsCodeMutation>;
-export type SendSmsCodeMutationOptions = Apollo.BaseMutationOptions<SendSmsCodeMutation, SendSmsCodeMutationVariables>;
-export const SignupDocument = gql`
-    mutation signup($input: SignupInput!) {
-  signup(input: $input) {
+export const SignInWithGoogleDocument = gql`
+    mutation signInWithGoogle($idToken: String!) {
+  signInWithGoogle(idToken: $idToken) {
     accessToken
     refreshToken
     user {
@@ -894,63 +736,32 @@ export const SignupDocument = gql`
   }
 }
     ${RegularUserFragmentDoc}`;
-export type SignupMutationFn = Apollo.MutationFunction<SignupMutation, SignupMutationVariables>;
+export type SignInWithGoogleMutationFn = Apollo.MutationFunction<SignInWithGoogleMutation, SignInWithGoogleMutationVariables>;
 
 /**
- * __useSignupMutation__
+ * __useSignInWithGoogleMutation__
  *
- * To run a mutation, you first call `useSignupMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSignupMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useSignInWithGoogleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignInWithGoogleMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [signupMutation, { data, loading, error }] = useSignupMutation({
+ * const [signInWithGoogleMutation, { data, loading, error }] = useSignInWithGoogleMutation({
  *   variables: {
- *      input: // value for 'input'
+ *      idToken: // value for 'idToken'
  *   },
  * });
  */
-export function useSignupMutation(baseOptions?: Apollo.MutationHookOptions<SignupMutation, SignupMutationVariables>) {
+export function useSignInWithGoogleMutation(baseOptions?: Apollo.MutationHookOptions<SignInWithGoogleMutation, SignInWithGoogleMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<SignupMutation, SignupMutationVariables>(SignupDocument, options);
+        return Apollo.useMutation<SignInWithGoogleMutation, SignInWithGoogleMutationVariables>(SignInWithGoogleDocument, options);
       }
-export type SignupMutationHookResult = ReturnType<typeof useSignupMutation>;
-export type SignupMutationResult = Apollo.MutationResult<SignupMutation>;
-export type SignupMutationOptions = Apollo.BaseMutationOptions<SignupMutation, SignupMutationVariables>;
-export const UpdateProfileDocument = gql`
-    mutation updateProfile($input: UpdateProfileInput!) {
-  updateProfile(input: $input)
-}
-    `;
-export type UpdateProfileMutationFn = Apollo.MutationFunction<UpdateProfileMutation, UpdateProfileMutationVariables>;
-
-/**
- * __useUpdateProfileMutation__
- *
- * To run a mutation, you first call `useUpdateProfileMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateProfileMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateProfileMutation, { data, loading, error }] = useUpdateProfileMutation({
- *   variables: {
- *      input: // value for 'input'
- *   },
- * });
- */
-export function useUpdateProfileMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProfileMutation, UpdateProfileMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateProfileMutation, UpdateProfileMutationVariables>(UpdateProfileDocument, options);
-      }
-export type UpdateProfileMutationHookResult = ReturnType<typeof useUpdateProfileMutation>;
-export type UpdateProfileMutationResult = Apollo.MutationResult<UpdateProfileMutation>;
-export type UpdateProfileMutationOptions = Apollo.BaseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>;
+export type SignInWithGoogleMutationHookResult = ReturnType<typeof useSignInWithGoogleMutation>;
+export type SignInWithGoogleMutationResult = Apollo.MutationResult<SignInWithGoogleMutation>;
+export type SignInWithGoogleMutationOptions = Apollo.BaseMutationOptions<SignInWithGoogleMutation, SignInWithGoogleMutationVariables>;
 export const UploadPhotoDocument = gql`
     mutation uploadPhoto($file: Upload!) {
   uploadPhoto(file: $file)
