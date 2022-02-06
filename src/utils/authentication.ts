@@ -1,6 +1,6 @@
 // import { Errors } from '_app/constants';
 // import { messaging, crashlytics, auth } from './firebase';
-import { StorageErrorTypes, removeToken } from './storage';
+import {StorageErrorTypes, removeToken} from './storage';
 
 export const handleLoginError = async (errorType: string) => {
   switch (errorType) {
@@ -21,8 +21,8 @@ export const signOut = async () => {
     // await messaging.deleteToken();
     await removeToken();
     // await auth.signOut();
-  } catch ({ message }) {
-    console.log({ message });
+  } catch ({message}) {
+    console.log({message});
     // crashlytics.recordCustomError(Errors.SIGN_OUT, message);
   }
 };

@@ -1,6 +1,5 @@
-import {ApolloProvider} from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import {
-  useFonts,
   Inter_100Thin,
   Inter_200ExtraLight,
   Inter_300Light,
@@ -10,24 +9,25 @@ import {
   Inter_700Bold,
   Inter_800ExtraBold,
   Inter_900Black,
+  useFonts,
 } from "@expo-google-fonts/inter";
 import {
   ActionSheetProvider,
   connectActionSheet,
 } from "@expo/react-native-action-sheet";
-import {IconSizes} from "_app/constants";
-import {AppContext, AppContextProvider} from "_app/context";
+import { IconSizes } from "_app/constants";
+import { AppContext, AppContextProvider } from "_app/context";
 import "_app/i18n";
-import {LoadingIndicator} from "_app/layout";
+import { LoadingIndicator } from "_app/layout";
 import RootStackNavigation from "_app/navigations";
-import {client} from "_app/services/graphql";
-import {ThemeStatic} from "_app/theme/Colors";
-import {loadThemeType} from "_app/utils/storage";
+import { client } from "_app/services/graphql";
+import { ThemeStatic } from "_app/theme/Colors";
+import { loadThemeType } from "_app/utils/storage";
 import AppLoading from "expo-app-loading";
 // import {StatusBar} from "expo-status-bar";
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import {StyleSheet, Text, View} from "react-native";
-import {LogBox} from "react-native";
+import { LogBox } from "react-native";
 import Config from "react-native-config";
 import * as Sentry from "sentry-expo";
 
@@ -44,7 +44,7 @@ if (Config.NODE_ENV !== "dev") {
 }
 
 const SafeAreaApp = () => {
-  const {toggleTheme} = useContext(AppContext);
+  const { toggleTheme } = useContext(AppContext);
 
   const [initializing, setInitializing] = useState(true);
 

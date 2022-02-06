@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
-import { StyleSheet, TextInput, View, Text } from 'react-native';
+import {radius} from "_app/constants";
+import {AppContext} from "_app/context";
+import {HandleAvailableColor, Typography} from "_app/theme";
+import {ThemeColors} from "_app/types/theme";
+import {normalize} from "_app/utils/dimensions";
+import React, {useContext} from "react";
+import {StyleSheet, TextInput, View, Text} from "react-native";
 
-import { radius } from '_app/constants';
-import { AppContext } from '_app/context';
-import { HandleAvailableColor, Typography } from '_app/theme';
-import { ThemeColors } from '_app/types/theme';
-import { normalize } from '_app/utils/dimensions';
-
-const { FontWeights } = Typography;
+const {FontWeights} = Typography;
 
 interface InputProps {
   ref: React.Ref<any>;
@@ -41,9 +40,9 @@ const Input: React.FC<InputProps> = React.forwardRef(
       editable,
       secureTextEntry,
     },
-    ref,
+    ref
   ) => {
-    const { theme } = useContext(AppContext);
+    const {theme} = useContext(AppContext);
     return (
       <View style={styles(theme).container}>
         {label && <Text style={styles(theme).labelTextStyle}>{label}</Text>}
@@ -63,6 +62,7 @@ const Input: React.FC<InputProps> = React.forwardRef(
             editable={editable || true}
             selectTextOnFocus={editable || true}
             secureTextEntry={secureTextEntry}
+            clearButtonMode="always"
           />
         </View>
         {children && <View>{children}</View>}
@@ -70,13 +70,13 @@ const Input: React.FC<InputProps> = React.forwardRef(
         {error && <Text style={styles(theme).errorLogin}>{error}</Text>}
       </View>
     );
-  },
+  }
 );
 
 const styles = (theme = {} as ThemeColors) =>
   StyleSheet.create({
     container: {
-      width: '100%',
+      width: "100%",
     },
     containerInput: {
       backgroundColor: theme.background,
@@ -95,8 +95,8 @@ const styles = (theme = {} as ThemeColors) =>
     errorLogin: {
       color: HandleAvailableColor.false,
       marginVertical: normalize(10),
-      width: '100%',
-      alignItems: 'center',
+      width: "100%",
+      alignItems: "center",
     },
   });
 
