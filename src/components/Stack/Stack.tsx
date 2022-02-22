@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 
-import { s } from './styles';
+import {Text, View} from 'react-native';
 
-export const Stack = ({ data }) => {
-  return (
-    <View style={s.container}>
-      <Text>Stack</Text>
-    </View>
-  );
+import {s} from './styles';
+
+export const Stack = ({data}) => {
+    return (
+        <View style={s.container}>
+            <Text>Stack</Text>
+        </View>
+    );
 };

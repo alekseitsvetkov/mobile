@@ -1,3 +1,3 @@
 type TCategoryProps = {
-  item: any;
+    item: any;
 };

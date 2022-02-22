@@ -1,25 +1,26 @@
-import React, { useContext } from 'react';
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useContext} from 'react';
 
-import { AppContext } from '_app/context';
-import { ThemeColors } from '_app/types/theme';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
-import { s } from './styles';
+import {ThemeColors} from '_app/types/theme';
+import {AppContext} from '_app/context';
 
-export const ProfileStatsItem = ({ name, number, action }: TProfileStatsItemProps) => {
-  const { theme } = useContext(AppContext);
+import {s} from './styles';
 
-  return (
-    <TouchableOpacity activeOpacity={0.6} onPress={action} style={s.item}>
-      <Text style={[s.number, styles(theme).text]}>{number}</Text>
-      <Text style={[s.name, styles(theme).text]}>{name}</Text>
-    </TouchableOpacity>
-  );
+export const ProfileStatsItem = ({name, number, action}: TProfileStatsItemProps) => {
+    const {theme} = useContext(AppContext);
+
+    return (
+        <TouchableOpacity activeOpacity={0.6} onPress={action} style={s.item}>
+            <Text style={[s.number, styles(theme).text]}>{number}</Text>
+            <Text style={[s.name, styles(theme).text]}>{name}</Text>
+        </TouchableOpacity>
+    );
 };
 
 const styles = (theme = {} as ThemeColors) =>
-  StyleSheet.create({
-    text: {
-      color: theme.text01,
-    },
-  });
+    StyleSheet.create({
+        text: {
+            color: theme.text01,
+        },
+    });

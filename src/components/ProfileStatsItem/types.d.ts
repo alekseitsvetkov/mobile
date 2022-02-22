@@ -1,5 +1,5 @@
 type TProfileStatsItemProps = {
-  name: string;
-  number: number;
-  action?: () => void;
+    name: string;
+    number: number;
+    action?: () => void;
 };

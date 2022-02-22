@@ -1,9 +1,9 @@
-import { Platform } from 'react-native';
+import {Platform} from 'react-native';
 
-const { OS } = Platform;
+const {OS} = Platform;
 
 export const PLATFORM = {
-  OS,
-  IS_ANDROID: OS === 'android',
-  IS_IOS: OS === 'ios',
+    OS,
+    IS_ANDROID: OS === 'android',
+    IS_IOS: OS === 'ios',
 };

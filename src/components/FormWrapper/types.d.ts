@@ -1,4 +1,4 @@
 type TFormWrapper = {
-  children: JSX.Elements;
-  verticalOffset?: number;
+    children: JSX.Elements;
+    verticalOffset?: number;
 };

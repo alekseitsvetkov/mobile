@@ -1,32 +1,33 @@
-import { StackActions, NavigationContainerRef, NavigationAction } from '@react-navigation/native';
 import * as React from 'react';
+
+import {NavigationAction, NavigationContainerRef, StackActions} from '@react-navigation/native';
 
 export const navigationRef: React.RefObject<NavigationContainerRef> = React.createRef();
 
 export function navigate(name: string, params?: object): void {
-  navigationRef.current?.navigate(name, params);
+    navigationRef.current?.navigate(name, params);
 }
 
 export function dispatch(action: NavigationAction): void {
-  navigationRef.current?.dispatch(action);
+    navigationRef.current?.dispatch(action);
 }
 
 export function replace(name: string, params?: object): void {
-  navigationRef.current?.dispatch(StackActions.replace(name, params));
+    navigationRef.current?.dispatch(StackActions.replace(name, params));
 }
 
 export function push(name: string, params?: object): void {
-  navigationRef.current?.dispatch(StackActions.push(name, params));
+    navigationRef.current?.dispatch(StackActions.push(name, params));
 }
 
 export function goBack(): void {
-  navigationRef.current?.goBack();
+    navigationRef.current?.goBack();
 }
 
 export const navigation = {
-  navigate,
-  dispatch,
-  replace,
-  push,
-  goBack,
+    navigate,
+    dispatch,
+    replace,
+    push,
+    goBack,
 };

@@ -1,4 +1,4 @@
 type UserWithRatingProps = {
-  index: number;
-  item: any;
+    index: number;
+    item: any;
 };

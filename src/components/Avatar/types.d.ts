@@ -1,5 +1,5 @@
 type TAvatarProps = {
-  src?: string;
-  username: string;
-  small?: boolean;
+    src?: string;
+    username: string;
+    small?: boolean;
 };

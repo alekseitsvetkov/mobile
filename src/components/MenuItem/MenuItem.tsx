@@ -1,40 +1,41 @@
-import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import { TouchableHighlight, View, Text, Alert, StyleSheet } from 'react-native';
+import React, {useContext} from 'react';
+
+import {Alert, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+
 import Icon from 'react-native-vector-icons/Feather';
+import {useTranslation} from 'react-i18next';
 
-import { tBase } from '_app/constants';
-import { AppContext } from '_app/context';
-import { ThemeColors } from '_app/types/theme';
+import {ThemeColors} from '_app/types/theme';
+import {AppContext} from '_app/context';
+import {tBase} from '_app/constants';
 
-import { s } from './styles';
+import {s} from './styles';
 
-const MenuItem = ({ name, icon, action }: MenuItemProps) => {
-  const { t } = useTranslation();
-  const { theme } = useContext(AppContext);
+const MenuItem = ({name, icon, action}: MenuItemProps) => {
+    const {t} = useTranslation();
+    const {theme} = useContext(AppContext);
 
-  return (
-    <TouchableHighlight
-      underlayColor={theme.gray01}
-      onPress={action ? action : () => Alert.alert(t('utils:wip'))}
-      style={s.menuItem}
-    >
-      <View style={s.container}>
-        <View style={s.wrap}>
-          <Icon name={icon} size={22} color={theme.text01} />
-          <Text style={[tBase, s.menuItemText, styles(theme).text]}>{t(`settings:${name}`)}</Text>
-        </View>
-        <Icon name="chevron-right" size={18} color={theme.text01} />
-      </View>
-    </TouchableHighlight>
-  );
+    return (
+        <TouchableHighlight
+            underlayColor={theme.gray01}
+            onPress={action ? action : () => Alert.alert(t('utils:wip'))}
+            style={s.menuItem}>
+            <View style={s.container}>
+                <View style={s.wrap}>
+                    <Icon name={icon} size={22} color={theme.text01} />
+                    <Text style={[tBase, s.menuItemText, styles(theme).text]}>{t(`settings:${name}`)}</Text>
+                </View>
+                <Icon name="chevron-right" size={18} color={theme.text01} />
+            </View>
+        </TouchableHighlight>
+    );
 };
 
 const styles = (theme = {} as ThemeColors) =>
-  StyleSheet.create({
-    text: {
-      color: theme.text01,
-    },
-  });
+    StyleSheet.create({
+        text: {
+            color: theme.text01,
+        },
+    });
 
 export default MenuItem;

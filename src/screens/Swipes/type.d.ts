@@ -1,4 +1,4 @@
 export type TSwipe = {
-  photo: string;
-  title: string;
+    photo: string;
+    title: string;
 };

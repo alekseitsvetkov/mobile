@@ -1,4 +1,4 @@
 type TSafeAreaWrapper = {
-  children: React.ReactNode;
-  center?: boolean;
+    children: React.ReactNode;
+    center?: boolean;
 };

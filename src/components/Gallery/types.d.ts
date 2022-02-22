@@ -1,3 +1,3 @@
 type GalleryProps = {
-  images: string[];
+    images: string[];
 };

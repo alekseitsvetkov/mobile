@@ -1,4 +1,4 @@
 type TStoryProps = {
-  url: string;
-  viewed: boolean;
+    url: string;
+    viewed: boolean;
 };

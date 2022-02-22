@@ -1,5 +1,5 @@
 type TListFilterItemProps = {
-  name: string;
-  title: string;
-  selected: string;
+    name: string;
+    title: string;
+    selected: string;
 };

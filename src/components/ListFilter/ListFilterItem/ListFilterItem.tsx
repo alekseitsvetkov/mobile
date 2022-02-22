@@ -1,19 +1,19 @@
 import React from 'react';
-import { TouchableHighlight, Text } from 'react-native';
 
-import { colors } from '_app/constants';
-import { navigation } from '_app/services/navigations';
+import {Text, TouchableHighlight} from 'react-native';
 
-import { s } from './styles';
+import {navigation} from '_app/services/navigations';
+import {colors} from '_app/constants';
 
-export const ListFilterItem = ({ name, icon }: TListFilterItemProps) => {
-  return (
-    <TouchableHighlight
-      style={s.filterItem}
-      underlayColor={colors.mainGray}
-      onPress={() => navigation.navigate('Search')}
-    >
-      {icon ? icon : <Text style={s.filterItemTitle}>{name}</Text>}
-    </TouchableHighlight>
-  );
+import {s} from './styles';
+
+export const ListFilterItem = ({name, icon}: TListFilterItemProps) => {
+    return (
+        <TouchableHighlight
+            style={s.filterItem}
+            underlayColor={colors.mainGray}
+            onPress={() => navigation.navigate('Search')}>
+            {icon ? icon : <Text style={s.filterItemTitle}>{name}</Text>}
+        </TouchableHighlight>
+    );
 };

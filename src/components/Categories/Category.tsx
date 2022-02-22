@@ -1,30 +1,31 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { tBase } from '_app/constants';
-import { navigation } from '_app/services/navigations';
-import { withLocalization } from '_app/utils/helpers';
+import {Text, View} from 'react-native';
 
-import { s } from './styles';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export const Category = ({ item }: TCategoryProps) => {
-  const { name, emoji, locale, localizations } = item;
+import {withLocalization} from '_app/utils/helpers';
+import {navigation} from '_app/services/navigations';
+import {tBase} from '_app/constants';
 
-  return (
-    <TouchableOpacity
-      onPress={() =>
-        navigation.navigate('ItemsByCategory', {
-          item,
-        })
-      }
-      activeOpacity={0.8}
-      style={s.category}
-    >
-      <View style={s.categoryEmoji}>
-        <Text>{emoji}</Text>
-      </View>
-      <Text style={tBase}>{withLocalization('name', name, locale, localizations)}</Text>
-    </TouchableOpacity>
-  );
+import {s} from './styles';
+
+export const Category = ({item}: TCategoryProps) => {
+    const {name, emoji, locale, localizations} = item;
+
+    return (
+        <TouchableOpacity
+            onPress={() =>
+                navigation.navigate('ItemsByCategory', {
+                    item,
+                })
+            }
+            activeOpacity={0.8}
+            style={s.category}>
+            <View style={s.categoryEmoji}>
+                <Text>{emoji}</Text>
+            </View>
+            <Text style={tBase}>{withLocalization('name', name, locale, localizations)}</Text>
+        </TouchableOpacity>
+    );
 };

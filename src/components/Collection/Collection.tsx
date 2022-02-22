@@ -1,23 +1,23 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
 
-import { navigation } from '_app/services/navigations';
+import {Pressable, Text, View} from 'react-native';
 
-import { s } from './styles';
+import {navigation} from '_app/services/navigations';
 
-export const Collection = ({ item }: TCollectionProps) => {
-  const { title } = item;
+import {s} from './styles';
 
-  return (
-    <Pressable
-      key={item.id}
-      onPress={() => {
-        navigation.navigate('Search');
-      }}
-    >
-      <View style={s.item}>
-        <Text style={s.title}>{title}</Text>
-      </View>
-    </Pressable>
-  );
+export const Collection = ({item}: TCollectionProps) => {
+    const {title} = item;
+
+    return (
+        <Pressable
+            key={item.id}
+            onPress={() => {
+                navigation.navigate('Search');
+            }}>
+            <View style={s.item}>
+                <Text style={s.title}>{title}</Text>
+            </View>
+        </Pressable>
+    );
 };
