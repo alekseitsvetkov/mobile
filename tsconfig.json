@@ -4,7 +4,9 @@
     "strict": true,
     "paths": {
       "_app/*": ["./src/*"],
-      "_assets": ["./assets"]
+      "_assets": ["./assets"],
+      "_hooks/*": ["./src/hooks/*"],
+      "_constants/*":  ["./src/constants/*"],
     },
-  }
+  },
 }
