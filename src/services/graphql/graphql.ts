@@ -9,13 +9,13 @@ import {PLATFORM} from '_app/constants';
 
 const cache = new InMemoryCache();
 
+const API_LOCAL_MAIN = 'http://10.0.2.2:3000/graphql';
+const API_LOCAL_ANDROID = 'http://localhost:3000/graphql';
+const API_LOCAL = PLATFORM.IS_ANDROID ? API_LOCAL_MAIN : API_LOCAL_ANDROID;
+const API_PROD = 'https://api.skeetry.com/graphql';
+
 const httpLink = createUploadLink({
-    uri:
-        process.env.NODE_ENV === 'dev'
-            ? PLATFORM.IS_ANDROID
-                ? 'http://10.0.2.2:3000/graphql'
-                : 'http://localhost:3000/graphql'
-            : 'https://api.skeetry.com/graphql',
+    uri: process.env.NODE_ENV === 'dev' ? API_LOCAL : API_PROD,
     credentials: 'include',
     fetch,
 });

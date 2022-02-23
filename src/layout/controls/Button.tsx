@@ -13,7 +13,7 @@ const {FontWeights, FontSizes} = Typography;
 interface ButtonProps {
     Icon?: React.FC;
     label: string;
-    onPress: any;
+    onPress: () => void;
     loading: boolean;
     containerStyle?: StyleProp<ViewStyle>;
     labelStyle?: StyleProp<TextStyle>;

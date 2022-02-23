@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 
 import {StyleSheet, Text, View} from 'react-native';
 
@@ -48,7 +48,7 @@ export const LoginScreen = () => {
             });
             setInitializing(false);
         }
-    }, [response]);
+    }, [response, signInWithGoogle]);
 
     const userData = data?.signInWithGoogle;
 
@@ -60,7 +60,7 @@ export const LoginScreen = () => {
             updateMe(user);
             navigation.navigate('RootTab');
         }
-    }, [data]);
+    }, [data, updateMe]);
 
     const navigateToApp = async () => {
         try {
@@ -71,7 +71,7 @@ export const LoginScreen = () => {
         }
     };
 
-    const initialize = async () => {
+    const initialize = useCallback(async () => {
         const token = await loadToken();
         if (token) {
             await navigateToApp();
@@ -79,11 +79,11 @@ export const LoginScreen = () => {
 
         setInitializing(false);
         SplashScreen.hide();
-    };
+    }, []);
 
     useEffect(() => {
         initialize();
-    }, []);
+    }, [initialize]);
 
     let content = <LoadingIndicator color={theme.accent} size={IconSizes.x1} />;
 
