@@ -2,7 +2,6 @@ import React from 'react';
 
 import {useColorScheme} from 'react-native';
 
-import {THomeTabParamList} from 'types';
 import Icon from 'react-native-vector-icons/Feather';
 import {TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
@@ -11,8 +10,6 @@ import {BottomTabNavigationOptions, createBottomTabNavigator} from '@react-navig
 import {HomeScreen, LocationsScreen, ProfileScreen, SearchScreen} from '_app/screens';
 import {colors} from '_app/constants';
 import {TabBarComponent} from '_app/components/BottomTabBar';
-
-// import { SwipesScreen } from '_app/screens';
 
 export const iosTransitionSpec = {
     animation: 'spring',
@@ -236,23 +233,6 @@ const HomeTab = () => {
                 component={SearchScreen}
                 name="Search"
             />
-            {/* <Tab.Screen
-        options={({ route }) => ({
-          tabBarIcon: ({ focused }) => (
-            <Icon name="globe" size={26} color={
-                focused
-                  ? theme === 'dark'
-                    ? colors.white
-                    : colors.gray900
-                  : theme === 'dark'
-                  ? colors.gray500
-                  : colors.gray300
-              } />
-          ),
-        })}
-        component={SwipesStack}
-        name="SwipesPage"
-      /> */}
             <Tab.Screen
                 options={({route}) => ({
                     tabBarVisible: getTabBarVisible(route),
