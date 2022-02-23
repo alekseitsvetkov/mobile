@@ -4,7 +4,7 @@ import {Easing, useColorScheme} from 'react-native';
 
 import {enableScreens} from 'react-native-screens';
 import {useTranslation} from 'react-i18next';
-import {StackNavigationOptions, TransitionPresets, createStackNavigator} from '@react-navigation/stack';
+import {StackNavigationOptions, createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
 import {navigationRef} from '_app/services/navigations';
@@ -20,7 +20,6 @@ import {
     LanguageScreen,
     MapScreen,
     NotificationsScreen,
-    OfflineScreen,
     ProfileUserScreen,
     SearchScreen,
     SettingsScreen,
@@ -155,16 +154,6 @@ const Index = () => {
                     }}
                     name="ProfileChange"
                     component={ProfileChangeScreen}
-                />
-                <RootStack.Screen
-                    options={{
-                        ...TransitionPresets.ModalTransition,
-                        headerShown: false,
-                        headerBackTitle: t('utils:back'),
-                        presentation: 'card',
-                    }}
-                    name="Offline"
-                    component={OfflineScreen}
                 />
                 <RootStack.Screen
                     options={{
