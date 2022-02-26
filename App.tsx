@@ -1,98 +1,68 @@
-import React, {useContext, useEffect, useState} from 'react';
-
 import {LogBox} from 'react-native';
-
-import '_app/i18n';
 
 import * as Sentry from 'sentry-expo';
 import Config from 'react-native-config';
-import AppLoading from 'expo-app-loading';
-import {ActionSheetProvider, connectActionSheet} from '@expo/react-native-action-sheet';
-import {
-    Inter_100Thin,
-    Inter_200ExtraLight,
-    Inter_300Light,
-    Inter_400Regular,
-    Inter_500Medium,
-    Inter_600SemiBold,
-    Inter_700Bold,
-    Inter_800ExtraBold,
-    Inter_900Black,
-    useFonts,
-} from '@expo-google-fonts/inter';
-import {ApolloProvider} from '@apollo/client';
 
-import {loadThemeType} from '_app/utils/storage';
-import {ThemeStatic} from '_app/theme/Colors';
-import {client} from '_app/services/graphql';
-import RootStackNavigation from '_app/navigations';
-import {LoadingIndicator} from '_app/layout';
-import {AppContext, AppContextProvider} from '_app/context';
-import {IconSizes} from '_app/constants';
+import {AppProvider} from '_app/core';
 
-LogBox.ignoreLogs(['Require cycle:']);
+import '_app/i18n';
 
-if (Config.NODE_ENV !== 'dev') {
-    Sentry.init({
-        dsn: Config.DSN,
-        environment: Config.NODE_ENV,
-    });
+LogBox.ignoreAllLogs(true);
 
-    // TODO: Identify Users
-    // Sentry.setUser({ id: '1', username: 'user' });
-}
+// export const routingInstrumentation = new Sentry.ReactNavigationInstrumentation();
 
-const SafeAreaApp = () => {
-    const {toggleTheme} = useContext(AppContext);
+Sentry.init({
+    dsn: Config.DSN,
+    // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.
+    // We recommend adjusting this value in production.
+    enableAutoPerformanceTracking: true,
+    enableAutoSessionTracking: true,
+    // Sessions close after app is 10 seconds in the background.
+    environment: Config.NODE_ENV,
+    enableInExpoDevelopment: true,
+    tracesSampleRate: 1.0,
+    // integrations: [
+    //     new Sentry.ReactNativeTracing({
+    //         // Pass instrumentation to be used as `routingInstrumentation`
+    //         routingInstrumentation,
+    //         // ...
+    //     }),
+    // ],
+});
 
-    const [initializing, setInitializing] = useState(true);
+const App = AppProvider;
 
-    const initializeTheme = async () => {
-        setInitializing(true);
-        const storageTheme = await loadThemeType();
-        if (storageTheme) {
-            toggleTheme(storageTheme);
-        }
-        setInitializing(false);
-    };
+export default App;
 
-    useEffect(() => {
-        initializeTheme();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+// import {loadThemeType} from '_app/utils/storage';
+// import {ThemeStatic} from '_app/theme/Colors';
+// import RootStackNavigation from '_app/navigations';
+// import {LoadingIndicator} from '_app/layout';
+// import {AppContext, AppContextProvider} from '_app/context';
+// import {IconSizes} from '_app/constants';
 
-    if (initializing) {
-        return <LoadingIndicator color={ThemeStatic.accent} size={IconSizes.x1} />;
-    }
+// const SafeAreaApp = () => {
+//     const {toggleTheme} = useContext(AppContext);
 
-    return <RootStackNavigation />;
-};
+//     const [initializing, setInitializing] = useState(true);
 
-const App = () => {
-    const [fontsLoaded] = useFonts({
-        Inter_100Thin,
-        Inter_200ExtraLight,
-        Inter_300Light,
-        Inter_400Regular,
-        Inter_500Medium,
-        Inter_600SemiBold,
-        Inter_700Bold,
-        Inter_800ExtraBold,
-        Inter_900Black,
-    });
-    if (!fontsLoaded) {
-        return <AppLoading />;
-    } else {
-        return (
-            <ApolloProvider client={client}>
-                <AppContextProvider>
-                    <ActionSheetProvider>
-                        <SafeAreaApp />
-                    </ActionSheetProvider>
-                </AppContextProvider>
-            </ApolloProvider>
-        );
-    }
-};
+//     const initializeTheme = async () => {
+//         setInitializing(true);
+//         const storageTheme = await loadThemeType();
+//         if (storageTheme) {
+//             toggleTheme(storageTheme);
+//         }
+//         setInitializing(false);
+//     };
 
-export default connectActionSheet(App);
+//     useEffect(() => {
+//         initializeTheme();
+//         // eslint-disable-next-line react-hooks/exhaustive-deps
+//     }, []);
+
+//     if (initializing) {
+//         return <LoadingIndicator color={ThemeStatic.accent} size={IconSizes.x1} />;
+//     }
+
+//     return <RootStackNavigation />;
+// };

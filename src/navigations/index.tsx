@@ -23,7 +23,6 @@ import {
     ProfileUserScreen,
     SearchScreen,
     SettingsScreen,
-    StoriesScreen,
     UsersTopScreen,
 } from '_app/screens';
 import {colors, darkTheme, lightTheme} from '_app/constants';
@@ -187,21 +186,6 @@ const Index = () => {
                     })}
                     name="ProfileUser"
                     component={ProfileUserScreen}
-                />
-                <RootStack.Screen
-                    options={({route}) => ({
-                        headerShown: true,
-                        headerTransparent: true,
-                        headerShadowVisible: false,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
-                        headerTitle: '',
-                        headerBackTitle: t('utils:back'),
-                        presentation: 'transparentModal',
-                        ...options,
-                        headerLeft: () => <CloseModal />,
-                    })}
-                    name="Stories"
-                    component={StoriesScreen}
                 />
                 <RootStack.Screen
                     options={({route}) => ({
