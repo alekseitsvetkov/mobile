@@ -16,7 +16,7 @@ import {Button, LoadingIndicator} from '_app/layout';
 import {useSignInWithGoogleMutation} from '_app/generated/graphql';
 import {AppContext} from '_app/context';
 import {IconSizes, tLogo} from '_app/constants';
-import {MainContainer} from '_app/components';
+import {EDGES, MainContainer} from '_app/components';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -103,7 +103,11 @@ export const LoginScreen = () => {
         );
     }
 
-    return <MainContainer>{content}</MainContainer>;
+    return (
+        <MainContainer edges={EDGES.horizontal} statusBarStyle="light-content">
+            {content}
+        </MainContainer>
+    );
 };
 
 const styles = (theme = {} as ThemeColors) =>

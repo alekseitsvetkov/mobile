@@ -2,14 +2,13 @@ import React from 'react';
 
 import {Image, ScrollView} from 'react-native';
 
-import {SCREEN_WIDTH} from '@gorhom/bottom-sheet';
-
 import {normalize} from '_app/utils/dimensions';
+import {SCREEN_WIDTH} from '_app/core';
 import {MainContainer} from '_app/components';
 
 export const HomeScreen = () => {
     return (
-        <MainContainer safeAreaDisabled>
+        <MainContainer safeAreaDisabled statusBarStyle="dark-content">
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Image
                     source={{
