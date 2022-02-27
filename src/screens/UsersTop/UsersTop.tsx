@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {FlatList} from 'react-native';
 
 import {OrderDirection, useUsersQuery} from '_app/generated/graphql';
-import {SafeAreaWrapper, UserWithRating} from '_app/components';
+import {MainContainer, UserWithRating} from '_app/components';
 
 export const UsersTopScreen = () => {
     const [loadingCounter, setLoadingCount] = useState(0);
@@ -51,7 +51,7 @@ export const UsersTopScreen = () => {
     };
 
     return (
-        <SafeAreaWrapper>
+        <MainContainer safeAreaDisabled>
             <FlatList
                 data={users}
                 renderItem={renderItem}
@@ -61,6 +61,6 @@ export const UsersTopScreen = () => {
                 onEndReachedThreshold={0.5}
                 decelerationRate="fast"
             />
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };

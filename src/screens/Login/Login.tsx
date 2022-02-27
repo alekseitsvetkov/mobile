@@ -16,7 +16,7 @@ import {Button, LoadingIndicator} from '_app/layout';
 import {useSignInWithGoogleMutation} from '_app/generated/graphql';
 import {AppContext} from '_app/context';
 import {IconSizes, tLogo} from '_app/constants';
-import {SafeAreaWrapper} from '_app/components';
+import {MainContainer} from '_app/components';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -103,7 +103,7 @@ export const LoginScreen = () => {
         );
     }
 
-    return <SafeAreaWrapper>{content}</SafeAreaWrapper>;
+    return <MainContainer>{content}</MainContainer>;
 };
 
 const styles = (theme = {} as ThemeColors) =>

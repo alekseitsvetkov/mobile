@@ -7,7 +7,7 @@ import {useTranslation} from 'react-i18next';
 import {SCREEN_WIDTH} from '_app/utils/dimensions';
 import {OrderDirection, useVisitedQuery, useWantedQuery} from '_app/generated/graphql';
 import {AppContext} from '_app/context';
-import {SafeAreaWrapper} from '_app/components';
+import {MainContainer} from '_app/components';
 
 import {s} from './styles';
 import {Empty, renderHeader, renderItem} from './elements';
@@ -120,7 +120,7 @@ export const ProfileUserScreen = ({route}) => {
     const type = selectedList === 'moments' ? 'moments' : 'list';
 
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             <FlatList
                 ref={ref}
                 ListHeaderComponent={renderHeader({
@@ -143,6 +143,6 @@ export const ProfileUserScreen = ({route}) => {
                 decelerationRate="fast"
                 onEndReached={() => (selectedList === 'want' ? wantedEndReached() : visitedEndReached())}
             />
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };

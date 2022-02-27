@@ -15,7 +15,6 @@ export * from './HorizontalCardList';
 export * from './FormWrapper';
 export * from './CloseModal';
 export * from './MenuItem';
-export * from './SafeAreaWrapper';
 export * from './Gallery';
 export * from './UserWithRating';
 export * from './Preview';

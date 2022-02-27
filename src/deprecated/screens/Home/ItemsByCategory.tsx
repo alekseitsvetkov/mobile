@@ -6,7 +6,7 @@ import {withLocalization} from '_app/utils/helpers';
 import {VerticalListPlaceholder} from '_app/layout';
 import {OrderDirection, useCitiesQuery} from '_app/generated/graphql';
 import {PLATFORM, tTitle} from '_app/constants';
-import {CardList, ModalControl, SafeAreaWrapper} from '_app/components';
+import {CardList, MainContainer, ModalControl} from '_app/components';
 
 import {s} from './styles';
 
@@ -62,7 +62,7 @@ export const ItemsByCategoryScreen = ({route}) => {
 
     // TODO: add wrapper for formSheet screens with StatusBar and ModalControl
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             {PLATFORM.IS_IOS && <ModalControl />}
             {PLATFORM.IS_IOS && (
                 <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 20}}>
@@ -76,6 +76,6 @@ export const ItemsByCategoryScreen = ({route}) => {
                 {loadingCounter === 0 && <VerticalListPlaceholder />}
                 {loadingCounter > 0 && <CardList data={cities} onEndReached={handleEndReached} />}
             </View>
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };

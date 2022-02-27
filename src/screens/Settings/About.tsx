@@ -8,7 +8,7 @@ import {normalize} from '_app/utils/dimensions';
 import {ThemeColors} from '_app/types/theme';
 import {Typography} from '_app/theme';
 import {AppContext} from '_app/context';
-import {SafeAreaWrapper} from '_app/components';
+import {MainContainer} from '_app/components';
 
 import {version} from '../../../package.json';
 
@@ -19,12 +19,12 @@ export const AboutScreen = () => {
     const {theme} = useContext(AppContext);
 
     return (
-        <SafeAreaWrapper center>
+        <MainContainer>
             <Text style={[styles(theme).logo]}>Skeetry</Text>
             <Text style={[styles(theme).text]}>
                 {t('utils:version')}: {version}
             </Text>
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };
 

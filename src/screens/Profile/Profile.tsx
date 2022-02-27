@@ -12,7 +12,7 @@ import {navigation} from '_app/services/navigations';
 import {Button} from '_app/layout';
 import {OrderDirection, useMeQuery, useVisitedQuery, useWantedQuery} from '_app/generated/graphql';
 import {AppContext} from '_app/context';
-import {MainContainer, SafeAreaWrapper} from '_app/components';
+import {MainContainer} from '_app/components';
 
 import {s} from './styles';
 import {Empty, renderHeader, renderItem} from './elements';
@@ -118,9 +118,9 @@ export const ProfileScreen = () => {
 
     if (loading) {
         return (
-            <SafeAreaWrapper center>
+            <MainContainer>
                 <Text style={styles(theme).text}>Loading...</Text>
-            </SafeAreaWrapper>
+            </MainContainer>
         );
     }
 
@@ -131,10 +131,10 @@ export const ProfileScreen = () => {
 
     if (error || errorWanted || errorVisited) {
         return (
-            <SafeAreaWrapper center>
+            <MainContainer>
                 <Text style={styles(theme).text}>Error. Please try later...</Text>
                 <Button label={t('utils:logout')} onPress={() => logOut()} loading={false} />
-            </SafeAreaWrapper>
+            </MainContainer>
         );
     }
 
@@ -157,7 +157,7 @@ export const ProfileScreen = () => {
     const type = selectedList === 'moments' ? 'moments' : 'list';
 
     return (
-        <MainContainer>
+        <MainContainer statusBarStyle="light-content">
             <FlatList
                 ref={ref}
                 ListHeaderComponent={renderHeader({

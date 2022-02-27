@@ -6,7 +6,7 @@ import {useScrollToTop} from '@react-navigation/native';
 
 // import { HorizontalCardList } from '_app/components';
 import {OrderDirection, useCitiesQuery} from '_app/generated/graphql';
-import {SafeAreaWrapper} from '_app/components';
+import {MainContainer} from '_app/components';
 
 export const LocationsScreen = () => {
     const {t} = useTranslation();
@@ -255,7 +255,7 @@ export const LocationsScreen = () => {
     };
 
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             <ScrollView ref={ref} showsVerticalScrollIndicator={false} scrollsToTop={true}>
                 {/* <HorizontalCardList
           title={`${t('explore:capital')}`}
@@ -306,6 +306,6 @@ export const LocationsScreen = () => {
           type="africa"
         />*/}
             </ScrollView>
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };

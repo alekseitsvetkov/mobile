@@ -11,7 +11,7 @@ import {useMeQuery} from '_app/generated/graphql';
 import {AppContext} from '_app/context';
 import {radius, tBase} from '_app/constants';
 import MenuItem from '_app/components/MenuItem/MenuItem';
-import {Avatar, SafeAreaWrapper} from '_app/components';
+import {Avatar, MainContainer} from '_app/components';
 
 export const SettingsScreen = () => {
     const {t} = useTranslation();
@@ -22,7 +22,7 @@ export const SettingsScreen = () => {
     const user = data!.me;
 
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             <View style={styles(theme).container}>
                 <View style={styles(theme).wrap}>
                     {!loading && (
@@ -66,7 +66,7 @@ export const SettingsScreen = () => {
             {/* <MenuItem name="language" icon="globe" action={() => navigation.push('Language')} /> */}
             {/* <MenuItem name="help" icon="life-buoy" action={() => navigation.push('Help')} /> */}
             <MenuItem name="about" icon="info" action={() => navigation.push('About')} />
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };
 

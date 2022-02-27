@@ -8,7 +8,7 @@ import {useScrollToTop} from '@react-navigation/native';
 import {normalize} from '_app/utils/dimensions';
 import {HorizontalListPlaceholder, Input} from '_app/layout';
 import {OrderDirection, useCitiesQuery, useUsersQuery} from '_app/generated/graphql';
-import {Card, SafeAreaWrapper, UserCard} from '_app/components';
+import {Card, MainContainer, UserCard} from '_app/components';
 
 export const SearchScreen = () => {
     const {t} = useTranslation();
@@ -50,7 +50,7 @@ export const SearchScreen = () => {
     console.log({searchList});
 
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             <View style={{paddingHorizontal: normalize(20)}}>
                 <Input ref={null} placeholder={t('search:search')} onChangeText={handleChange} />
             </View>
@@ -89,6 +89,6 @@ export const SearchScreen = () => {
                     )}
                 </View>
             )}
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };

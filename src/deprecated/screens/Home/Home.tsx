@@ -7,7 +7,7 @@ import {useScrollToTop} from '@react-navigation/native';
 import {ThemeColors} from '_app/types/theme';
 import {AppContext} from '_app/context';
 import {tTitle} from '_app/constants';
-import {Preview, SafeAreaWrapper} from '_app/components';
+import {MainContainer, Preview} from '_app/components';
 
 import {s} from './styles';
 
@@ -117,7 +117,7 @@ export const HomeScreen = () => {
     // ];
 
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             <View style={s.header}>
                 <Text style={[tTitle, styles(theme).text]}>Skeetry</Text>
             </View>
@@ -171,7 +171,7 @@ export const HomeScreen = () => {
           type="popular"
         /> */}
             </ScrollView>
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };
 

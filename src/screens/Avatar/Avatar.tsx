@@ -3,13 +3,13 @@ import React from 'react';
 import {Image} from 'react-native';
 
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '_app/utils/dimensions';
-import {SafeAreaWrapper} from '_app/components';
+import {MainContainer} from '_app/components';
 
 export const AvatarScreen = ({route}) => {
     const {image} = route.params;
 
     return (
-        <SafeAreaWrapper center>
+        <MainContainer center>
             <Image
                 source={{
                     uri: image,
@@ -19,6 +19,6 @@ export const AvatarScreen = ({route}) => {
                     width: SCREEN_WIDTH,
                 }}
             />
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };

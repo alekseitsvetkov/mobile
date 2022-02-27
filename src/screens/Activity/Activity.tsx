@@ -2,12 +2,12 @@ import React from 'react';
 
 import {Text} from 'react-native';
 
-import {SafeAreaWrapper} from '_app/components';
+import {MainContainer} from '_app/components';
 
 export const ActivityScreen = () => {
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             <Text>Activity!</Text>
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };

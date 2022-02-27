@@ -5,7 +5,7 @@ import {Text, View} from 'react-native';
 import {VerticalListPlaceholder} from '_app/layout';
 import {OrderDirection, useCitiesQuery} from '_app/generated/graphql';
 import {PLATFORM, tTitle} from '_app/constants';
-import {CardList, ModalControl, SafeAreaWrapper} from '_app/components';
+import {CardList, MainContainer, ModalControl} from '_app/components';
 
 export const CitiesListScreen = ({route}) => {
     const {name, type} = route.params.item;
@@ -56,7 +56,7 @@ export const CitiesListScreen = ({route}) => {
     };
 
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             {PLATFORM.IS_IOS && <ModalControl />}
             {PLATFORM.IS_IOS && (
                 <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 20}}>
@@ -67,6 +67,6 @@ export const CitiesListScreen = ({route}) => {
                 {loadingCounter === 0 && <VerticalListPlaceholder />}
                 {loadingCounter > 0 && <CardList data={cities} onEndReached={handleEndReached} />}
             </View>
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };

@@ -1,39 +1,55 @@
 import React, {FC, ReactNode, useContext} from 'react';
 
-import {StatusBar, StyleSheet, View} from 'react-native';
+import {Keyboard, StatusBar, StatusBarStyle, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import {ThemeColors} from '_app/types/theme';
+import {DynamicStatusBar} from '_app/theme/Colors';
 import {AppContext} from '_app/context';
 import {colors} from '_app/constants';
 
 interface IProps {
     children: ReactNode;
     safeAreaDisabled?: boolean;
+    statusBarStyle?: StatusBarStyle | null;
 }
 
-export const MainContainer: FC<IProps> = ({children, safeAreaDisabled = false}) => {
-    const {theme} = useContext(AppContext);
+export const MainContainer: FC<IProps> = ({children, safeAreaDisabled = false, statusBarStyle = null}) => {
+    console.log({safeAreaDisabled});
+
+    const {theme, themeType} = useContext(AppContext);
+
+    const {barStyle, backgroundColor} = DynamicStatusBar[themeType];
 
     const content = (
         <>
             <StatusBar
                 animated={true}
-                backgroundColor={colors.black}
-                barStyle={'light-content'}
-                showHideTransition={'fade'}
+                backgroundColor={backgroundColor}
+                barStyle={statusBarStyle ? statusBarStyle : barStyle}
             />
-            <View style={styles(theme).container}>{children}</View>
+            <View
+                style={[
+                    styles(theme).container,
+                    !safeAreaDisabled && {
+                        borderTopRightRadius: 12,
+                        borderTopLeftRadius: 12,
+                    },
+                ]}>
+                {children}
+            </View>
         </>
     );
 
     return safeAreaDisabled ? (
         content
     ) : (
-        <SafeAreaView edges={['top']} style={styles(theme).safeArea}>
-            {content}
-        </SafeAreaView>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <SafeAreaView edges={['top']} style={styles(theme).safeArea}>
+                {content}
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
     );
 };
 
@@ -47,7 +63,5 @@ const styles = (theme = {} as ThemeColors) =>
             backgroundColor: colors.white,
             borderBottomRightRadius: 12,
             borderBottomLeftRadius: 12,
-            borderTopRightRadius: 12,
-            borderTopLeftRadius: 12,
         },
     });

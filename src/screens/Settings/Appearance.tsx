@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {PLATFORM} from '_app/constants';
-import {FormGroup, OptionList, SafeAreaWrapper} from '_app/components';
+import {FormGroup, MainContainer, OptionList} from '_app/components';
 
 export const AppearanceScreen = () => {
     const options = [
@@ -24,10 +24,10 @@ export const AppearanceScreen = () => {
     ];
 
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             <FormGroup name="Тема">
                 <OptionList options={options} />
             </FormGroup>
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };

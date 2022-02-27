@@ -1,31 +1,24 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
-import {StyleSheet, Text} from 'react-native';
+import {Image, ScrollView} from 'react-native';
 
-import {ThemeColors} from '_app/types/theme';
-import {AppContext} from '_app/context';
-import {colors} from '_app/constants';
+import {SCREEN_WIDTH} from '@gorhom/bottom-sheet';
+
+import {normalize} from '_app/utils/dimensions';
 import {MainContainer} from '_app/components';
 
 export const HomeScreen = () => {
-    const {theme} = useContext(AppContext);
-
     return (
         <MainContainer safeAreaDisabled>
-            <Text style={styles(theme).text}>New Home</Text>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <Image
+                    source={{
+                        uri: 'https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1838&q=80',
+                        width: SCREEN_WIDTH,
+                        height: normalize(350),
+                    }}
+                />
+            </ScrollView>
         </MainContainer>
     );
 };
-
-const styles = (theme = {} as ThemeColors) =>
-    StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.white,
-            borderBottomRightRadius: 12,
-            borderBottomLeftRadius: 12,
-        },
-        text: {
-            color: theme.text01,
-        },
-    });
