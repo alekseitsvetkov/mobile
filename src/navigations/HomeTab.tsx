@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {useColorScheme} from 'react-native';
+import {View, useColorScheme} from 'react-native';
 
-import Icon from 'react-native-vector-icons/Feather';
+import {Home, User} from 'iconsax-react-native';
 import {TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {BottomTabNavigationOptions, createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {HomeScreen, LocationsScreen, ProfileScreen, SearchScreen} from '_app/screens';
+import {HomeScreen, ProfileScreen} from '_app/screens';
 import {colors} from '_app/constants';
 import {TabBarComponent} from '_app/components/BottomTabBar';
 
@@ -59,38 +59,38 @@ const ProfileStack = () => {
     );
 };
 
-const ExploreStack = () => {
-    return (
-        <Stack.Navigator
-            initialRouteName="Explore"
-            // mode="modal"
-            screenOptions={{
-                // useNativeDriver: true,
-                // gestureEnabled: true,
-                headerShown: false,
-                ...TransitionPresets.ModalFadeTransition,
-                // transitionSpec: {
-                //   open: iosTransitionSpec,
-                //   close: iosTransitionSpec,
-                // },
-                cardStyleInterpolator: ({current: {progress}}) => ({
-                    cardStyle: {
-                        opacity: progress,
-                    },
-                }),
-            }}
-            // headerMode="float"
-        >
-            <Stack.Screen
-                component={LocationsScreen}
-                name="Explore"
-                options={({route}) => ({
-                    headerShown: false,
-                })}
-            />
-        </Stack.Navigator>
-    );
-};
+// const ExploreStack = () => {
+//     return (
+//         <Stack.Navigator
+//             initialRouteName="Explore"
+//             // mode="modal"
+//             screenOptions={{
+//                 // useNativeDriver: true,
+//                 // gestureEnabled: true,
+//                 headerShown: false,
+//                 ...TransitionPresets.ModalFadeTransition,
+//                 // transitionSpec: {
+//                 //   open: iosTransitionSpec,
+//                 //   close: iosTransitionSpec,
+//                 // },
+//                 cardStyleInterpolator: ({current: {progress}}) => ({
+//                     cardStyle: {
+//                         opacity: progress,
+//                     },
+//                 }),
+//             }}
+//             // headerMode="float"
+//         >
+//             <Stack.Screen
+//                 component={LocationsScreen}
+//                 name="Explore"
+//                 options={({route}) => ({
+//                     headerShown: false,
+//                 })}
+//             />
+//         </Stack.Navigator>
+//     );
+// };
 
 // const SwipesStack = () => {
 //   return (
@@ -138,16 +138,13 @@ const HomeStack = () => {
     );
 };
 
-const Tab = createBottomTabNavigator<THomeTabParamList>();
+const Tab = createBottomTabNavigator();
 
 const HomeTab = () => {
     const screenOptions: BottomTabNavigationOptions = {
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: {
-            borderTopColor: colors.mainGray,
-            backgroundColor: 'transparent',
-        },
+        tabBarBackground: () => <View style={{backgroundColor: 'black', height: '100%'}} />,
     };
 
     function getTabBarVisible(route) {
@@ -169,21 +166,10 @@ const HomeTab = () => {
                 options={({route}) => ({
                     tabBarStyle: {
                         display: getTabBarVisible(route) ? 'flex' : 'none',
+                        borderTopColor: 'transparent',
                     },
                     tabBarIcon: ({focused}) => (
-                        <Icon
-                            name="home"
-                            size={26}
-                            color={
-                                focused
-                                    ? theme === 'dark'
-                                        ? colors.white
-                                        : colors.gray900
-                                    : theme === 'dark'
-                                    ? colors.gray500
-                                    : colors.gray300
-                            }
-                        />
+                        <Home size={20} variant={focused ? 'Bold' : 'Outline'} color={colors.white} />
                     ),
                 })}
                 component={HomeStack}
@@ -195,7 +181,7 @@ const HomeTab = () => {
             display: getTabBarVisible(route) ? 'flex' : 'none',
           },
           tabBarIcon: ({ focused }) => (
-            <Icon name="compass" size={26} color={
+            <Icon name="compass" size={20} color={
                 focused
                   ? theme === 'dark'
                     ? colors.white
@@ -209,50 +195,28 @@ const HomeTab = () => {
         component={ExploreStack}
         name="ExplorePage"
       /> */}
-            <Tab.Screen
+            {/* <Tab.Screen
                 options={({route}) => ({
                     tabBarStyle: {
                         display: getTabBarVisible(route) ? 'flex' : 'none',
+                        borderTopColor: 'transparent',
                     },
                     tabBarIcon: ({focused}) => (
-                        <Icon
-                            name="search"
-                            size={26}
-                            color={
-                                focused
-                                    ? theme === 'dark'
-                                        ? colors.white
-                                        : colors.gray900
-                                    : theme === 'dark'
-                                    ? colors.gray500
-                                    : colors.gray300
-                            }
-                        />
+                        <SearchNormal1 size={20} variant={focused ? 'Bold' : 'Outline'} color={colors.white} />
                     ),
                 })}
                 component={SearchScreen}
                 name="Search"
-            />
+            /> */}
             <Tab.Screen
                 options={({route}) => ({
                     tabBarVisible: getTabBarVisible(route),
                     tabBarStyle: {
                         display: getTabBarVisible(route) ? 'flex' : 'none',
+                        borderTopColor: 'transparent',
                     },
                     tabBarIcon: ({focused}) => (
-                        <Icon
-                            name="user"
-                            size={26}
-                            color={
-                                focused
-                                    ? theme === 'dark'
-                                        ? colors.white
-                                        : colors.gray900
-                                    : theme === 'dark'
-                                    ? colors.gray500
-                                    : colors.gray300
-                            }
-                        />
+                        <User size={20} variant={focused ? 'Bold' : 'Outline'} color={colors.white} />
                     ),
                 })}
                 component={ProfileStack}

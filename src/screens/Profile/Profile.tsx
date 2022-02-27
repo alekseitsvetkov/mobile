@@ -12,7 +12,7 @@ import {navigation} from '_app/services/navigations';
 import {Button} from '_app/layout';
 import {OrderDirection, useMeQuery, useVisitedQuery, useWantedQuery} from '_app/generated/graphql';
 import {AppContext} from '_app/context';
-import {SafeAreaWrapper} from '_app/components';
+import {MainContainer, SafeAreaWrapper} from '_app/components';
 
 import {s} from './styles';
 import {Empty, renderHeader, renderItem} from './elements';
@@ -157,7 +157,7 @@ export const ProfileScreen = () => {
     const type = selectedList === 'moments' ? 'moments' : 'list';
 
     return (
-        <SafeAreaWrapper>
+        <MainContainer>
             <FlatList
                 ref={ref}
                 ListHeaderComponent={renderHeader({
@@ -183,7 +183,7 @@ export const ProfileScreen = () => {
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                 onEndReached={() => (true ? wantedEndReached() : visitedEndReached())}
             />
-        </SafeAreaWrapper>
+        </MainContainer>
     );
 };
 

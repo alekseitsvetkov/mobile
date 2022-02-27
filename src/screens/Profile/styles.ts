@@ -14,6 +14,7 @@ export const s = StyleSheet.create({
         alignItems: 'flex-end',
         paddingBottom: normalize(10),
         marginBottom: normalize(10),
+        marginTop: normalize(10),
         paddingHorizontal: normalize(20),
     },
     profileHeader: {

@@ -65,7 +65,7 @@ export const lightTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        background: colors.white,
+        background: colors.black,
     },
 };
 
