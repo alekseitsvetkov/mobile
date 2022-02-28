@@ -11,6 +11,7 @@ module.exports = function (api) {
                     alias: {
                         _app: './src',
                         _assets: './assets',
+                        _mocks: './__mocks__',
                         _hooks: './src/hooks',
                         _constants: './src/constants',
                     },

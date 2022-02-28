@@ -22,3 +22,4 @@ export * from './FormGroup';
 export * from './OptionList';
 export * from './UserCard';
 export * from './MainContainer';
+export * from './MainCarousel';
