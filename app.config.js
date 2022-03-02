@@ -37,8 +37,8 @@ export default {
                 {
                     file: 'sentry-expo/upload-sourcemaps',
                     config: {
-                        organization: 'skeetry',
-                        project: 'Skeetry',
+                        organization: process.env.SENTRY_ORGANIZATION,
+                        project: process.env.SENTRY_PROJECT,
                         authToken: process.env.SENTRY_AUTH_TOKEN,
                     },
                 },
