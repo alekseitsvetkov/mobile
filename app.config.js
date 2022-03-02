@@ -39,7 +39,7 @@ export default {
                     config: {
                         organization: 'skeetry',
                         project: 'Skeetry',
-                        authToken: 'your auth token here',
+                        authToken: process.env.SENTRY_AUTH_TOKEN,
                     },
                 },
             ],
