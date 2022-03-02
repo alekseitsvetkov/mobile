@@ -74,7 +74,6 @@
     "react-i18next": "^11.15.5",
     "react-native": "0.64.3",
     "react-native-camera": "^4.2.1",
-    "react-native-config": "^1.4.5",
     "react-native-confirmation-code-field": "^7.3.0",
     "react-native-device-info": "^8.4.9",
     "react-native-gesture-handler": "~2.1.0",

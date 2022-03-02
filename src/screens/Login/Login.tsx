@@ -25,10 +25,10 @@ export const LoginScreen = () => {
     const [initializing, setInitializing] = useState(true);
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-        expoClientId: Constants?.manifest?.extra?.expoClientId,
-        iosClientId: Constants?.manifest?.extra?.iosClientId,
-        androidClientId: Constants?.manifest?.extra?.androidClientId,
-        webClientId: Constants?.manifest?.extra?.webClientId,
+        expoClientId: Constants?.manifest?.extra?.EXPO_CLIENT_ID,
+        iosClientId: Constants?.manifest?.extra?.IOS_CLIENT_ID,
+        androidClientId: Constants?.manifest?.extra?.ANDROID_CLIENT_ID,
+        webClientId: Constants?.manifest?.extra?.WEB_CLIENT_ID,
     });
 
     const [signInWithGoogle, {loading, data, error}] = useSignInWithGoogleMutation();

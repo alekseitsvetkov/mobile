@@ -37,18 +37,19 @@ export default {
                 {
                     file: 'sentry-expo/upload-sourcemaps',
                     config: {
-                        organization: "your sentry organization's short name here",
-                        project: "your sentry project's name here",
+                        organization: 'skeetry',
+                        project: 'Skeetry',
                         authToken: 'your auth token here',
                     },
                 },
             ],
         },
         extra: {
-            expoClientId: process.env.expoClientId,
-            iosClientId: process.env.iosClientId,
-            androidClientId: process.env.androidClientId,
-            webClientId: process.env.webClientId,
+            EXPO_CLIENT_ID: process.env.EXPO_CLIENT_ID,
+            IOS_CLIENT_ID: process.env.IOS_CLIENT_ID,
+            ANDROID_CLIENT_ID: process.env.ANDROID_CLIENT_ID,
+            WEB_CLIENT_ID: process.env.WEB_CLIENT_ID,
+            SENTRY_DSN: process.env.SENTRY_DSN,
         },
     },
 };
