@@ -32,18 +32,6 @@ export default {
             favicon: './assets/favicon.png',
         },
         plugins: ['sentry-expo'],
-        hooks: {
-            postPublish: [
-                {
-                    file: 'sentry-expo/upload-sourcemaps',
-                    config: {
-                        organization: process.env.SENTRY_ORGANIZATION,
-                        project: process.env.SENTRY_PROJECT,
-                        authToken: process.env.SENTRY_AUTH_TOKEN,
-                    },
-                },
-            ],
-        },
         extra: {
             EXPO_CLIENT_ID: process.env.EXPO_CLIENT_ID,
             IOS_CLIENT_ID: process.env.IOS_CLIENT_ID,
