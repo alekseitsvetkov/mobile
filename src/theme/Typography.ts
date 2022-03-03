@@ -22,6 +22,10 @@ const FontWeights = {
         fontFamily: 'Inter_300Light',
         color: '#000',
     },
+    Medium: {
+        fontFamily: 'Inter_500Medium',
+        color: '#000',
+    },
 };
 
 const FontSizes = {
