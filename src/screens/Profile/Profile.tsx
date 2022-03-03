@@ -50,7 +50,7 @@ export const ProfileScreen = () => {
         if (dataWanted && wanted.length === 0) {
             setWanted(dataWanted.wanted.edges);
         }
-    }, [dataWanted]);
+    }, [dataWanted, wanted.length]);
 
     const wantedEndReached = async () => {
         if (wanted) {
@@ -88,7 +88,7 @@ export const ProfileScreen = () => {
         if (dataVisited && visited.length === 0) {
             setVisited(dataVisited.visited.edges);
         }
-    }, [dataVisited]);
+    }, [dataVisited, visited.length]);
 
     const visitedEndReached = async () => {
         if (wanted) {
@@ -154,7 +154,7 @@ export const ProfileScreen = () => {
         }
     };
 
-    const type = selectedList === 'moments' ? 'moments' : 'list';
+    // const type = selectedList === 'moments' ? 'moments' : 'list';
 
     return (
         <MainContainer statusBarStyle="light-content">
@@ -170,10 +170,10 @@ export const ProfileScreen = () => {
                     showActionSheetWithOptions,
                     selectList,
                 })}
-                ListEmptyComponent={() => <Empty t={t} theme={theme} type={type} />}
+                ListEmptyComponent={() => <Empty t={t} theme={theme} type="list" />}
                 numColumns={2}
                 horizontal={false}
-                data={selectedList === 'moments' ? null : getData()}
+                data={getData()}
                 columnWrapperStyle={s.listWrapper}
                 contentContainerStyle={{}}
                 renderItem={renderItem}
@@ -181,6 +181,7 @@ export const ProfileScreen = () => {
                 showsVerticalScrollIndicator={false}
                 decelerationRate="fast"
                 refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                // TODO: Fix this
                 onEndReached={() => (true ? wantedEndReached() : visitedEndReached())}
             />
         </MainContainer>
