@@ -20,6 +20,12 @@ export default {
             supportsTablet: false,
             bundleIdentifier: 'com.kive.skeetry',
             buildNumber: '2',
+            infoPlist: {
+                NSCameraUsageDescription: 'The app uses camera for making images and change the profile picture',
+                NSPhotoLibraryUsageDescription: 'The app uses photo library for change the profile picture',
+                NSLocationWhenInUseUsageDescription:
+                    'Your location is needed to find a nearby city and easy using of the service',
+            },
         },
         android: {
             adaptiveIcon: {
