@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - preprod
 jobs:
   build:
     name: Install and build

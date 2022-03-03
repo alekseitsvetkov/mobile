@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 export default {
     expo: {
-        name: 'skeetry',
+        name: 'Skeetry',
         slug: 'skeetry',
         version: '1.0.0',
         orientation: 'portrait',
@@ -17,7 +17,7 @@ export default {
         },
         assetBundlePatterns: ['**/*'],
         ios: {
-            supportsTablet: true,
+            supportsTablet: false,
             bundleIdentifier: 'com.kive.skeetry',
         },
         android: {

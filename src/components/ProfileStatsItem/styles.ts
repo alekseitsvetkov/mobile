@@ -6,6 +6,7 @@ import {colors} from '_app/constants';
 export const s = StyleSheet.create({
     item: {
         alignItems: 'center',
+        marginRight: normalize(16),
     },
     number: {
         color: colors.black,
