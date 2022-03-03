@@ -19,6 +19,7 @@ export default {
         ios: {
             supportsTablet: false,
             bundleIdentifier: 'com.kive.skeetry',
+            buildNumber: '2',
         },
         android: {
             adaptiveIcon: {
@@ -26,7 +27,7 @@ export default {
                 backgroundColor: '#FFFFFF',
             },
             package: 'com.kive.skeetry',
-            versionCode: 1,
+            versionCode: 2,
         },
         web: {
             favicon: './assets/favicon.png',
