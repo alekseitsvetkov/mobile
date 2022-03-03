@@ -19,7 +19,7 @@ export default {
         ios: {
             supportsTablet: false,
             bundleIdentifier: 'com.kive.skeetry',
-            buildNumber: '2',
+            buildNumber: '3',
             infoPlist: {
                 NSCameraUsageDescription: 'The app uses camera for making images and change the profile picture',
                 NSPhotoLibraryUsageDescription: 'The app uses photo library for change the profile picture',
@@ -33,7 +33,7 @@ export default {
                 backgroundColor: '#FFFFFF',
             },
             package: 'com.kive.skeetry',
-            versionCode: 2,
+            versionCode: 3,
         },
         web: {
             favicon: './assets/favicon.png',
