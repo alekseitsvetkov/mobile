@@ -354,3 +354,5 @@ export const IconSizes: IconSizesType = {
     x11: 60,
     x12: 100,
 };
+
+export const ACTIVE_OPACITY = 0.6;
