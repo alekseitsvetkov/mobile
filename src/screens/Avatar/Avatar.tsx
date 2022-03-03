@@ -9,7 +9,7 @@ export const AvatarScreen = ({route}) => {
     const {image} = route.params;
 
     return (
-        <MainContainer center>
+        <MainContainer>
             <Image
                 source={{
                     uri: image,
