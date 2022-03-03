@@ -19,7 +19,7 @@ export default {
         ios: {
             supportsTablet: false,
             bundleIdentifier: 'com.kive.skeetry',
-            buildNumber: 2,
+            buildNumber: '2',
         },
         android: {
             adaptiveIcon: {

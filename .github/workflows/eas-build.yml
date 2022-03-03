@@ -23,4 +23,4 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Build on EAS
-        run: eas build --platform all --non-interactive
+        run: eas build --platform ios --non-interactive
