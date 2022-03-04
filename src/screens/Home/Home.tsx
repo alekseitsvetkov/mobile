@@ -4,6 +4,7 @@ import {ScrollView} from 'react-native';
 
 import {MOCK_CAROUSEL_DATA} from '_mocks';
 
+import {Categories} from '_app/components/Categories';
 import {MainCarousel, MainContainer, MainSearch} from '_app/components';
 
 export const HomeScreen = () => {
@@ -12,6 +13,7 @@ export const HomeScreen = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <MainCarousel data={MOCK_CAROUSEL_DATA} />
                 <MainSearch />
+                <Categories />
             </ScrollView>
         </MainContainer>
     );

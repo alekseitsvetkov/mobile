@@ -78,7 +78,7 @@ export const darkTheme = {
 };
 
 const textBase: TextStyle = {
-    fontFamily: fontFamily.regular,
+    fontFamily: fontFamily.semiBold,
 };
 
 export const tSplash: TextStyle = {
@@ -133,7 +133,7 @@ export const tBase: TextStyle = {
 export const tTitle: TextStyle = {
     ...textBase,
     fontWeight: '700',
-    fontSize: fontSize.xl,
+    fontSize: fontSize.base,
     lineHeight: 24,
 };
 
