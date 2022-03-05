@@ -26,6 +26,9 @@ export default {
                 NSLocationWhenInUseUsageDescription:
                     'Your location is needed to find a nearby city and easy using of the service',
             },
+            config: {
+                googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+            },
         },
         android: {
             adaptiveIcon: {
@@ -40,6 +43,7 @@ export default {
         },
         plugins: ['sentry-expo'],
         extra: {
+            NODE_ENV: process.env.NODE_ENV,
             EXPO_CLIENT_ID: process.env.EXPO_CLIENT_ID,
             IOS_CLIENT_ID: process.env.IOS_CLIENT_ID,
             ANDROID_CLIENT_ID: process.env.ANDROID_CLIENT_ID,

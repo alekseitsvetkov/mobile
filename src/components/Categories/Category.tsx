@@ -11,7 +11,7 @@ import {ACTIVE_OPACITY, tBase} from '_app/constants';
 import {s} from './styles';
 
 export const Category = ({item}: TCategoryProps) => {
-    const {title, imageUri, locale, localizations} = item;
+    const {name, imageUri, locale, localizations} = item;
 
     return (
         <TouchableOpacity
@@ -24,7 +24,7 @@ export const Category = ({item}: TCategoryProps) => {
             style={s.category}>
             <Image source={{uri: imageUri}} resizeMode="cover" style={[s.image, s.absoluteFillObject]} />
             <View style={s.overlay} />
-            <Text style={[tBase, s.categoryName]}>{withLocalization('name', title, locale, localizations)}</Text>
+            <Text style={[tBase, s.categoryName]}>{withLocalization('name', name, locale, localizations)}</Text>
         </TouchableOpacity>
     );
 };

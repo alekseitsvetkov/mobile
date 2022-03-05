@@ -156,7 +156,7 @@ export const tSmallSemibold: TextStyle = {
     fontWeight: '600',
 };
 
-export const avatarSize = normalize(70);
+export const avatarSize = normalize(80);
 
 export const mapGfxStyle: MapStyleElement[] = [
     {
