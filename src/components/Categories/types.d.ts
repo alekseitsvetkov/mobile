@@ -1,6 +1,7 @@
 interface ICategory {
-    title: string;
+    name: string;
     imageUri: string;
+    emoji?: string;
     locale: string;
     // TODO: NEED FIX, IDK WHAT IS IT
     localizations: any;
