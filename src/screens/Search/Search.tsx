@@ -50,9 +50,9 @@ export const SearchScreen = () => {
     console.log({searchList});
 
     return (
-        <MainContainer>
-            <View style={{paddingHorizontal: normalize(20)}}>
-                <Input ref={null} placeholder={t('search:search')} onChangeText={handleChange} />
+        <MainContainer statusBarStyle="light-content" marginTop>
+            <View style={{padding: normalize(16)}}>
+                <Input ref={null} autoFocus placeholder={t('search:search')} onChangeText={handleChange} />
             </View>
             {searchList?.length === 0 && usersList?.length === 0 && (
                 <Text style={[{alignItems: 'center', padding: 20}]}>{t('search:not_found')}</Text>

@@ -24,6 +24,7 @@ interface InputProps {
     error?: string;
     editable?: boolean;
     secureTextEntry?: boolean;
+    autoFocus?: boolean;
 }
 
 const Input: React.FC<InputProps> = React.forwardRef(
@@ -41,6 +42,7 @@ const Input: React.FC<InputProps> = React.forwardRef(
             error,
             editable,
             secureTextEntry,
+            autoFocus,
         },
         ref,
     ) => {
@@ -57,6 +59,7 @@ const Input: React.FC<InputProps> = React.forwardRef(
                         placeholder={placeholder}
                         placeholderTextColor={theme.gray02}
                         onChangeText={onChangeText}
+                        autoFocus={autoFocus}
                         onBlur={onBlur}
                         value={value || undefined}
                         multiline={multiline || false}
@@ -74,6 +77,8 @@ const Input: React.FC<InputProps> = React.forwardRef(
         );
     },
 );
+
+Input.displayName = 'Input';
 
 const styles = (theme = {} as ThemeColors) =>
     StyleSheet.create({

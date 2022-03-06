@@ -4,6 +4,7 @@ import {Keyboard, StatusBar, StatusBarStyle, StyleSheet, TouchableWithoutFeedbac
 
 import {Edge, SafeAreaView} from 'react-native-safe-area-context';
 
+import {normalize} from '_app/utils/dimensions';
 import {ThemeColors} from '_app/types/theme';
 import {DynamicStatusBar} from '_app/theme/Colors';
 import {AppContext} from '_app/context';
@@ -18,6 +19,7 @@ interface IProps {
     safeAreaDisabled?: boolean;
     statusBarStyle?: StatusBarStyle | null;
     edges?: EDGES;
+    marginTop?: boolean;
 }
 
 export const MainContainer: FC<IProps> = ({
@@ -25,9 +27,8 @@ export const MainContainer: FC<IProps> = ({
     safeAreaDisabled = false,
     statusBarStyle = null,
     edges = EDGES.top,
+    marginTop = false,
 }) => {
-    console.log({safeAreaDisabled});
-
     const {theme, themeType} = useContext(AppContext);
 
     const {barStyle, backgroundColor} = DynamicStatusBar[themeType];
@@ -51,7 +52,9 @@ export const MainContainer: FC<IProps> = ({
         content
     ) : (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <SafeAreaView edges={edges === EDGES.top ? edgesTop : edgesHorizontal} style={styles(theme).safeArea}>
+            <SafeAreaView
+                edges={edges === EDGES.top ? edgesTop : edgesHorizontal}
+                style={[styles(theme).safeArea, marginTop && styles(theme).marginTop]}>
                 {content}
             </SafeAreaView>
         </TouchableWithoutFeedback>
@@ -62,6 +65,9 @@ const styles = (theme = {} as ThemeColors) =>
     StyleSheet.create({
         safeArea: {
             flex: 1,
+        },
+        marginTop: {
+            marginTop: normalize(50),
         },
         container: {
             flex: 1,
