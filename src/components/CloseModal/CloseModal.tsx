@@ -19,6 +19,11 @@ const CloseModal = () => {
                     paddingVertical: normalize(6),
                     paddingHorizontal: normalize(6),
                     marginLeft: normalize(20),
+                    shadowColor: colors.black,
+                    shadowOpacity: 0.15,
+                    shadowRadius: 30,
+                    shadowOffset: {width: 0, height: 4},
+                    elevation: 6,
                 }}>
                 <Icon name="x" size={18} color={colors.black} />
             </Animated.View>

@@ -19,11 +19,11 @@ export const ThemeVariant: ThemeVariantType = {
 export const DynamicStatusBar: DynamicStatusBarType = {
     light: {
         barStyle: 'dark-content',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#000000',
     },
     dark: {
         barStyle: 'light-content',
-        backgroundColor: '#21262d',
+        backgroundColor: '#000000',
     },
 };
 

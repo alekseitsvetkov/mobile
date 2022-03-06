@@ -47,8 +47,6 @@ export const SearchScreen = () => {
     const searchList = dataSearch?.cities.edges;
     const usersList = dataUsers?.users.edges;
 
-    console.log({searchList});
-
     return (
         <MainContainer statusBarStyle="light-content" marginTop>
             <View style={{padding: normalize(16)}}>

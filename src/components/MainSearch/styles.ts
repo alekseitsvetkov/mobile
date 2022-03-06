@@ -18,6 +18,7 @@ export const s = StyleSheet.create({
         shadowOpacity: 0.15,
         shadowRadius: 30,
         shadowOffset: {width: 0, height: 4},
+        elevation: 6,
     },
     searchContainer: {
         flexDirection: 'row',

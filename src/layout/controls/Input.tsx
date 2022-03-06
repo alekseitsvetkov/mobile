@@ -6,7 +6,7 @@ import {normalize} from '_app/utils/dimensions';
 import {ThemeColors} from '_app/types/theme';
 import {HandleAvailableColor, Typography} from '_app/theme';
 import {AppContext} from '_app/context';
-import {radius} from '_app/constants';
+import {colors, radius} from '_app/constants';
 
 const {FontWeights} = Typography;
 
@@ -86,10 +86,19 @@ const styles = (theme = {} as ThemeColors) =>
             width: '100%',
         },
         containerInput: {
-            backgroundColor: theme.background,
+            backgroundColor: colors.white,
             marginVertical: normalize(10),
-            padding: normalize(14),
-            borderRadius: radius.base,
+            paddingHorizontal: normalize(16),
+            height: normalize(40),
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderRadius: radius.s,
+            shadowColor: colors.black,
+            shadowOpacity: 0.15,
+            shadowRadius: 30,
+            shadowOffset: {width: 0, height: 4},
+            elevation: 6,
         },
         labelTextStyle: {
             ...FontWeights.Semibold,
