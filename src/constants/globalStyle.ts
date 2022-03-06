@@ -6,7 +6,7 @@ import {DarkTheme, DefaultTheme} from '@react-navigation/native';
 import {normalize} from '_app/utils/dimensions';
 
 export const radius = {
-    s: 10,
+    s: 8,
     base: 12,
     l: 18,
     full: 100,

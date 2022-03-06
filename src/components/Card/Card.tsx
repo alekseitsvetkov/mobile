@@ -18,8 +18,6 @@ export const Card = ({item, size}: TCardProps) => {
     const {images, name, countryCode, alternateName} = item;
     const [active, setActive] = useState(0);
 
-    console.log({item});
-
     const ruName = alternateName
         ? alternateName.find((a) => {
               if (a.isoLang === 'ru' && a.isPreferredName === true) {
