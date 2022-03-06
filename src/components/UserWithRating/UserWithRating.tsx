@@ -31,7 +31,7 @@ export const UserWithRating = ({item, index}: UserWithRatingProps) => {
                     <Avatar small username={node.username} src={node.avatar} />
                     <View style={s.credentials}>
                         <Text style={[tBase, styles(theme).text]}>{node.name}</Text>
-                        <Text style={[tBase, styles(theme).text]}>@{node.username}</Text>
+                        {/* <Text style={[tBase, styles(theme).text]}>@{node.username}</Text> */}
                     </View>
                 </View>
                 <Text style={[tBase, styles(theme).text]}>{node.rating}</Text>

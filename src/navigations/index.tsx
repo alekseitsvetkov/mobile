@@ -79,6 +79,7 @@ const Index = () => {
                         headerBackTitle: t('utils:back'),
                         title: t('utils:search'),
                         presentation: 'transparentModal',
+                        ...options,
                     }}
                     name="Search"
                     component={SearchScreen}
@@ -180,10 +181,12 @@ const Index = () => {
                 <RootStack.Screen
                     options={({route}) => ({
                         headerShown: true,
-                        headerTitle: `${route.params.user.username}`,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
+                        headerTransparent: true,
+                        headerTitle: `${route.params.user.name}`,
+                        headerTintColor: scheme === 'dark' ? colors.black : colors.white,
                         headerBackTitle: t('utils:back'),
                         presentation: 'card',
+                        ...options,
                     })}
                     name="ProfileUser"
                     component={ProfileUserScreen}

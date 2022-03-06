@@ -157,7 +157,7 @@ export const ProfileScreen = () => {
     // const type = selectedList === 'moments' ? 'moments' : 'list';
 
     return (
-        <MainContainer statusBarStyle="light-content">
+        <MainContainer statusBarStyle="light-content" marginTop>
             <FlatList
                 ref={ref}
                 ListHeaderComponent={renderHeader({

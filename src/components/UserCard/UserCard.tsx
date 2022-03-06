@@ -24,7 +24,7 @@ export const UserCard = ({node, avatar, username, name}) => {
                 <Avatar src={avatar} username={username} />
                 <View>
                     <Text style={[tBase, styles(theme).text]}>{name}</Text>
-                    <Text style={[tBase, styles(theme).text]}>@{username}</Text>
+                    {/* <Text style={[tBase, styles(theme).text]}>@{username}</Text> */}
                 </View>
             </View>
         </TouchableOpacity>
