@@ -9,7 +9,7 @@ import {MainCarousel, MainContainer, MainSearch} from '_app/components';
 
 export const HomeScreen = () => {
     return (
-        <MainContainer safeAreaDisabled statusBarStyle="dark-content">
+        <MainContainer safeAreaDisabled statusBarStyle="light-content">
             <ScrollView showsVerticalScrollIndicator={false}>
                 <MainCarousel data={MOCK_CAROUSEL_DATA} />
                 <MainSearch />
