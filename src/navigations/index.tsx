@@ -57,7 +57,6 @@ const options = {
         };
     },
 };
-
 const Index = () => {
     const scheme = useColorScheme();
 
@@ -73,11 +72,13 @@ const Index = () => {
                 <RootStack.Screen name="RootTab" component={RootTab} options={navigationOptions} />
                 <RootStack.Screen
                     options={{
+                        //...TransitionPresets.ModalTransition,
                         headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
+                        headerTintColor: scheme === 'dark' ? colors.black : colors.white,
+                        headerTransparent: true,
                         headerBackTitle: t('utils:back'),
                         title: t('utils:search'),
-                        presentation: 'card',
+                        presentation: 'transparentModal',
                     }}
                     name="Search"
                     component={SearchScreen}
