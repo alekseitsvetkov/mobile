@@ -6,7 +6,8 @@
   "wip": "Work in progress",
   "welcome": "Hello",
   "categories": "Categories",
-  "no_images": "There's no picture yet",
+  "want": "Want",
+  "visited": "Visited",
   "login": "Login",
   "logout": "Logout",
   "delete": "Delete",
@@ -14,5 +15,12 @@
   "loading": "Loading",
   "next": "Next",
   "change": "Change",
-  "done": "Done"
+  "done": "Done",
+  "contribute": "Contribute to Skeetry",
+  "add_your_photo": "Add your photo",
+  "submit_photo": "Submit a photo",
+  "no_images": "There's no picture yet",
+  "overview": "Overview",
+  "location": "Location",
+  "where_do_you_want_to_go": "Where do you want to go?"
 }

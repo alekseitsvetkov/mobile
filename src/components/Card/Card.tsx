@@ -27,7 +27,9 @@ export const Card = ({item, size}: TCardProps) => {
           })
         : null;
 
-    const title = languageTag === 'ru' && ruName && ruName.alternateName ? ruName.alternateName : name;
+    // const title = languageTag === 'ru' && ruName && ruName.alternateName ? ruName.alternateName : name;
+
+    const title = name;
 
     const changeItem = (nativeEvent) => {
         if (nativeEvent) {
@@ -83,7 +85,7 @@ export const Card = ({item, size}: TCardProps) => {
                                         item,
                                     })
                                 }>
-                                <ImagePlaceholder
+                                {/* <ImagePlaceholder
                                     style={[
                                         s.itemImage,
                                         size === 'wide' && s.itemSizeWide,
@@ -91,7 +93,7 @@ export const Card = ({item, size}: TCardProps) => {
                                         size === 'small' && s.itemSizeSmall,
                                     ]}
                                     size={35}
-                                />
+                                /> */}
                             </Pressable>
                         )}
                     </View>
@@ -124,10 +126,10 @@ export const Card = ({item, size}: TCardProps) => {
                                             item,
                                         })
                                     }>
-                                    <ImagePlaceholder
+                                    {/* <ImagePlaceholder
                                         style={[s.itemImage, size === 'full' && s.itemSizeFull]}
                                         size={35}
-                                    />
+                                    /> */}
                                 </Pressable>
                             )}
                         </ScrollView>

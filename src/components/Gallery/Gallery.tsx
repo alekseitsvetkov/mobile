@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 
 import {Alert, Button, FlatList, Image as RNImage, Text, TouchableOpacity, View} from 'react-native';
 
+import i18n from 'i18n-js';
+
 import {navigation} from '_app/services/navigations';
 
 import {s} from './styles';
@@ -44,14 +46,14 @@ export const Gallery = ({images}: GalleryProps) => {
                         return (
                             <View style={s.plusImage}>
                                 <Text style={s.title}>
-                                    {images.length === 0 ? t('card:no_images') : t('card:contribute')}
+                                    {images.length === 0 ? i18n.t('no_images') : i18n.t('contribute')}
                                 </Text>
-                                {images.length === 0 && <Text style={s.desc}>{t('card:contribute')}</Text>}
-                                <Text style={s.secondDesc}>{t('card:add_your_photo')}</Text>
+                                {images.length === 0 && <Text style={s.desc}>{i18n.t('contribute')}</Text>}
+                                <Text style={s.secondDesc}>{i18n.t('add_your_photo')}</Text>
                                 <Button
-                                    // label={t('card:submit_photo')}
-                                    title={t('card:submit_photo')}
-                                    onPress={() => Alert.alert(t('utils:wip'))}
+                                    // label={i18n.t('card:submit_photo')}
+                                    title={i18n.t('submit_photo')}
+                                    onPress={() => Alert.alert(i18n.t('wip'))}
                                     //loading={false}
                                     //containerStyle={s.button}
                                 />

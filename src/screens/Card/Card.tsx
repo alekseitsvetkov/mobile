@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {ScrollView} from 'react-native-gesture-handler';
+import i18n from 'i18n-js';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 
 import {useAddCityMutation, useCityQuery, useMoveCityMutation, useRemoveCityMutation} from '_app/generated/graphql';
@@ -160,9 +161,9 @@ export const CardScreen = ({route, navigation}) => {
             ? ActionSheetIOS.showActionSheetWithOptions(
                   {
                       options: [
-                          `${t('utils:cancel')}`,
-                          `${alreadyWanted ? t('utils:visited') : t('utils:want')}`,
-                          `${t('utils:delete')}`,
+                          `${i18n.t('cancel')}`,
+                          `${alreadyWanted ? i18n.t('visited') : i18n.t('want')}`,
+                          `${i18n.t('delete')}`,
                       ],
                       destructiveButtonIndex: 2,
                       cancelButtonIndex: 0,
@@ -181,9 +182,9 @@ export const CardScreen = ({route, navigation}) => {
             : showActionSheetWithOptions(
                   {
                       options: [
-                          `${t('utils:cancel')}`,
-                          `${alreadyWanted ? t('utils:visited') : t('utils:want')}`,
-                          `${t('utils:delete')}`,
+                          `${i18n.t('cancel')}`,
+                          `${alreadyWanted ? i18n.t('visited') : i18n.t('want')}`,
+                          `${i18n.t('delete')}`,
                       ],
                       cancelButtonIndex: 0,
                       destructiveButtonIndex: 2,
@@ -225,13 +226,13 @@ export const CardScreen = ({route, navigation}) => {
                                     //underlayColor={theme.gray01}
                                     style={s.button}
                                     onPress={() => handlePress('want')}>
-                                    <Text style={[s.buttonText, s.text]}>{t('utils:want')}</Text>
+                                    <Text style={[s.buttonText, s.text]}>{i18n.t('want')}</Text>
                                 </TouchableHighlight>
                                 <TouchableHighlight
                                     // underlayColor={theme.gray01}
                                     style={s.button}
                                     onPress={() => handlePress('visited')}>
-                                    <Text style={[s.buttonText, s.text]}>{t('utils:visited')}</Text>
+                                    <Text style={[s.buttonText, s.text]}>{i18n.t('visited')}</Text>
                                 </TouchableHighlight>
                             </>
                         ) : (
@@ -247,10 +248,10 @@ export const CardScreen = ({route, navigation}) => {
                                             s.text,
                                         ]}>
                                         {loading
-                                            ? t('utils:loading')
+                                            ? i18n.t('loading')
                                             : alreadyWanted
-                                            ? t('utils:want')
-                                            : t('utils:visited')}
+                                            ? i18n.t('want')
+                                            : i18n.t('visited')}
                                     </Text>
                                     <Icon name="more-horizontal" style={s.buttonIcon} size={18} color={'#ddd'} />
                                 </View>
@@ -260,12 +261,12 @@ export const CardScreen = ({route, navigation}) => {
                 </View>
                 {item.overview && (
                     <View style={s.section}>
-                        <Text style={[s.sectionTitle, s.text]}>{t('card:overview')}</Text>
+                        <Text style={[s.sectionTitle, s.text]}>{i18n.t('overview')}</Text>
                         <Text style={s.text}>{item.overview}</Text>
                     </View>
                 )}
                 <View style={s.section}>
-                    <Text style={[s.sectionTitle, s.text]}>{t('utils:location')}</Text>
+                    <Text style={[s.sectionTitle, s.text]}>{i18n.t('location')}</Text>
                     <Pressable
                         onPress={() =>
                             navigation.navigate('Map', {

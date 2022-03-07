@@ -1,7 +1,8 @@
 import React, {useRef, useState} from 'react';
 
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, TextInput, View} from 'react-native';
 
+import i18n from 'i18n-js';
 import {useScrollToTop} from '@react-navigation/native';
 
 import {OrderDirection, useCitiesQuery, useUsersQuery} from '_app/generated/graphql';
@@ -45,14 +46,21 @@ export const SearchScreen = () => {
     return (
         <MainContainer statusBarStyle="light-content" marginTop>
             <View style={{padding: 16}}>
-                <Input ref={null} autoFocus placeholder={t('search:search')} onChangeText={handleChange} />
+                <TextInput
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    placeholder={i18n.t('search')}
+                    onChangeText={handleChange}
+                    autoFocus
+                    clearButtonMode="always"
+                />
             </View>
             {searchList?.length === 0 && usersList?.length === 0 && (
-                <Text style={[{alignItems: 'center', padding: 20}]}>{t('search:not_found')}</Text>
+                <Text style={[{alignItems: 'center', padding: 20}]}>{i18n.t('not_found')}</Text>
             )}
             {input.length !== 0 && (
                 <View>
-                    {loadingSearch && <HorizontalListPlaceholder size="small" />}
+                    {/* {loadingSearch && <HorizontalListPlaceholder size="small" />} */}
                     {searchList?.length !== 0 && (
                         <ScrollView
                             horizontal
@@ -65,18 +73,16 @@ export const SearchScreen = () => {
                             ))}
                         </ScrollView>
                     )}
-                    {loadingUsers && <HorizontalListPlaceholder size="small" />}
+                    {/* {loadingUsers && <HorizontalListPlaceholder size="small" />} */}
                     {usersList?.length !== 0 && (
                         <ScrollView
                             horizontal
                             showsHorizontalScrollIndicator={false}
                             contentContainerStyle={{alignItems: 'center', padding: 20}}>
                             {usersList?.map((i) => {
-                                const {id, avatar, username, name} = i.node;
+                                const {id, avatar, name} = i.node;
 
-                                return (
-                                    <UserCard key={id} node={i.node} avatar={avatar} username={username} name={name} />
-                                );
+                                return <UserCard key={id} node={i.node} avatar={avatar} name={name} />;
                             })}
                         </ScrollView>
                     )}

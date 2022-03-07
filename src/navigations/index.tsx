@@ -5,7 +5,7 @@ import {Easing, useColorScheme} from 'react-native';
 import {enableScreens} from 'react-native-screens';
 import i18n from 'i18n-js';
 import {StackNavigationOptions, createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import {DarkTheme, NavigationContainer} from '@react-navigation/native';
 
 import {navigationRef} from '_app/services/navigations';
 import {CardScreen, GalleryScreen, MapScreen, ProfileUserScreen, SearchScreen} from '_app/screens';
@@ -49,7 +49,7 @@ const Index = () => {
         headerShown: false,
     };
     return (
-        <NavigationContainer ref={navigationRef}>
+        <NavigationContainer ref={navigationRef} theme={DarkTheme}>
             <RootStack.Navigator initialRouteName="Auth">
                 <RootStack.Screen name="Auth" component={AuthStack} options={navigationOptions} />
                 <RootStack.Screen name="RootTab" component={RootTab} options={navigationOptions} />

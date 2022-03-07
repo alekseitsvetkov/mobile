@@ -31,7 +31,11 @@ export const MainContainer: FC<IProps> = ({
 
     const content = (
         <>
-            <StatusBar animated={true} backgroundColor={'#000'} barStyle={statusBarStyle ? statusBarStyle : barStyle} />
+            <StatusBar
+                animated={true}
+                backgroundColor={'#000'}
+                barStyle={statusBarStyle ? statusBarStyle : statusBarStyle}
+            />
             <View style={[s.container, !safeAreaDisabled && s.borderTop]}>{children}</View>
         </>
     );

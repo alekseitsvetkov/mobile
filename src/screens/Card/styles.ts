@@ -63,6 +63,7 @@ export const s = StyleSheet.create({
         lineHeight: 18,
     },
     content: {
+        backgroundColor: '#fff',
         padding: 16,
     },
     section: {

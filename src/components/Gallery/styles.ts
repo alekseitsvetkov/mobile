@@ -19,6 +19,7 @@ export const s = StyleSheet.create({
         backgroundColor: '#ddd',
     },
     container: {
+        backgroundColor: '#fff',
         position: 'relative',
         borderBottomColor: '#ddd',
         borderBottomWidth: 1,

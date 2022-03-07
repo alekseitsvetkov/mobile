@@ -9,7 +9,7 @@ export const s = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fff',
         borderBottomRightRadius: 12,
         borderBottomLeftRadius: 12,
     },
