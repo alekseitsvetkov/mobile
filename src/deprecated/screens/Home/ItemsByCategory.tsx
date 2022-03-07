@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 
 import {Text, View} from 'react-native';
 
-import {withLocalization} from '_app/utils/helpers';
 import {VerticalListPlaceholder} from '_app/layout';
 import {OrderDirection, useCitiesQuery} from '_app/generated/graphql';
 import {PLATFORM, tTitle} from '_app/constants';
@@ -66,7 +65,7 @@ export const ItemsByCategoryScreen = ({route}) => {
             {PLATFORM.IS_IOS && <ModalControl />}
             {PLATFORM.IS_IOS && (
                 <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 20}}>
-                    <Text style={tTitle}>{withLocalization('name', name, locale, localizations)}</Text>
+                    <Text style={tTitle}>name</Text>
                     <View style={{marginLeft: 5}}>
                         <Text>{emoji}</Text>
                     </View>

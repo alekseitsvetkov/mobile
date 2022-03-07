@@ -1,20 +1,13 @@
-import {initReactI18next} from 'react-i18next';
-import i18n from 'i18next';
-import Constants from 'expo-constants';
+import i18n from 'i18n-js';
+import * as Localization from 'expo-localization';
 
-import {detectedLocale} from './languageDetector';
-import {defaultLanguage, languagesResources} from './languageConfig';
+import ru from './locales/ru.json';
+import en from './locales/en.json';
 
-i18n.use(initReactI18next) // passes i18n down to react-i18next
-    .init({
-        debug: Constants?.manifest?.extra?.NODE_ENV === 'dev',
-        resources: languagesResources,
-        fallbackLng: defaultLanguage,
-        lng: detectedLocale ? detectedLocale.languageTag : 'en',
+i18n.translations = {
+    en,
+    ru,
+};
 
-        interpolation: {
-            escapeValue: false,
-        },
-    });
-
-export default i18n;
+i18n.locale = Localization.locale;
+i18n.fallbacks = true;

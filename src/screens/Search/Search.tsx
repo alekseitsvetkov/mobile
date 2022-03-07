@@ -2,17 +2,12 @@ import React, {useRef, useState} from 'react';
 
 import {ScrollView, Text, View} from 'react-native';
 
-import {useTranslation} from 'react-i18next';
 import {useScrollToTop} from '@react-navigation/native';
 
-import {normalize} from '_app/utils/dimensions';
-import {HorizontalListPlaceholder, Input} from '_app/layout';
 import {OrderDirection, useCitiesQuery, useUsersQuery} from '_app/generated/graphql';
 import {Card, MainContainer, UserCard} from '_app/components';
 
 export const SearchScreen = () => {
-    const {t} = useTranslation();
-
     const ref = useRef<ScrollView>(null);
     const [input, setInput] = useState('');
 
@@ -49,7 +44,7 @@ export const SearchScreen = () => {
 
     return (
         <MainContainer statusBarStyle="light-content" marginTop>
-            <View style={{padding: normalize(16)}}>
+            <View style={{padding: 16}}>
                 <Input ref={null} autoFocus placeholder={t('search:search')} onChangeText={handleChange} />
             </View>
             {searchList?.length === 0 && usersList?.length === 0 && (

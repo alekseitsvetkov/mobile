@@ -81,11 +81,6 @@ module.exports = {
                         position: 'after',
                     },
                     {
-                        pattern: '_hooks/**',
-                        group: 'parent',
-                        position: 'before',
-                    },
-                    {
                         pattern: '_constants/**',
                         group: 'object',
                         position: 'before',

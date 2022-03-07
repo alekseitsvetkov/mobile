@@ -4,28 +4,26 @@ import {Animated, TouchableWithoutFeedback} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import {normalize} from '_app/utils/dimensions';
 import {navigation} from '_app/services/navigations';
-import {colors} from '_app/constants';
 
 const CloseModal = () => {
     return (
         <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
             <Animated.View
                 style={{
-                    backgroundColor: colors.white,
+                    backgroundColor: '#ffffff',
                     borderRadius: 100,
                     alignItems: 'center',
-                    paddingVertical: normalize(6),
-                    paddingHorizontal: normalize(6),
-                    marginLeft: normalize(20),
-                    shadowColor: colors.black,
+                    paddingVertical: 6,
+                    paddingHorizontal: 6,
+                    marginLeft: 20,
+                    shadowColor: '#000000',
                     shadowOpacity: 0.15,
                     shadowRadius: 30,
                     shadowOffset: {width: 0, height: 4},
                     elevation: 6,
                 }}>
-                <Icon name="x" size={18} color={colors.black} />
+                <Icon name="x" size={18} color={'#000000'} />
             </Animated.View>
         </TouchableWithoutFeedback>
     );

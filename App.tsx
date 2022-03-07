@@ -33,36 +33,3 @@ Sentry.init({
 const App = AppProvider;
 
 export default App;
-
-// import {loadThemeType} from '_app/utils/storage';
-// import {ThemeStatic} from '_app/theme/Colors';
-// import RootStackNavigation from '_app/navigations';
-// import {LoadingIndicator} from '_app/layout';
-// import {AppContext, AppContextProvider} from '_app/context';
-// import {IconSizes} from '_app/constants';
-
-// const SafeAreaApp = () => {
-//     const {toggleTheme} = useContext(AppContext);
-
-//     const [initializing, setInitializing] = useState(true);
-
-//     const initializeTheme = async () => {
-//         setInitializing(true);
-//         const storageTheme = await loadThemeType();
-//         if (storageTheme) {
-//             toggleTheme(storageTheme);
-//         }
-//         setInitializing(false);
-//     };
-
-//     useEffect(() => {
-//         initializeTheme();
-//         // eslint-disable-next-line react-hooks/exhaustive-deps
-//     }, []);
-
-//     if (initializing) {
-//         return <LoadingIndicator color={ThemeStatic.accent} size={IconSizes.x1} />;
-//     }
-
-//     return <RootStackNavigation />;
-// };

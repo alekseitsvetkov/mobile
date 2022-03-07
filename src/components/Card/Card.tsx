@@ -1,20 +1,15 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, Text, View} from 'react-native';
 
 import {ScrollView} from 'react-native-gesture-handler';
 
-import {languageTag} from '_app/utils/helpers';
-import {ThemeColors} from '_app/types/theme';
 import {navigation} from '_app/services/navigations';
-import {ImagePlaceholder} from '_app/layout';
-import {AppContext} from '_app/context';
 
 import {s} from './styles';
 
 // TODO: refactor
 export const Card = ({item, size}: TCardProps) => {
-    const {theme} = useContext(AppContext);
     const {images, name, countryCode, alternateName} = item;
     const [active, setActive] = useState(0);
 
@@ -152,15 +147,15 @@ export const Card = ({item, size}: TCardProps) => {
             </View>
             {/* {size !== 'base' && (
         <View style={s.rating}>
-          <Icon.StarIcon size={16} color={colors.black} />
+          <Icon.StarIcon size={16} color={'#000000'} />
           <Text style={s.ratingNumber}>{rating ? rating.number : 0}</Text>
           <Text style={s.ratingCount}>{rating ? rating.count : 0}</Text>
         </View>
       )} */}
-            <Text numberOfLines={1} style={[s.itemTitle, styles(theme).text]}>
+            <Text numberOfLines={1} style={[s.itemTitle]}>
                 {title}
             </Text>
-            <Text numberOfLines={1} style={[s.itemDesc, styles(theme).text]}>
+            <Text numberOfLines={1} style={[s.itemDesc]}>
                 {countryCode}
                 {/* {state
           ? withLocalization('state.country.name', state.country.name, locale, localizations)
@@ -169,10 +164,3 @@ export const Card = ({item, size}: TCardProps) => {
         </View>
     );
 };
-
-const styles = (theme = {} as ThemeColors) =>
-    StyleSheet.create({
-        text: {
-            color: theme.text01,
-        },
-    });

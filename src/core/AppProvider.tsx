@@ -23,6 +23,7 @@ import {client} from '_app/services/graphql';
 import {AppContextProvider} from '_app/context';
 
 import {AppWrapper} from './AppWrapper';
+import '_app/i18n';
 
 const Provider = (): JSX.Element => {
     const [fontsLoaded] = useFonts({

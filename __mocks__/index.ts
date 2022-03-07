@@ -1,4 +1,4 @@
-import {SCREEN_HEIGHT} from '_app/utils/dimensions';
+import {SCREEN_HEIGHT} from '_app/core';
 import {ISlide} from '_app/components/MainCarousel/types';
 
 // TODO: REMOVE THIS MOCK WHEN DONE ON BACKEND

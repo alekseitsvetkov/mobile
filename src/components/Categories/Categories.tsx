@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 import {ScrollView, Text, View} from 'react-native';
 
-import {useTranslation} from 'react-i18next';
+import i18n from 'i18n-js';
 import {MOCK_CATEGORIES_DATA} from '_mocks';
 
-import {CategoriesPlaceholder} from '_app/layout';
 import {useTagsQuery} from '_app/generated/graphql';
-import {tTitle} from '_app/constants';
 
 import {s} from './styles';
 import {Category} from './Category';
-export const Categories = () => {
-    const {t} = useTranslation();
 
+export const Categories = () => {
     const {data, loading} = useTagsQuery();
 
     // const categories = data?.tags;
@@ -22,8 +19,8 @@ export const Categories = () => {
 
     return categories && categories?.length !== 0 ? (
         <View style={s.container}>
-            <Text style={[tTitle, s.title]}>{`${t('home:categories')}`}</Text>
-            {loading && <CategoriesPlaceholder />}
+            <Text style={s.title}>{i18n.t('categories')}</Text>
+            {/* {loading && <CategoriesPlaceholder />} */}
             {!loading && (
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.categoryWrapper}>
                     {categories.map((category) => (
