@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {SafeAreaProvider, initialWindowMetrics} from 'react-native-safe-area-context';
+import {initialWindowMetrics} from 'react-native-safe-area-context';
+import {NativeBaseProvider} from 'native-base';
 import AppLoading from 'expo-app-loading';
 import {TouchEventBoundary} from '@sentry/react-native';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
@@ -19,6 +20,8 @@ import {
 } from '@expo-google-fonts/inter';
 import {ApolloProvider} from '@apollo/client';
 
+import {themeConfig} from '_app/utils/themeConfig';
+import {colorModeManager, theme} from '_app/utils';
 import {client} from '_app/services/graphql';
 import {AppContextProvider} from '_app/context';
 
@@ -44,13 +47,17 @@ const Provider = (): JSX.Element => {
             <TouchEventBoundary>
                 <ApolloProvider client={client}>
                     <AppContextProvider>
-                        <ActionSheetProvider>
-                            <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+                        <NativeBaseProvider
+                            initialWindowMetrics={initialWindowMetrics}
+                            theme={theme}
+                            colorModeManager={colorModeManager}
+                            config={themeConfig}>
+                            <ActionSheetProvider>
                                 <BottomSheetModalProvider>
                                     <AppWrapper />
                                 </BottomSheetModalProvider>
-                            </SafeAreaProvider>
-                        </ActionSheetProvider>
+                            </ActionSheetProvider>
+                        </NativeBaseProvider>
                     </AppContextProvider>
                 </ApolloProvider>
             </TouchEventBoundary>
