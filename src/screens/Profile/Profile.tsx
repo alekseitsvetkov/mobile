@@ -36,12 +36,12 @@ export const ProfileScreen = () => {
 
     if (error) {
         // TODO: something here
-        return <View />;
+        return signOut();
     }
 
     if (!user) {
         // TODO: something here
-        return <View />;
+        return signOut();
     }
 
     return (
