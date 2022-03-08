@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 export default {
     expo: {
+        owner: 'skeetry',
         name: 'Skeetry',
         slug: 'skeetry',
         version: '1.0.0',
