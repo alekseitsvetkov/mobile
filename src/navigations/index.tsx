@@ -47,6 +47,7 @@ const Index = () => {
 
     const navigationOptions: StackNavigationOptions = {
         headerShown: false,
+        presentation: 'transparentModal',
     };
     return (
         <NavigationContainer ref={navigationRef} theme={DarkTheme}>

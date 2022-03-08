@@ -22,5 +22,6 @@
   "no_images": "Тут пока нет фото",
   "overview": "Описание",
   "location": "Местоположение",
-  "where_do_you_want_to_go": "Куда вы хотите отправиться?"
+  "where_do_you_want_to_go": "Куда вы хотите отправиться?",
+  "sign_in_with_google": "Войти через Google"
 }

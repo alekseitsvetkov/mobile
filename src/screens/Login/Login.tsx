@@ -1,7 +1,9 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 
-import {Button, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 
+import {Button, Center, Spinner} from 'native-base';
+import i18n from 'i18n-js';
 import * as WebBrowser from 'expo-web-browser';
 import Constants from 'expo-constants';
 import * as Google from 'expo-auth-session/providers/google';
@@ -81,7 +83,12 @@ export const LoginScreen = () => {
         initialize();
     }, [initialize]);
 
-    let content = <View />;
+    let content = (
+        <Center>
+            <Spinner accessibilityLabel="Loading posts" />
+            <Text>Loading</Text>
+        </Center>
+    );
 
     if (!initializing) {
         content = (
@@ -89,13 +96,12 @@ export const LoginScreen = () => {
                 <Text style={s.formTitle}>Skeetry</Text>
 
                 <Button
-                    //loading={!request || loading}
-                    //label="Sign in with Google"
-                    title="Sign in with Google"
-                    onPress={() => {
-                        promptAsync();
-                    }}
-                />
+                    isLoading={!request || loading}
+                    isDisabled={!request || loading}
+                    isLoadingText={i18n.t('loading')}
+                    onPress={() => promptAsync()}>
+                    {i18n.t('sign_in_with_google')}
+                </Button>
             </View>
         );
     }

@@ -2,6 +2,8 @@ import React from 'react';
 
 import {Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 
+import {HStack, Heading, Spinner} from 'native-base';
+
 import {signOut} from '_app/utils';
 import {navigation} from '_app/services/navigations';
 import {useMeQuery} from '_app/generated/graphql';
@@ -22,7 +24,14 @@ export const ProfileScreen = () => {
 
     if (loading) {
         // TODO: something here
-        return <View />;
+        return (
+            <HStack space={2} justifyContent="center">
+                <Spinner accessibilityLabel="Loading posts" />
+                <Heading color="primary.500" fontSize="md">
+                    Loading
+                </Heading>
+            </HStack>
+        );
     }
 
     if (error) {
