@@ -1,8 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 
-import {Text, View} from 'react-native';
+import {Button, Text, View} from 'react-native';
 
-import {Button, Center, Spinner} from 'native-base';
 import i18n from 'i18n-js';
 import * as WebBrowser from 'expo-web-browser';
 import Constants from 'expo-constants';
@@ -84,10 +83,9 @@ export const LoginScreen = () => {
     }, [initialize]);
 
     let content = (
-        <Center>
-            <Spinner accessibilityLabel="Loading posts" />
+        <View>
             <Text>Loading</Text>
-        </Center>
+        </View>
     );
 
     if (!initializing) {
@@ -96,12 +94,14 @@ export const LoginScreen = () => {
                 <Text style={s.formTitle}>Skeetry</Text>
 
                 <Button
-                    isLoading={!request || loading}
-                    isDisabled={!request || loading}
-                    isLoadingText={i18n.t('loading')}
-                    onPress={() => promptAsync()}>
-                    {i18n.t('sign_in_with_google')}
-                </Button>
+                    disabled={!request || loading}
+                    // loading={!request || loading}
+                    // label="Sign in with Google"
+                    title={i18n.t('sign_in_with_google')}
+                    onPress={() => {
+                        promptAsync();
+                    }}
+                />
             </View>
         );
     }

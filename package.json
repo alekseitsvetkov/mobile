@@ -58,7 +58,6 @@
     "iconsax-react-native": "^0.0.8",
     "isomorphic-unfetch": "^3.1.0",
     "lint-staged": "^12.3.4",
-    "native-base": "^3.3.7",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",
     "react": "17.0.2",
