@@ -9,6 +9,8 @@ import {Text} from '_app/lib/skeetry-ui';
 
 import {s} from './styles';
 
+import {ImagePlaceholder} from '../ImagePlaceholder';
+
 // TODO: refactor
 export const Card = ({item, size}: TCardProps) => {
     const {images, name, countryCode, alternateName} = item;
@@ -86,7 +88,7 @@ export const Card = ({item, size}: TCardProps) => {
                                         item,
                                     })
                                 }>
-                                {/* <ImagePlaceholder
+                                <ImagePlaceholder
                                     style={[
                                         s.itemImage,
                                         size === 'wide' && s.itemSizeWide,
@@ -94,7 +96,7 @@ export const Card = ({item, size}: TCardProps) => {
                                         size === 'small' && s.itemSizeSmall,
                                     ]}
                                     size={35}
-                                /> */}
+                                />
                             </Pressable>
                         )}
                     </View>
@@ -127,10 +129,10 @@ export const Card = ({item, size}: TCardProps) => {
                                             item,
                                         })
                                     }>
-                                    {/* <ImagePlaceholder
+                                    <ImagePlaceholder
                                         style={[s.itemImage, size === 'full' && s.itemSizeFull]}
                                         size={35}
-                                    /> */}
+                                    />
                                 </Pressable>
                             )}
                         </ScrollView>

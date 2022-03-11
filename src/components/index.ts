@@ -8,3 +8,4 @@ export * from './UserCard';
 export * from './MainContainer';
 export * from './MainCarousel';
 export * from './MainSearch';
+export * from './ImagePlaceholder';
