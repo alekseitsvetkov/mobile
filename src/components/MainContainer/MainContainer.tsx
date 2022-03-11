@@ -4,6 +4,8 @@ import {Keyboard, StatusBar, StatusBarStyle, TouchableWithoutFeedback, View} fro
 
 import {Edge, SafeAreaView} from 'react-native-safe-area-context';
 
+import {Surface} from '_app/lib/skeetry-ui';
+
 import {s} from './styles';
 
 export enum EDGES {
@@ -36,7 +38,7 @@ export const MainContainer: FC<IProps> = ({
                 backgroundColor={'#000'}
                 barStyle={statusBarStyle ? statusBarStyle : statusBarStyle}
             />
-            <View style={[s.container, !safeAreaDisabled && s.borderTop]}>{children}</View>
+            <Surface style={[s.container, !safeAreaDisabled && s.borderTop]}>{children}</Surface>
         </>
     );
 

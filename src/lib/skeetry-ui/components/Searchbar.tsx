@@ -2,7 +2,7 @@ import React, {ComponentPropsWithRef, forwardRef, useImperativeHandle, useRef} f
 
 import {Platform, StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, ViewStyle} from 'react-native';
 
-import {Add, SearchNormal1} from 'iconsax-react-native';
+import {CloseCircle, SearchNormal1} from 'iconsax-react-native';
 import color from 'color';
 
 import Surface from './Surface';
@@ -190,12 +190,7 @@ const Searchbar = forwardRef<TextInputHandles, TProps>(
                     accessibilityLabel={clearAccessibilityLabel}
                     color={value ? iconColor : 'rgba(255, 255, 255, 0)'}
                     onPress={handleClearPress}
-                    icon={
-                        clearIcon ||
-                        (({size, color}) => (
-                            <Add size={size} variant="Outline" color={color} style={styles.crossIcon} />
-                        ))
-                    }
+                    icon={clearIcon || (({size, color}) => <CloseCircle size={size} variant="Bold" color={color} />)}
                     // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
                     accessibilityTraits="button"
                     accessibilityComponentType="button"
@@ -221,9 +216,6 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         textAlign: 'left',
         minWidth: 0,
-    },
-    crossIcon: {
-        transform: [{rotate: '45deg'}],
     },
 });
 

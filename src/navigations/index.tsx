@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {Easing, useColorScheme} from 'react-native';
+import {Easing} from 'react-native';
 
 import {enableScreens} from 'react-native-screens';
 import i18n from 'i18n-js';
 import {StackNavigationOptions, createStackNavigator} from '@react-navigation/stack';
-import {DarkTheme, NavigationContainer} from '@react-navigation/native';
+import {DarkTheme, DefaultTheme, InitialState, NavigationContainer} from '@react-navigation/native';
 
+import {loadPersistence, savePersistence} from '_app/utils';
 import {navigationRef} from '_app/services/navigations';
 import {CardScreen, GalleryScreen, MapScreen, ProfileUserScreen, SearchScreen} from '_app/screens';
 import CloseModal from '_app/components/CloseModal/CloseModal';
@@ -43,14 +44,43 @@ const options = {
 };
 
 const Index = () => {
-    const scheme = useColorScheme();
+    const [isReady, setIsReady] = useState(false);
+    const [initialState, setInitialState] = useState<InitialState | undefined>();
+
+    useEffect(() => {
+        const restoreState = async () => {
+            try {
+                const savedStateString = await loadPersistence();
+                const state = JSON.parse(savedStateString || '');
+
+                setInitialState(state);
+            } catch (e) {
+                // ignore error
+            } finally {
+                setIsReady(true);
+            }
+        };
+
+        if (!isReady) {
+            restoreState();
+        }
+    }, [isReady]);
 
     const navigationOptions: StackNavigationOptions = {
         headerShown: false,
         presentation: 'transparentModal',
     };
+
+    if (!isReady) {
+        return null;
+    }
+
     return (
-        <NavigationContainer ref={navigationRef} theme={DarkTheme}>
+        <NavigationContainer
+            initialState={initialState}
+            onStateChange={(state) => savePersistence(JSON.stringify(state))}
+            theme={DarkTheme}
+            ref={navigationRef}>
             <RootStack.Navigator initialRouteName="Auth">
                 <RootStack.Screen name="Auth" component={AuthStack} options={navigationOptions} />
                 <RootStack.Screen name="RootTab" component={RootTab} options={navigationOptions} />
@@ -58,7 +88,7 @@ const Index = () => {
                     options={{
                         //...TransitionPresets.ModalTransition,
                         headerShown: true,
-                        headerTintColor: scheme === 'dark' ? '#000000' : '#ffffff',
+                        headerTintColor: '#ffffff',
                         headerTransparent: true,
                         headerBackTitle: i18n.t('back'),
                         title: i18n.t('search'),
@@ -73,7 +103,7 @@ const Index = () => {
                         headerShown: true,
                         headerTransparent: true,
                         headerShadowVisible: false,
-                        headerTintColor: scheme === 'dark' ? '#ffffff' : '#000000',
+                        headerTintColor: '#ffffff',
                         title: '',
                         headerBackTitle: i18n.t('back'),
                         ...options,
@@ -86,7 +116,7 @@ const Index = () => {
                     options={({route}) => ({
                         headerTransparent: true,
                         headerShadowVisible: false,
-                        headerTintColor: scheme === 'dark' ? '#ffffff' : '#000000',
+                        headerTintColor: '#ffffff',
                         title: '',
                         headerBackTitle: i18n.t('back'),
                         presentation: 'modal',
@@ -101,7 +131,7 @@ const Index = () => {
                         headerShown: true,
                         headerTransparent: true,
                         headerTitle: `${route.params.user.name}`,
-                        headerTintColor: scheme === 'dark' ? '#000000' : '#ffffff',
+                        headerTintColor: '#ffffff',
                         headerBackTitle: i18n.t('back'),
                         presentation: 'card',
                         ...options,
@@ -114,7 +144,7 @@ const Index = () => {
                         headerShown: true,
                         headerTransparent: true,
                         headerShadowVisible: false,
-                        headerTintColor: scheme === 'dark' ? '#ffffff' : '#000000',
+                        headerTintColor: '#ffffff',
                         title: '',
                         headerBackTitle: i18n.t('back'),
                         ...options,

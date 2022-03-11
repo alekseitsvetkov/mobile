@@ -11,3 +11,11 @@ export const loadToken = async () => {
 export const removeToken = async () => {
     return await AsyncStorage.removeItem('@skeetry_token');
 };
+
+export const loadPersistence = async () => {
+    return await AsyncStorage.getItem('@skeetry_persistence');
+};
+
+export const savePersistence = async (persistence: string) => {
+    return await AsyncStorage.setItem('@skeetry_persistence', persistence);
+};

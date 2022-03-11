@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 
 import {AccessibilityInfo, Appearance, ColorSchemeName, NativeEventSubscription} from 'react-native';
 
@@ -28,7 +28,7 @@ const Provider = ({...props}: Props) => {
         setColorScheme(colorScheme);
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         let subscription: NativeEventSubscription | undefined;
 
         if (!props.theme) {
@@ -41,7 +41,7 @@ const Provider = ({...props}: Props) => {
         };
     }, [props.theme]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         let appearanceSubscription: NativeEventSubscription | undefined;
         if (!props.theme) {
             appearanceSubscription = Appearance?.addChangeListener(handleAppearanceChange) as

@@ -43,6 +43,7 @@ export default {
             favicon: './assets/favicon.png',
         },
         plugins: ['sentry-expo'],
+        userInterfaceStyle: 'automatic',
         extra: {
             NODE_ENV: process.env.NODE_ENV,
             EXPO_CLIENT_ID: process.env.EXPO_CLIENT_ID,

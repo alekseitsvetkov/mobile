@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {createContext, useEffect, useState} from 'react';
+
+import {useColorScheme} from 'react-native';
 
 import {SafeAreaProvider, initialWindowMetrics} from 'react-native-safe-area-context';
 import {useKeepAwake} from 'expo-keep-awake';
@@ -21,15 +23,29 @@ import {
 import {ApolloProvider} from '@apollo/client';
 
 import {client} from '_app/services/graphql';
-import {Provider as ThemeProvider} from '_app/lib/skeetry-ui';
+import {DarkTheme, DefaultTheme, Provider as ThemeProvider} from '_app/lib/skeetry-ui';
 import {AppContextProvider} from '_app/context';
 
 import {AppWrapper} from './AppWrapper';
 
 import '_app/i18n';
 
+export const PreferencesContext = createContext<any>(null);
+
 const Provider = (): JSX.Element => {
     useKeepAwake();
+
+    const colorScheme = useColorScheme();
+
+    const [theme, setTheme] = useState<SkeetryUI.Theme>(DarkTheme);
+
+    useEffect(() => {
+        if (colorScheme === 'dark') {
+            setTheme(DarkTheme);
+        } else {
+            setTheme(DefaultTheme);
+        }
+    }, [colorScheme]);
 
     const [fontsLoaded] = useFonts({
         Inter_100Thin,
@@ -49,7 +65,7 @@ const Provider = (): JSX.Element => {
             <TouchEventBoundary>
                 <ApolloProvider client={client}>
                     <AppContextProvider>
-                        <ThemeProvider>
+                        <ThemeProvider theme={theme}>
                             <ActionSheetProvider>
                                 <SafeAreaProvider initialMetrics={initialWindowMetrics}>
                                     <BottomSheetModalProvider>
