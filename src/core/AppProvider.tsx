@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {SafeAreaProvider, initialWindowMetrics} from 'react-native-safe-area-context';
+import {useKeepAwake} from 'expo-keep-awake';
 import AppLoading from 'expo-app-loading';
 import {TouchEventBoundary} from '@sentry/react-native';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
@@ -20,12 +21,16 @@ import {
 import {ApolloProvider} from '@apollo/client';
 
 import {client} from '_app/services/graphql';
+import {Provider as ThemeProvider} from '_app/lib/skeetry-ui';
 import {AppContextProvider} from '_app/context';
 
 import {AppWrapper} from './AppWrapper';
+
 import '_app/i18n';
 
 const Provider = (): JSX.Element => {
+    useKeepAwake();
+
     const [fontsLoaded] = useFonts({
         Inter_100Thin,
         Inter_200ExtraLight,
@@ -44,13 +49,15 @@ const Provider = (): JSX.Element => {
             <TouchEventBoundary>
                 <ApolloProvider client={client}>
                     <AppContextProvider>
-                        <ActionSheetProvider>
-                            <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-                                <BottomSheetModalProvider>
-                                    <AppWrapper />
-                                </BottomSheetModalProvider>
-                            </SafeAreaProvider>
-                        </ActionSheetProvider>
+                        <ThemeProvider>
+                            <ActionSheetProvider>
+                                <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+                                    <BottomSheetModalProvider>
+                                        <AppWrapper />
+                                    </BottomSheetModalProvider>
+                                </SafeAreaProvider>
+                            </ActionSheetProvider>
+                        </ThemeProvider>
                     </AppContextProvider>
                 </ApolloProvider>
             </TouchEventBoundary>

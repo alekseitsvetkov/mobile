@@ -20,7 +20,6 @@ export const MainSearch: FC = () => {
                     navigation.navigate('Search');
                 }}>
                 <SearchNormal1 size={20} variant="Outline" color={'#6B7280'} />
-                {/* TODO: NEED TO LOCALIZE WHEN EXPO-LOCALIZATION IS SET UP */}
                 <Text style={s.text}>{i18n.t('where_do_you_want_to_go')}</Text>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={ACTIVE_OPACITY}>

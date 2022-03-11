@@ -1,21 +1,24 @@
 import React, {useRef, useState} from 'react';
 
-import {ScrollView, Text, TextInput, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 
 import i18n from 'i18n-js';
 import {useScrollToTop} from '@react-navigation/native';
 
+import {Searchbar} from '_app/lib/skeetry-ui';
 import {OrderDirection, useCitiesQuery, useUsersQuery} from '_app/generated/graphql';
 import {Card, MainContainer, UserCard} from '_app/components';
 
+import {s} from './styles';
+
 export const SearchScreen = () => {
     const ref = useRef<ScrollView>(null);
-    const [input, setInput] = useState('');
+    const [searchValue, setSearchValue] = useState('');
 
     const {data: dataSearch, loading: loadingSearch} = useCitiesQuery({
         variables: {
             first: 5,
-            query: input,
+            query: searchValue,
             orderBy: {
                 direction: OrderDirection.Desc,
             },
@@ -26,17 +29,13 @@ export const SearchScreen = () => {
     const {data: dataUsers, loading: loadingUsers} = useUsersQuery({
         variables: {
             first: 5,
-            query: input,
+            query: searchValue,
             orderBy: {
                 direction: OrderDirection.Desc,
             },
         },
         notifyOnNetworkStatusChange: true,
     });
-
-    const handleChange = async (value) => {
-        setInput(value);
-    };
 
     useScrollToTop(ref);
 
@@ -45,29 +44,29 @@ export const SearchScreen = () => {
 
     return (
         <MainContainer statusBarStyle="light-content" marginTop>
-            <View style={{padding: 16}}>
-                <TextInput
+            <View style={s.searchbarContainer}>
+                <Searchbar
                     autoCapitalize="none"
-                    autoCorrect={false}
-                    placeholder={i18n.t('search')}
-                    onChangeText={handleChange}
                     autoFocus
-                    clearButtonMode="always"
+                    autoCorrect={false}
+                    placeholder={i18n.t('where_do_you_want_to_go')}
+                    value={searchValue}
+                    onChangeText={setSearchValue}
                 />
             </View>
             {searchList?.length === 0 && usersList?.length === 0 && (
-                <Text style={[{alignItems: 'center', padding: 20}]}>{i18n.t('not_found')}</Text>
+                <Text style={s.contentContainer}>{i18n.t('search_not_found')}</Text>
             )}
-            {input.length !== 0 && (
+            {searchValue.length !== 0 && (
                 <View>
                     {/* {loadingSearch && <HorizontalListPlaceholder size="small" />} */}
                     {searchList?.length !== 0 && (
                         <ScrollView
                             horizontal
                             showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={{alignItems: 'center', padding: 20}}>
+                            contentContainerStyle={s.centerContainer}>
                             {searchList?.map((i) => (
-                                <View key={i.node.id} style={{marginRight: 20}}>
+                                <View key={i.node.id} style={s.cardContainer}>
                                     <Card item={i.node} size="small" />
                                 </View>
                             ))}
@@ -78,7 +77,7 @@ export const SearchScreen = () => {
                         <ScrollView
                             horizontal
                             showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={{alignItems: 'center', padding: 20}}>
+                            contentContainerStyle={s.centerContainer}>
                             {usersList?.map((i) => {
                                 const {id, avatar, name} = i.node;
 

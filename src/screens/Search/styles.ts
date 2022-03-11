@@ -32,10 +32,15 @@ export const s = StyleSheet.create({
         color: '#C6C6C6',
         borderRadius: 12,
     },
-    input: {
-        width: '100%',
-        height: '100%',
-        paddingHorizontal: 15,
-        ...tInput,
+    centerContainer: {
+        alignItems: 'center',
+        padding: 20,
+    },
+    cardContainer: {
+        marginRight: 20,
+    },
+    searchbarContainer: {
+        paddingHorizontal: 16,
+        paddingVertical: 16,
     },
 });

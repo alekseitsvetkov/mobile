@@ -23,5 +23,6 @@
   "overview": "Overview",
   "location": "Location",
   "where_do_you_want_to_go": "Where do you want to go?",
-  "sign_in_with_google": "Sign in with Google"
+  "sign_in_with_google": "Sign in with Google",
+  "search_not_found": "Nothing was found for your query"
 }
