@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 
-import {Button, Text, View} from 'react-native';
+import {Button, View} from 'react-native';
 
 import i18n from 'i18n-js';
 import * as WebBrowser from 'expo-web-browser';
@@ -10,6 +10,7 @@ import * as Google from 'expo-auth-session/providers/google';
 import {loadToken, saveToken} from '_app/utils';
 import {signOut} from '_app/utils';
 import {navigation} from '_app/services/navigations';
+import {Surface, Text} from '_app/lib/skeetry-ui';
 import {useSignInWithGoogleMutation} from '_app/generated/graphql';
 import {AppContext} from '_app/context';
 import {EDGES, MainContainer} from '_app/components';
@@ -83,9 +84,9 @@ export const LoginScreen = () => {
     }, [initialize]);
 
     let content = (
-        <View>
+        <Surface>
             <Text>Loading</Text>
-        </View>
+        </Surface>
     );
 
     if (!initializing) {

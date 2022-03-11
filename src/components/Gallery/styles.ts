@@ -19,10 +19,7 @@ export const s = StyleSheet.create({
         backgroundColor: '#ddd',
     },
     container: {
-        backgroundColor: '#fff',
         position: 'relative',
-        borderBottomColor: '#ddd',
-        borderBottomWidth: 1,
     },
     image: {
         width: SCREEN_WIDTH,
@@ -38,7 +35,6 @@ export const s = StyleSheet.create({
         padding: 6,
     },
     plusImage: {
-        backgroundColor: '#E5E7EB',
         width: SCREEN_WIDTH,
         height: 380,
         paddingHorizontal: 20,

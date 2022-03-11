@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export const s = StyleSheet.create({
     container: {
-        backgroundColor: '#ffffff',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -23,7 +22,6 @@ export const s = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        color: '#6B7280',
         marginLeft: 16,
     },
 });

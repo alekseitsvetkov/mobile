@@ -1,9 +1,10 @@
 import React from 'react';
 
-import {Image, Text, View} from 'react-native';
+import {Image, View} from 'react-native';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
+import {Text} from '_app/lib/skeetry-ui';
 import {ACTIVE_OPACITY} from '_app/constants';
 
 import {s} from './styles';

@@ -1,10 +1,7 @@
 import React from 'react';
 
-import {StyleSheet, Text} from 'react-native';
-
+import {Text} from '_app/lib/skeetry-ui';
 import {MainContainer} from '_app/components';
-
-import {s} from './styles';
 
 export const ProfileUserScreen = () => {
     return (

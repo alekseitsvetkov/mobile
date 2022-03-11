@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 
-import {Alert, Button, FlatList, Image as RNImage, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Button, FlatList, Image as RNImage, TouchableOpacity, View} from 'react-native';
 
 import i18n from 'i18n-js';
 
 import {navigation} from '_app/services/navigations';
+import {Surface, Text} from '_app/lib/skeetry-ui';
 
 import {s} from './styles';
 
@@ -44,7 +45,7 @@ export const Gallery = ({images}: GalleryProps) => {
                 renderItem={({item}) => {
                     if (item.plusImage) {
                         return (
-                            <View style={s.plusImage}>
+                            <Surface style={s.plusImage}>
                                 <Text style={s.title}>
                                     {images.length === 0 ? i18n.t('no_images') : i18n.t('contribute')}
                                 </Text>
@@ -57,7 +58,7 @@ export const Gallery = ({images}: GalleryProps) => {
                                     //loading={false}
                                     //containerStyle={s.button}
                                 />
-                            </View>
+                            </Surface>
                         );
                     }
                     return <Image item={item} />;

@@ -36,4 +36,4 @@ export {default as Surface} from './components/Surface';
 // export {default as Paragraph} from './components/Typography/Paragraph';
 // export {default as Subheading} from './components/Typography/Subheading';
 // export {default as Title} from './components/Typography/Title';
-// export {default as Text} from './components/Typography/Text';
+export {default as Text} from './components/Typography/Text';

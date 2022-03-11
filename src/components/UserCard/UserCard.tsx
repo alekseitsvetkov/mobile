@@ -1,8 +1,9 @@
 import React from 'react';
 
-import {Text, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 
 import {navigation} from '_app/services/navigations';
+import {Text} from '_app/lib/skeetry-ui';
 import {Avatar} from '_app/components';
 
 import {s} from './styles';

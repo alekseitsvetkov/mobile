@@ -39,13 +39,11 @@ export const s = StyleSheet.create({
     },
     smallDivider: {
         height: 1,
-        backgroundColor: '#EEEEEE',
         marginVertical: 16,
         width: width * 0.25,
     },
     divider: {
         height: 1,
-        backgroundColor: '#EEEEEE',
         marginVertical: 16,
     },
     host: {
@@ -63,13 +61,10 @@ export const s = StyleSheet.create({
         lineHeight: 18,
     },
     content: {
-        backgroundColor: '#fff',
         padding: 16,
     },
     section: {
         paddingBottom: 20,
-        borderColor: '#EEEEEE',
-        borderBottomWidth: 1,
         marginBottom: 20,
     },
     minimap: {
@@ -93,7 +88,6 @@ export const s = StyleSheet.create({
         paddingHorizontal: 20,
     },
     button: {
-        backgroundColor: '#EEEEEE',
         paddingHorizontal: 50,
         paddingVertical: 12,
         borderRadius: 6,

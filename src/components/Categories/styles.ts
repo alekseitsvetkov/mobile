@@ -43,14 +43,6 @@ export const s = StyleSheet.create({
     categoryName: {
         fontSize: 12,
         letterSpacing: 0.5,
-        color: '#ffffff',
         zIndex: 10,
-    },
-    // TODO: Deprecated, remove when task is done
-    categoryEmoji: {
-        backgroundColor: '#E5E7EB',
-        borderRadius: 10,
-        padding: 12,
-        marginRight: 10,
     },
 });

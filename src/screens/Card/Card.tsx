@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
 
-import {ActionSheetIOS, Pressable, Text, TouchableHighlight, View, useColorScheme} from 'react-native';
+import {ActionSheetIOS, Pressable, TouchableHighlight, useColorScheme} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {ScrollView} from 'react-native-gesture-handler';
 import i18n from 'i18n-js';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 
+import {Surface, Text} from '_app/lib/skeetry-ui';
 import {useAddCityMutation, useCityQuery, useMoveCityMutation, useRemoveCityMutation} from '_app/generated/graphql';
 import {AppContext} from '_app/context';
 import {
@@ -202,24 +202,20 @@ export const CardScreen = ({route, navigation}) => {
               );
     };
 
-    const insets = useSafeAreaInsets();
-
     return (
-        <ScrollView
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={[s.container, {paddingBottom: insets.bottom}]}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[s.container]}>
             <Gallery images={currentCity.images} />
-            <View style={s.content}>
-                <View style={s.section}>
+            <Surface style={s.content}>
+                <Surface style={s.section}>
                     <Text style={[s.name, s.text]}>
                         {title}
                         {/* {currentCity.state
               ? currentCity.state.country.emoji + ' ' + currentCity.name
               : currentCity.country.emoji + ' ' + currentCity.name} */}
                     </Text>
-                </View>
-                <View style={[s.section, s.section]}>
-                    <View style={s.cardButtons}>
+                </Surface>
+                <Surface style={[s.section, s.section]}>
+                    <Surface style={s.cardButtons}>
                         {!alreadyWanted && !alreadyVisited && !loading ? (
                             <>
                                 <TouchableHighlight
@@ -240,7 +236,7 @@ export const CardScreen = ({route, navigation}) => {
                                 // underlayColor={theme.gray01}
                                 style={[s.button, (alreadyWanted || alreadyVisited || loading) && s.buttonFull]}
                                 onPress={() => !loading && onPressSheet()}>
-                                <View style={[s.buttonWithIcon]}>
+                                <Surface style={[s.buttonWithIcon]}>
                                     <Text
                                         style={[
                                             s.buttonText,
@@ -254,18 +250,18 @@ export const CardScreen = ({route, navigation}) => {
                                             : i18n.t('visited')}
                                     </Text>
                                     <Icon name="more-horizontal" style={s.buttonIcon} size={18} color={'#ddd'} />
-                                </View>
+                                </Surface>
                             </TouchableHighlight>
                         )}
-                    </View>
-                </View>
+                    </Surface>
+                </Surface>
                 {item.overview && (
-                    <View style={s.section}>
+                    <Surface style={s.section}>
                         <Text style={[s.sectionTitle, s.text]}>{i18n.t('overview')}</Text>
                         <Text style={s.text}>{item.overview}</Text>
-                    </View>
+                    </Surface>
                 )}
-                <View style={s.section}>
+                <Surface style={s.section}>
                     <Text style={[s.sectionTitle, s.text]}>{i18n.t('location')}</Text>
                     <Pressable
                         onPress={() =>
@@ -300,8 +296,8 @@ export const CardScreen = ({route, navigation}) => {
                             />
                         </MapView>
                     </Pressable>
-                </View>
-            </View>
+                </Surface>
+            </Surface>
         </ScrollView>
     );
 };

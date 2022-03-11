@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 
-import {Image, Pressable, Text, View} from 'react-native';
+import {Image, Pressable, View} from 'react-native';
 
 import {ScrollView} from 'react-native-gesture-handler';
 
 import {navigation} from '_app/services/navigations';
+import {Text} from '_app/lib/skeetry-ui';
 
 import {s} from './styles';
 

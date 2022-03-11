@@ -1,14 +1,13 @@
 import React from 'react';
 
-import {Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import {TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 
 import {signOut} from '_app/utils';
 import {navigation} from '_app/services/navigations';
+import {Surface, Text} from '_app/lib/skeetry-ui';
 import {useMeQuery} from '_app/generated/graphql';
 import {ACTIVE_OPACITY, DEFAULT_OPACITY} from '_app/constants';
 import {Avatar, MainContainer} from '_app/components';
-
-import {s} from './styles';
 
 const logOut = async () => {
     await signOut();
@@ -23,9 +22,9 @@ export const ProfileScreen = () => {
     if (loading) {
         // TODO: something here
         return (
-            <View>
+            <Surface>
                 <Text>Loading</Text>
-            </View>
+            </Surface>
         );
     }
 

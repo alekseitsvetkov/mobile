@@ -12,6 +12,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
      */
     children: React.ReactNode;
     style?: Animated.WithAnimatedValue<StyleProp<ViewStyle>>;
+    withShadow?: boolean;
     /**
      * @optional
      */
@@ -60,7 +61,7 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * });
  * ```
  */
-const Surface = ({style, theme, ...rest}: Props) => {
+const Surface = ({style, theme, withShadow = false, ...rest}: Props) => {
     const {elevation = 6} = (StyleSheet.flatten(style) || {}) as ViewStyle;
     const {dark: isDarkTheme, mode, colors} = theme;
     return (
@@ -71,7 +72,7 @@ const Surface = ({style, theme, ...rest}: Props) => {
                     backgroundColor:
                         isDarkTheme && mode === 'adaptive' ? overlay(elevation, colors.surface) : colors.surface,
                 },
-                shadow(),
+                withShadow && shadow(),
                 style,
             ]}
         />
