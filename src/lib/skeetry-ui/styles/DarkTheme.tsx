@@ -11,17 +11,19 @@ const DarkTheme: Theme = {
     mode: 'adaptive',
     colors: {
         ...DefaultTheme.colors,
-        primary: '#ffffff',
+        primary: white,
         accent: '#03dac6',
-        background: '#121212',
-        surface: '#121212',
+        background: '#2B2B2B',
+        surface: '#1E1E1E',
         error: '#CF6679',
-        onSurface: '#FFFFFF',
+        onSurface: white,
         text: white,
         disabled: color(white).alpha(0.38).rgb().string(),
         placeholder: color(white).alpha(0.54).rgb().string(),
         backdrop: color(black).alpha(0.5).rgb().string(),
         notification: pinkA100,
+        white: white,
+        black: black,
     },
 };
 

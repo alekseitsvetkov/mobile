@@ -149,8 +149,13 @@ const Searchbar = forwardRef<TextInputHandles, TProps>(
         const iconColor = customIconColor || (dark ? textColor : color(textColor).alpha(0.54).rgb().string());
 
         return (
-            // eslint-disable-next-line react-native/no-inline-styles
-            <Surface withShadow style={[{borderRadius: roundness, elevation: 6}, styles.container, style]}>
+            <Surface
+                withShadow
+                style={[
+                    {borderRadius: roundness, elevation: 6, backgroundColor: colors.background},
+                    styles.container,
+                    style,
+                ]}>
                 <IconButton
                     // @ts-expect-error We keep old a11y props for backwards compat with old RN versions
                     accessibilityTraits="button"

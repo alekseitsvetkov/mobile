@@ -8,6 +8,7 @@ import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {BottomTabNavigationOptions, createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {HomeScreen, ProfileScreen} from '_app/screens';
+import {useTheme} from '_app/lib/skeetry-ui';
 import {TabBarComponent} from '_app/components/BottomTabBar';
 
 export const iosTransitionSpec = {
@@ -94,10 +95,11 @@ const HomeStack = () => {
 const Tab = createBottomTabNavigator();
 
 const HomeTab = () => {
+    const {colors} = useTheme();
     const screenOptions: BottomTabNavigationOptions = {
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarBackground: () => <View style={{backgroundColor: 'black', height: '100%'}} />,
+        tabBarBackground: () => <View style={{backgroundColor: colors.black, height: '100%'}} />,
     };
 
     function getTabBarVisible(route) {

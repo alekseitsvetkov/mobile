@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-import {Animated, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {Animated, StyleProp, View, ViewStyle} from 'react-native';
 
 import shadow from '../styles/shadow';
-import overlay from '../styles/overlay';
 import {withTheme} from '../core/theming';
 
 type Props = React.ComponentPropsWithRef<typeof View> & {
@@ -62,15 +61,13 @@ type Props = React.ComponentPropsWithRef<typeof View> & {
  * ```
  */
 const Surface = ({style, theme, withShadow = false, ...rest}: Props) => {
-    const {elevation = 6} = (StyleSheet.flatten(style) || {}) as ViewStyle;
-    const {dark: isDarkTheme, mode, colors} = theme;
+    const {dark: isDarkTheme, colors} = theme;
     return (
         <Animated.View
             {...rest}
             style={[
                 {
-                    backgroundColor:
-                        isDarkTheme && mode === 'adaptive' ? overlay(elevation, colors.surface) : colors.surface,
+                    backgroundColor: isDarkTheme ? colors.surface : colors.surface,
                 },
                 withShadow && shadow(),
                 style,

@@ -14,7 +14,7 @@ import {s} from './styles';
 export const MainSearch: FC = () => {
     const {colors} = useTheme();
     return (
-        <Surface style={s.container}>
+        <Surface style={[s.container, {backgroundColor: colors.background}]}>
             <TouchableOpacity
                 style={s.searchContainer}
                 activeOpacity={ACTIVE_OPACITY}

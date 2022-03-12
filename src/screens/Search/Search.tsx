@@ -1,17 +1,18 @@
 import React, {useRef, useState} from 'react';
 
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 
 import i18n from 'i18n-js';
 import {useScrollToTop} from '@react-navigation/native';
 
-import {Searchbar} from '_app/lib/skeetry-ui';
+import {Searchbar, Text, useTheme} from '_app/lib/skeetry-ui';
 import {OrderDirection, useCitiesQuery, useUsersQuery} from '_app/generated/graphql';
 import {Card, MainContainer, UserCard} from '_app/components';
 
 import {s} from './styles';
 
 export const SearchScreen = () => {
+    const {colors} = useTheme();
     const ref = useRef<ScrollView>(null);
     const [searchValue, setSearchValue] = useState('');
 

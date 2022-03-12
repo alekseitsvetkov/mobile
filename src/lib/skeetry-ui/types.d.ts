@@ -30,6 +30,8 @@ export type Theme = {
         placeholder: string;
         backdrop: string;
         notification: string;
+        white: string;
+        black: string;
     };
     fonts: Fonts;
     animation: {
@@ -66,6 +68,8 @@ declare global {
             placeholder: string;
             backdrop: string;
             notification: string;
+            white: string;
+            black: string;
         }
 
         interface ThemeAnimation {
