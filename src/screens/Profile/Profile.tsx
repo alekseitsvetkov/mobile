@@ -2,6 +2,8 @@ import React from 'react';
 
 import {TouchableOpacity, TouchableWithoutFeedback} from 'react-native';
 
+import i18n from 'i18n-js';
+
 import {signOut} from '_app/utils';
 import {navigation} from '_app/services/navigations';
 import {Surface, Text} from '_app/lib/skeetry-ui';
@@ -44,7 +46,7 @@ export const ProfileScreen = () => {
                 <Avatar src={user.avatar} />
             </TouchableOpacity>
             <TouchableWithoutFeedback onPress={() => logOut()}>
-                <Text>Logout</Text>
+                <Text>{i18n.t('logout')}</Text>
             </TouchableWithoutFeedback>
         </MainContainer>
     );
