@@ -6,7 +6,7 @@ import {MainContainer} from '_app/components';
 export const ProfileUserScreen = () => {
     return (
         <MainContainer statusBarStyle="light-content">
-            <Text>Profile</Text>
+            <Text />
         </MainContainer>
     );
 };
