@@ -1,4 +1,4 @@
-import color from 'color';
+import {colord} from 'colord';
 
 import DefaultTheme from './DefaultTheme';
 import {black, pinkA100, white} from './colors';
@@ -18,9 +18,9 @@ const DarkTheme: Theme = {
         error: '#CF6679',
         onSurface: white,
         text: white,
-        disabled: color(white).alpha(0.38).rgb().string(),
-        placeholder: color(white).alpha(0.54).rgb().string(),
-        backdrop: color(black).alpha(0.5).rgb().string(),
+        disabled: colord(white).alpha(0.38).toRgbString(),
+        placeholder: colord(white).alpha(0.54).toRgbString(),
+        backdrop: colord(black).alpha(0.5).toRgbString(),
         notification: pinkA100,
         white: white,
         black: black,

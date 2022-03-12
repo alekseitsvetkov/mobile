@@ -1,8 +1,11 @@
 import {Animated} from 'react-native';
 
-import color from 'color';
+import mixPlugin from 'colord/plugins/mix';
+import {colord, extend} from 'colord';
 
 import DarkTheme from './DarkTheme';
+
+extend([mixPlugin]);
 
 const isAnimatedValue = (it: number | Animated.AnimatedInterpolation): it is Animated.Value =>
     it instanceof Animated.Value;
@@ -36,9 +39,9 @@ function calculateColor(surfaceColor: string, elevation: number = 1) {
     } else {
         overlayTransparency = elevationOverlayTransparency[1];
     }
-    return color(surfaceColor)
-        .mix(color('white'), overlayTransparency * 0.01)
-        .hex();
+    return colord(surfaceColor)
+        .mix(colord('white'), overlayTransparency * 0.01)
+        .toHex();
 }
 
 const elevationOverlayTransparency: Record<string, number> = {
