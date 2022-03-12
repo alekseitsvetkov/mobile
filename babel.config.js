@@ -12,7 +12,6 @@ module.exports = function (api) {
                         _app: './src',
                         _assets: './assets',
                         _mocks: './__mocks__',
-                        _hooks: './src/hooks',
                         _constants: './src/constants',
                     },
                 },

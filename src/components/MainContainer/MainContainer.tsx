@@ -1,14 +1,12 @@
-import React, {FC, ReactNode, useContext} from 'react';
+import React, {FC, ReactNode} from 'react';
 
-import {Keyboard, StatusBar, StatusBarStyle, StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
+import {Keyboard, StatusBar, StatusBarStyle, TouchableWithoutFeedback, View} from 'react-native';
 
 import {Edge, SafeAreaView} from 'react-native-safe-area-context';
 
-import {normalize} from '_app/utils/dimensions';
-import {ThemeColors} from '_app/types/theme';
-import {DynamicStatusBar} from '_app/theme/Colors';
-import {AppContext} from '_app/context';
-import {colors} from '_app/constants';
+import {Surface} from '_app/lib/skeetry-ui';
+
+import {s} from './styles';
 
 export enum EDGES {
     top = 'edgesTop',
@@ -29,10 +27,6 @@ export const MainContainer: FC<IProps> = ({
     edges = EDGES.top,
     marginTop = false,
 }) => {
-    const {theme, themeType} = useContext(AppContext);
-
-    const {barStyle, backgroundColor} = DynamicStatusBar[themeType];
-
     const edgesTop: ReadonlyArray<Edge> = ['top'];
 
     const edgesHorizontal: ReadonlyArray<Edge> = ['top', 'bottom'];
@@ -41,10 +35,10 @@ export const MainContainer: FC<IProps> = ({
         <>
             <StatusBar
                 animated={true}
-                backgroundColor={backgroundColor}
-                barStyle={statusBarStyle ? statusBarStyle : barStyle}
+                backgroundColor={'#000'}
+                barStyle={statusBarStyle ? statusBarStyle : statusBarStyle}
             />
-            <View style={[styles(theme).container, !safeAreaDisabled && styles(theme).borderTop]}>{children}</View>
+            <Surface style={[s.container, !safeAreaDisabled && s.borderTop]}>{children}</Surface>
         </>
     );
 
@@ -54,29 +48,9 @@ export const MainContainer: FC<IProps> = ({
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
             <SafeAreaView
                 edges={edges === EDGES.top ? edgesTop : edgesHorizontal}
-                style={[styles(theme).safeArea, marginTop && styles(theme).marginTop]}>
+                style={[s.safeArea, marginTop && s.marginTop]}>
                 {content}
             </SafeAreaView>
         </TouchableWithoutFeedback>
     );
 };
-
-const styles = (theme = {} as ThemeColors) =>
-    StyleSheet.create({
-        safeArea: {
-            flex: 1,
-        },
-        marginTop: {
-            marginTop: normalize(50),
-        },
-        container: {
-            flex: 1,
-            backgroundColor: colors.white,
-            borderBottomRightRadius: 12,
-            borderBottomLeftRadius: 12,
-        },
-        borderTop: {
-            borderTopRightRadius: 12,
-            borderTopLeftRadius: 12,
-        },
-    });

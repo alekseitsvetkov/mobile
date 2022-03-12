@@ -1,8 +1,5 @@
 import {StyleSheet} from 'react-native';
 
-import {normalize} from '_app/utils/dimensions';
-import {colors, radius, tInput} from '_app/constants';
-
 export const s = StyleSheet.create({
     container: {
         flex: 1,
@@ -12,33 +9,38 @@ export const s = StyleSheet.create({
     },
     contentContainer: {
         flexWrap: 'wrap',
-        maxWidth: normalize(800),
-        paddingHorizontal: normalize(12),
+        maxWidth: 800,
+        paddingHorizontal: 12,
     },
     title: {
-        color: colors.mediumGray,
+        color: '#595959',
         fontSize: 18,
         fontWeight: '500',
     },
     tag: {
-        backgroundColor: colors.mainGray,
-        paddingHorizontal: normalize(14),
-        paddingVertical: normalize(10),
-        borderRadius: radius.full,
-        margin: normalize(6),
+        backgroundColor: '#EEEEEE',
+        paddingHorizontal: 14,
+        paddingVertical: 10,
+        borderRadius: 100,
+        margin: 6,
     },
     textInputWrapper: {
         position: 'relative',
         width: '100%',
-        height: normalize(45),
-        backgroundColor: colors.lightGray,
-        color: colors.baseGray,
-        borderRadius: radius.base,
+        height: 45,
+        backgroundColor: '#F7F7F7',
+        color: '#C6C6C6',
+        borderRadius: 12,
     },
-    input: {
-        width: '100%',
-        height: '100%',
-        paddingHorizontal: normalize(15),
-        ...tInput,
+    centerContainer: {
+        alignItems: 'center',
+        padding: 20,
+    },
+    cardContainer: {
+        marginRight: 20,
+    },
+    searchbarContainer: {
+        paddingHorizontal: 16,
+        paddingVertical: 16,
     },
 });

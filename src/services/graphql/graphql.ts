@@ -5,7 +5,7 @@ import {onError} from '@apollo/client/link/error';
 import {setContext} from '@apollo/client/link/context';
 import {ApolloClient, InMemoryCache, from} from '@apollo/client';
 
-import {loadToken} from '_app/utils/storage';
+import {loadToken} from '_app/utils';
 import {PLATFORM} from '_app/constants';
 
 const cache = new InMemoryCache();

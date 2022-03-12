@@ -1,10 +1,9 @@
 import {StyleSheet} from 'react-native';
 
-import {SCREEN_WIDTH, normalize} from '_app/utils/dimensions';
-import {colors} from '_app/constants';
+import {SCREEN_WIDTH} from '_app/utils';
 
-const IMAGE_HEIGHT = normalize(350);
-const NORMALIZE_16 = normalize(16);
+const IMAGE_HEIGHT = 350;
+const NORMALIZE_16 = 16;
 
 export const s = StyleSheet.create({
     container: {
@@ -18,18 +17,18 @@ export const s = StyleSheet.create({
     overlay: {
         width: '100%',
         height: IMAGE_HEIGHT,
-        backgroundColor: colors.black,
+        backgroundColor: '#000000',
         opacity: 0.3,
         position: 'absolute',
     },
     info: {
         position: 'absolute',
-        bottom: normalize(54),
+        bottom: 54,
         left: NORMALIZE_16,
         right: NORMALIZE_16,
     },
     infoText: {
-        color: colors.white,
+        color: '#ffffff',
     },
     infoTitle: {
         fontSize: 24,
@@ -44,16 +43,16 @@ export const s = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         position: 'absolute',
-        bottom: normalize(36),
+        bottom: 36,
         left: NORMALIZE_16,
     },
     element: {
-        height: normalize(2),
-        width: normalize(18),
-        backgroundColor: colors.white,
+        height: 2,
+        width: 18,
+        backgroundColor: '#ffffff',
         opacity: 0.35,
         borderRadius: 2,
-        marginRight: normalize(4),
+        marginRight: 4,
     },
     elementActive: {
         opacity: 1,

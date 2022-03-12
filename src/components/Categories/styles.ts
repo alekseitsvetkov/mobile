@@ -1,19 +1,16 @@
 import {StyleSheet} from 'react-native';
 
-import {normalize} from '_app/utils/dimensions';
-import {colors, fontFamily} from '_app/constants';
-
 export const s = StyleSheet.create({
     container: {
-        marginTop: normalize(16),
-        marginBottom: normalize(20),
+        marginTop: 16,
+        marginBottom: 20,
     },
     title: {
-        marginHorizontal: normalize(16),
+        marginHorizontal: 16,
     },
     categoryWrapper: {
-        marginTop: normalize(10),
-        paddingHorizontal: normalize(8),
+        marginTop: 10,
+        paddingHorizontal: 8,
     },
     category: {
         display: 'flex',
@@ -22,10 +19,10 @@ export const s = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 10,
         overflow: 'hidden',
-        marginHorizontal: normalize(8),
-        minWidth: normalize(116),
-        paddingVertical: normalize(20),
-        paddingHorizontal: normalize(20),
+        marginHorizontal: 8,
+        minWidth: 116,
+        paddingVertical: 20,
+        paddingHorizontal: 20,
     },
     image: {
         flex: 1,
@@ -33,7 +30,7 @@ export const s = StyleSheet.create({
     },
     overlay: {
         ...StyleSheet.absoluteFillObject,
-        backgroundColor: colors.black,
+        backgroundColor: '#000000',
         opacity: 0.25,
     },
     absoluteFillObject: {
@@ -46,15 +43,6 @@ export const s = StyleSheet.create({
     categoryName: {
         fontSize: 12,
         letterSpacing: 0.5,
-        fontFamily: fontFamily.bold,
-        color: colors.white,
         zIndex: 10,
-    },
-    // TODO: Deprecated, remove when task is done
-    categoryEmoji: {
-        backgroundColor: colors.gray200,
-        borderRadius: 10,
-        padding: normalize(12),
-        marginRight: normalize(10),
     },
 });

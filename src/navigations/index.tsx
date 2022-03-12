@@ -1,36 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {Easing, useColorScheme} from 'react-native';
+import {Easing} from 'react-native';
 
 import {enableScreens} from 'react-native-screens';
-import {useTranslation} from 'react-i18next';
+import i18n from 'i18n-js';
 import {StackNavigationOptions, createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import {DarkTheme, DefaultTheme, InitialState, NavigationContainer} from '@react-navigation/native';
 
+import {loadPersistence, savePersistence} from '_app/utils';
 import {navigationRef} from '_app/services/navigations';
-import {ProfileChangeScreen} from '_app/screens/Settings/ProfileChange';
-import {
-    AboutScreen,
-    AppearanceScreen,
-    AvatarScreen,
-    CameraScreen,
-    CardScreen,
-    GalleryScreen,
-    HelpScreen,
-    LanguageScreen,
-    MapScreen,
-    NotificationsScreen,
-    ProfileUserScreen,
-    SearchScreen,
-    SettingsScreen,
-    UsersTopScreen,
-} from '_app/screens';
-import {colors, darkTheme, lightTheme} from '_app/constants';
+import {CardScreen, GalleryScreen, MapScreen, ProfileUserScreen, SearchScreen} from '_app/screens';
 import CloseModal from '_app/components/CloseModal/CloseModal';
 
 import RootTab from './RootTab';
 import AuthStack from './AuthStack';
 
+// TODO: move to global place?
 enableScreens();
 
 // TODO: type when done
@@ -57,16 +42,45 @@ const options = {
         };
     },
 };
-const Index = () => {
-    const scheme = useColorScheme();
 
-    const {t} = useTranslation();
+const Index = () => {
+    const [isReady, setIsReady] = useState(false);
+    const [initialState, setInitialState] = useState<InitialState | undefined>();
+
+    useEffect(() => {
+        const restoreState = async () => {
+            try {
+                const savedStateString = await loadPersistence();
+                const state = JSON.parse(savedStateString || '');
+
+                setInitialState(state);
+            } catch (e) {
+                // ignore error
+            } finally {
+                setIsReady(true);
+            }
+        };
+
+        if (!isReady) {
+            restoreState();
+        }
+    }, [isReady]);
 
     const navigationOptions: StackNavigationOptions = {
         headerShown: false,
+        presentation: 'transparentModal',
     };
+
+    if (!isReady) {
+        return null;
+    }
+
     return (
-        <NavigationContainer ref={navigationRef} theme={scheme === 'dark' ? darkTheme : lightTheme}>
+        <NavigationContainer
+            initialState={initialState}
+            onStateChange={(state) => savePersistence(JSON.stringify(state))}
+            theme={DarkTheme}
+            ref={navigationRef}>
             <RootStack.Navigator initialRouteName="Auth">
                 <RootStack.Screen name="Auth" component={AuthStack} options={navigationOptions} />
                 <RootStack.Screen name="RootTab" component={RootTab} options={navigationOptions} />
@@ -74,46 +88,24 @@ const Index = () => {
                     options={{
                         //...TransitionPresets.ModalTransition,
                         headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.black : colors.white,
+                        headerTintColor: '#ffffff',
                         headerTransparent: true,
-                        headerBackTitle: t('utils:back'),
-                        title: t('utils:search'),
+                        headerBackTitle: i18n.t('back'),
+                        title: i18n.t('search'),
                         presentation: 'transparentModal',
                         ...options,
                     }}
                     name="Search"
                     component={SearchScreen}
                 />
-                {/* <RootStack.Screen
-          options={({ route }) => ({
-            ...TransitionPresets.ModalTransition,
-            headerShown: PLATFORM.IS_IOS ? false : true,
-            headerTitle: `${route.params.item.name} ${route.params.item.emoji}`,
-            headerBackTitle: t('utils:back'),
-            presentation: 'modal',
-          })}
-          name="ItemsByCategory"
-          component={ItemsByCategoryScreen}
-        /> */}
-                {/* <RootStack.Screen
-          options={({ route }) => ({
-            ...TransitionPresets.ModalTransition,
-            headerShown: PLATFORM.IS_IOS ? false : true,
-            headerTitle: `${route.params.item.name}`,
-            headerBackTitle: t('utils:back'),
-            presentation: 'modal',
-          })}
-          name="CitiesList"
-          component={CitiesListScreen}
-        /> */}
                 <RootStack.Screen
                     options={({route}) => ({
                         headerShown: true,
                         headerTransparent: true,
                         headerShadowVisible: false,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
+                        headerTintColor: '#ffffff',
                         title: '',
-                        headerBackTitle: t('utils:back'),
+                        headerBackTitle: i18n.t('back'),
                         ...options,
                         headerLeft: () => <CloseModal />,
                     })}
@@ -124,9 +116,9 @@ const Index = () => {
                     options={({route}) => ({
                         headerTransparent: true,
                         headerShadowVisible: false,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
+                        headerTintColor: '#ffffff',
                         title: '',
-                        headerBackTitle: t('utils:back'),
+                        headerBackTitle: i18n.t('back'),
                         presentation: 'modal',
                         ...options,
                         headerLeft: () => <CloseModal />,
@@ -135,56 +127,12 @@ const Index = () => {
                     component={CardScreen}
                 />
                 <RootStack.Screen
-                    options={{
-                        headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
-                        headerBackTitle: t('utils:back'),
-                        title: t('utils:settings'),
-                        presentation: 'card',
-                    }}
-                    name="Settings"
-                    component={SettingsScreen}
-                />
-                <RootStack.Screen
-                    options={{
-                        headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
-                        headerBackTitle: t('utils:back'),
-                        title: t('profile:profile_change'),
-                        presentation: 'card',
-                    }}
-                    name="ProfileChange"
-                    component={ProfileChangeScreen}
-                />
-                <RootStack.Screen
-                    options={{
-                        headerShown: false,
-                        presentation: 'transparentModal',
-                    }}
-                    name="Avatar"
-                    component={AvatarScreen}
-                />
-                <RootStack.Screen
-                    options={{
-                        headerTransparent: true,
-                        headerShadowVisible: false,
-                        headerTintColor: colors.white,
-                        title: t('utils:camera'),
-                        headerBackTitle: t('utils:back'),
-                        presentation: 'modal',
-                        ...options,
-                        headerLeft: () => <CloseModal />,
-                    }}
-                    name="Camera"
-                    component={CameraScreen}
-                />
-                <RootStack.Screen
                     options={({route}) => ({
                         headerShown: true,
                         headerTransparent: true,
                         headerTitle: `${route.params.user.name}`,
-                        headerTintColor: scheme === 'dark' ? colors.black : colors.white,
-                        headerBackTitle: t('utils:back'),
+                        headerTintColor: '#ffffff',
+                        headerBackTitle: i18n.t('back'),
                         presentation: 'card',
                         ...options,
                     })}
@@ -194,77 +142,11 @@ const Index = () => {
                 <RootStack.Screen
                     options={({route}) => ({
                         headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
-                        headerBackTitle: t('utils:back'),
-                        title: t('utils:top'),
-                        presentation: 'card',
-                    })}
-                    name="UsersTop"
-                    component={UsersTopScreen}
-                />
-                <RootStack.Screen
-                    options={({route}) => ({
-                        headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
-                        headerBackTitle: t('utils:back'),
-                        title: t('settings:notifications'),
-                        presentation: 'card',
-                    })}
-                    name="Notifications"
-                    component={NotificationsScreen}
-                />
-                <RootStack.Screen
-                    options={({route}) => ({
-                        headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
-                        headerBackTitle: t('utils:back'),
-                        title: t('settings:appearance'),
-                        presentation: 'card',
-                    })}
-                    name="Appearance"
-                    component={AppearanceScreen}
-                />
-                <RootStack.Screen
-                    options={({route}) => ({
-                        headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
-                        headerBackTitle: t('utils:back'),
-                        title: t('settings:language'),
-                        presentation: 'card',
-                    })}
-                    name="Language"
-                    component={LanguageScreen}
-                />
-                <RootStack.Screen
-                    options={({route}) => ({
-                        headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
-                        headerBackTitle: t('utils:back'),
-                        title: t('settings:help'),
-                        presentation: 'card',
-                    })}
-                    name="Help"
-                    component={HelpScreen}
-                />
-                <RootStack.Screen
-                    options={({route}) => ({
-                        headerShown: true,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
-                        headerBackTitle: t('utils:back'),
-                        title: t('settings:about'),
-                        presentation: 'card',
-                    })}
-                    name="About"
-                    component={AboutScreen}
-                />
-                <RootStack.Screen
-                    options={({route}) => ({
-                        headerShown: true,
                         headerTransparent: true,
                         headerShadowVisible: false,
-                        headerTintColor: scheme === 'dark' ? colors.white : colors.black,
+                        headerTintColor: '#ffffff',
                         title: '',
-                        headerBackTitle: t('utils:back'),
+                        headerBackTitle: i18n.t('back'),
                         ...options,
                         headerLeft: () => <CloseModal />,
                     })}
