@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {StyleProp, StyleSheet, TextStyle} from 'react-native';
 
-import color from 'color';
+import {colord} from 'colord';
 
 import Text from './Text';
 
@@ -16,7 +16,7 @@ type Props = React.ComponentProps<typeof Text> & {
 };
 
 const StyledText = ({theme, alpha, family, style, ...rest}: Props) => {
-    const textColor = color(theme.colors.text).alpha(alpha).rgb().string();
+    const textColor = colord(theme.colors.text).alpha(alpha).toRgbString();
     const font = theme.fonts[family];
 
     return <Text {...rest} style={[styles.text, {color: textColor, ...font}, style]} />;

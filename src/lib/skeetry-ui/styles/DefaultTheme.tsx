@@ -1,4 +1,4 @@
-import color from 'color';
+import {colord} from 'colord';
 
 import configureFonts from './fonts';
 import {black, pinkA400, white} from './colors';
@@ -16,9 +16,9 @@ const DefaultTheme: Theme = {
         error: '#B00020',
         text: black,
         onSurface: black,
-        disabled: color(black).alpha(0.26).rgb().string(),
-        placeholder: color(black).alpha(0.54).rgb().string(),
-        backdrop: color(black).alpha(0.5).rgb().string(),
+        disabled: colord(black).alpha(0.26).toRgbString(),
+        placeholder: colord(black).alpha(0.54).toRgbString(),
+        backdrop: colord(black).alpha(0.5).toRgbString(),
         notification: pinkA400,
         white: white,
         black: black,

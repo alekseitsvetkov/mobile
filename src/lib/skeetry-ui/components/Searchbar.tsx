@@ -3,7 +3,7 @@ import React, {ComponentPropsWithRef, forwardRef, useImperativeHandle, useRef} f
 import {Platform, StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, ViewStyle} from 'react-native';
 
 import {CloseCircle, SearchNormal1} from 'iconsax-react-native';
-import color from 'color';
+import {colord} from 'colord';
 
 import Surface from './Surface';
 import IconButton from './IconButton';
@@ -146,7 +146,7 @@ const Searchbar = forwardRef<TextInputHandles, TProps>(
         const {colors, roundness, dark, fonts} = theme;
         const textColor = colors.text;
         const font = fonts.regular;
-        const iconColor = customIconColor || (dark ? textColor : color(textColor).alpha(0.54).rgb().string());
+        const iconColor = customIconColor || (dark ? textColor : colord(textColor).alpha(0.54).toRgbString());
 
         return (
             <Surface
