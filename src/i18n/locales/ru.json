@@ -24,5 +24,6 @@
   "location": "Местоположение",
   "where_do_you_want_to_go": "Куда вы хотите отправиться?",
   "sign_in_with_google": "Войти через Google",
-  "search_not_found": "По вашему запросу ничего не найдено"
+  "search_not_found": "По вашему запросу ничего не найдено",
+  "date_of_registration": "Дата регистрации"
 }

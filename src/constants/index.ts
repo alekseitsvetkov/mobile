@@ -11,3 +11,5 @@ export const PLATFORM = {
 // TODO: MOVE TO ANOTHER FILE
 export const ACTIVE_OPACITY = 0.6;
 export const DEFAULT_OPACITY = 1;
+
+export * from './colors';

@@ -68,7 +68,7 @@ const Index = () => {
 
     const navigationOptions: StackNavigationOptions = {
         headerShown: false,
-        presentation: 'transparentModal',
+        //presentation: 'transparentModal',
     };
 
     if (!isReady) {
