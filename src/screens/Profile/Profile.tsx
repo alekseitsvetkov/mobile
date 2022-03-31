@@ -148,6 +148,7 @@ export const ProfileScreen = () => {
                         right: 0,
                         alignItems: 'center',
                         paddingBottom: 16,
+                        overflow: 'hidden',
                         opacity: scrollY.interpolate({
                             inputRange: [90, 110],
                             outputRange: [0, 1],
@@ -259,7 +260,7 @@ export const ProfileScreen = () => {
                         </View>
 
                         <View style={[s.container]}>
-                            <View style={{height: SCREEN_HEIGHT - 500}}>
+                            <View style={{height: 500}}>
                                 <ProfileTabs />
                             </View>
                         </View>

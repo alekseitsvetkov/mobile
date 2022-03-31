@@ -1,10 +1,12 @@
 import React from 'react';
 
-import {ScrollView, Text, View} from 'react-native';
+import {Text} from 'react-native';
 
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
-import {MainContainer} from '../MainContainer';
+import {Surface} from '_app/design-system';
+
+// import {MyTabBar} from '../MyTabBar';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -19,24 +21,20 @@ export const ProfileTabs = () => {
 
 const Want = () => {
     return (
-        <View style={{backgroundColor: 'green', height: '100%'}}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                {new Array(30).fill(0).map((_, index) => (
-                    <Text key={index}>Want</Text>
-                ))}
-            </ScrollView>
-        </View>
+        <Surface style={{height: '100%'}}>
+            {new Array(30).fill(0).map((_, index) => (
+                <Text key={index}>Want</Text>
+            ))}
+        </Surface>
     );
 };
 
 const Visited = () => {
     return (
-        <View style={{backgroundColor: 'red', height: '100%'}}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                {new Array(30).fill(0).map((_, index) => (
-                    <Text key={index}>Visited</Text>
-                ))}
-            </ScrollView>
-        </View>
+        <Surface style={{height: '100%'}}>
+            {new Array(30).fill(0).map((_, index) => (
+                <Text key={index}>Visited</Text>
+            ))}
+        </Surface>
     );
 };

@@ -11,3 +11,4 @@ export * from './MainSearch';
 export * from './ImagePlaceholder';
 export * from './UserInfo';
 export * from './ProfileTabs';
+export * from './MyTabBar';
