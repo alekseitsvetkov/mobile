@@ -10,3 +10,4 @@ export * from './MainCarousel';
 export * from './MainSearch';
 export * from './ImagePlaceholder';
 export * from './UserInfo';
+export * from './ProfileTabs';

@@ -5,7 +5,7 @@ import {TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import {navigation} from '_app/services/navigations';
-import {Surface, useTheme} from '_app/lib/skeetry-ui';
+import {Surface, useTheme} from '_app/design-system';
 
 const CloseModal = () => {
     const {colors} = useTheme();
