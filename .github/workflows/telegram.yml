@@ -1,0 +1,21 @@
+name: Telegram notification
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Telegram Notify
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: |
+            ${{ github.repository }}: ${{ github.actor }} created a new pull request or updated it [View all PR's](https://github.com/skeetry-app/mobile/pulls)

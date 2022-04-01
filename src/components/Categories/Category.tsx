@@ -4,7 +4,7 @@ import {Image, View} from 'react-native';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-import {Text, useTheme} from '_app/lib/skeetry-ui';
+import {Text, useTheme} from '_app/design-system';
 import {ACTIVE_OPACITY} from '_app/constants';
 
 import {s} from './styles';

@@ -8,8 +8,8 @@ import {ScrollView} from 'react-native-gesture-handler';
 import i18n from 'i18n-js';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 
-import {Surface, Text} from '_app/lib/skeetry-ui';
 import {useAddCityMutation, useCityQuery, useMoveCityMutation, useRemoveCityMutation} from '_app/generated/graphql';
+import {Surface, Text} from '_app/design-system';
 import {AppContext} from '_app/context';
 import {
     PLATFORM,

@@ -23,7 +23,7 @@ import {
 import {ApolloProvider} from '@apollo/client';
 
 import {client} from '_app/services/graphql';
-import {DarkTheme, DefaultTheme, Provider as ThemeProvider} from '_app/lib/skeetry-ui';
+import {DarkTheme, DefaultTheme, Provider as ThemeProvider} from '_app/design-system';
 import {AppContextProvider} from '_app/context';
 
 import {AppWrapper} from './AppWrapper';

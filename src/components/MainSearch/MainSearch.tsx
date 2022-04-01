@@ -6,7 +6,7 @@ import {SearchNormal1, Setting4} from 'iconsax-react-native';
 import i18n from 'i18n-js';
 
 import {navigation} from '_app/services/navigations';
-import {Surface, Text, useTheme} from '_app/lib/skeetry-ui';
+import {Surface, Text, useTheme} from '_app/design-system';
 import {ACTIVE_OPACITY} from '_app/constants';
 
 import {s} from './styles';

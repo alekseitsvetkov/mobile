@@ -1,10 +1,7 @@
 import {StyleSheet} from 'react-native';
 
 export const s = StyleSheet.create({
-    container: {
-        paddingHorizontal: 16,
-        paddingVertical: 16,
-    },
+    container: {},
     avatar: {
         marginTop: -60,
         marginLeft: -4,

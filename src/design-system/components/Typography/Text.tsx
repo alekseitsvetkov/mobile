@@ -1,6 +1,6 @@
 import React, {ComponentProps, RefForwardingComponent, forwardRef, useImperativeHandle, useRef} from 'react';
 
-import {Text as NativeText, StyleProp, StyleSheet, TextStyle} from 'react-native';
+import {Animated, Text as NativeText, StyleProp, StyleSheet, TextStyle} from 'react-native';
 
 import {withTheme} from '../../core/theming';
 
@@ -27,7 +27,7 @@ const Text: RefForwardingComponent<{}, Props> = ({style, theme, ...rest}: Props,
     }));
 
     return (
-        <NativeText
+        <Animated.Text
             {...rest}
             ref={root}
             style={[

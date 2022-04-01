@@ -5,8 +5,8 @@ import {ScrollView, View} from 'react-native';
 import i18n from 'i18n-js';
 import {useScrollToTop} from '@react-navigation/native';
 
-import {Searchbar, Text, useTheme} from '_app/lib/skeetry-ui';
 import {OrderDirection, useCitiesQuery, useUsersQuery} from '_app/generated/graphql';
+import {Searchbar, Text, useTheme} from '_app/design-system';
 import {Card, MainContainer, UserCard} from '_app/components';
 
 import {s} from './styles';

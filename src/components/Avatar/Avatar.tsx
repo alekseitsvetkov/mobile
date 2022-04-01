@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Image} from 'react-native';
 
-import {useTheme} from '_app/lib/skeetry-ui';
+import {useTheme} from '_app/design-system';
 
 import {s} from './styles';
 
