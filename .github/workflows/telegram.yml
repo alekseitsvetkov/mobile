@@ -18,4 +18,4 @@ jobs:
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: |
-            ${{ github.repository }}: ${{ github.actor }} created a new pull request or updated it [View all PR's](https://github.com/skeetry-app/web/pulls)
+            ${{ github.repository }}: ${{ github.actor }} created a new pull request or updated it [View all PR's](https://github.com/skeetry-app/mobile/pulls)
