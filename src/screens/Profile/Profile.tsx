@@ -57,7 +57,6 @@ export const ProfileScreen = () => {
     }
 
     if (loading) {
-        // TODO: SOMETHING HERE
         return (
             <MainContainer statusBarStyle="light-content">
                 <View>
@@ -71,6 +70,7 @@ export const ProfileScreen = () => {
         logOut();
     }
 
+    // TODO: NEED TO SEPARATE
     return (
         // TODO: DELETE WHEN ADDED LOGOUT
         // <MainContainer marginTop statusBarStyle="light-content">

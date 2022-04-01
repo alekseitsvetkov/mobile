@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
 
 import {colord} from 'colord';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
@@ -26,12 +26,10 @@ export const ProfileTabs = () => {
     };
 
     return (
-        <>
-            <Tab.Navigator screenOptions={screenOptions}>
-                <Tab.Screen name="Want" component={Want} />
-                <Tab.Screen name="Visited" component={Visited} />
-            </Tab.Navigator>
-        </>
+        <Tab.Navigator screenOptions={screenOptions}>
+            <Tab.Screen name="Want" component={Want} />
+            <Tab.Screen name="Visited" component={Visited} />
+        </Tab.Navigator>
     );
 };
 
