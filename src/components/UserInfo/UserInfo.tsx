@@ -19,8 +19,8 @@ require('dayjs/locale/es');
 require('dayjs/locale/ru');
 
 interface IUser {
-    name: string;
-    avatar: string;
+    name?: string | null;
+    avatar?: string | null;
     createdAt: string;
 }
 
