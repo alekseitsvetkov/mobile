@@ -5,7 +5,7 @@ import {Alert, Button, FlatList, Image as RNImage, TouchableOpacity, View} from 
 import i18n from 'i18n-js';
 
 import {navigation} from '_app/services/navigations';
-import {Surface, Text} from '_app/lib/skeetry-ui';
+import {Surface, Text} from '_app/design-system';
 
 import {s} from './styles';
 

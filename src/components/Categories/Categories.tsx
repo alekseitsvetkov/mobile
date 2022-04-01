@@ -5,8 +5,8 @@ import {ScrollView, View} from 'react-native';
 import i18n from 'i18n-js';
 import {MOCK_CATEGORIES_DATA} from '_mocks';
 
-import {Text} from '_app/lib/skeetry-ui';
 import {useTagsQuery} from '_app/generated/graphql';
+import {Text} from '_app/design-system';
 
 import {s} from './styles';
 import {Category} from './Category';

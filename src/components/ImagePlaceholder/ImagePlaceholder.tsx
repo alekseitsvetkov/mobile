@@ -2,7 +2,7 @@ import React from 'react';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import {Surface, useTheme} from '_app/lib/skeetry-ui';
+import {Surface, useTheme} from '_app/design-system';
 
 import {s} from './styles';
 

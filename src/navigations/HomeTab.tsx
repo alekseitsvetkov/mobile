@@ -8,7 +8,7 @@ import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {BottomTabNavigationOptions, createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {HomeScreen, ProfileScreen} from '_app/screens';
-import {useTheme} from '_app/lib/skeetry-ui';
+import {useTheme} from '_app/design-system';
 import {TabBarComponent} from '_app/components/BottomTabBar';
 
 export const iosTransitionSpec = {

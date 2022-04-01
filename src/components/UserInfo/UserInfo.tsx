@@ -6,7 +6,7 @@ import {Calendar, Location, Verify} from 'iconsax-react-native';
 import i18n from 'i18n-js';
 import dayjs from 'dayjs';
 
-import {Text, useTheme} from '_app/lib/skeetry-ui';
+import {Text, useTheme} from '_app/design-system';
 import {APP_COLORS} from '_app/constants';
 
 import {s} from './styles';
@@ -19,8 +19,8 @@ require('dayjs/locale/es');
 require('dayjs/locale/ru');
 
 interface IUser {
-    name: string;
-    avatar: string;
+    name?: string | null;
+    avatar?: string | null;
     createdAt: string;
 }
 
@@ -37,9 +37,6 @@ export const UserInfo: FC<IProps> = ({user}) => {
 
     return (
         <View style={s.container}>
-            <View style={s.avatar}>
-                <Avatar src={avatar} />
-            </View>
             <View style={s.row}>
                 <Text style={s.name}>{name}</Text>
                 {!!verified && <Verify size={16} variant="Bold" color={APP_COLORS.BLUE} />}

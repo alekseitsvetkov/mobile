@@ -130,7 +130,7 @@ const Index = () => {
                     options={({route}) => ({
                         headerShown: true,
                         headerTransparent: true,
-                        headerTitle: `${route.params.user.name}`,
+                        headerTitle: `${route.params?.user?.name}`,
                         headerTintColor: '#ffffff',
                         headerBackTitle: i18n.t('back'),
                         presentation: 'card',

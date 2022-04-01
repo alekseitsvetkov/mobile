@@ -10,8 +10,8 @@ import * as Google from 'expo-auth-session/providers/google';
 import {loadToken, saveToken} from '_app/utils';
 import {signOut} from '_app/utils';
 import {navigation} from '_app/services/navigations';
-import {Surface, Text, Title} from '_app/lib/skeetry-ui';
 import {useSignInWithGoogleMutation} from '_app/generated/graphql';
+import {Surface, Text, Title} from '_app/design-system';
 import {AppContext} from '_app/context';
 import {EDGES, MainContainer} from '_app/components';
 

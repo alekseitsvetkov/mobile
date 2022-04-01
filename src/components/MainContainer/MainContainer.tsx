@@ -4,7 +4,7 @@ import {Keyboard, StatusBar, StatusBarStyle, TouchableWithoutFeedback, View} fro
 
 import {Edge, SafeAreaView} from 'react-native-safe-area-context';
 
-import {Surface} from '_app/lib/skeetry-ui';
+import {Surface} from '_app/design-system';
 
 import {s} from './styles';
 

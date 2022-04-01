@@ -3,7 +3,7 @@ import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 
 import {navigation} from '_app/services/navigations';
-import {Text} from '_app/lib/skeetry-ui';
+import {Text} from '_app/design-system';
 import {Avatar} from '_app/components';
 
 import {s} from './styles';
