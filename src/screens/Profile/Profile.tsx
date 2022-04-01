@@ -4,7 +4,7 @@ import {Animated, ImageBackground, View} from 'react-native';
 
 import Feather from 'react-native-vector-icons/Feather';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import i18n from 'i18n-js';
+// import i18n from 'i18n-js';
 import {BlurView} from 'expo-blur';
 import dayjs from 'dayjs';
 
@@ -37,10 +37,15 @@ const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground
 
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
-const currentLocale = i18n.currentLocale().split('-')[0];
+// const currentLocale = i18n.currentLocale().split('-')[0];
 
 export const ProfileScreen = () => {
-    const {loading, data, error, refetch} = useMeQuery();
+    const {
+        loading,
+        data,
+        error,
+        //refetch
+    } = useMeQuery();
     const insets = useSafeAreaInsets();
     const scrollY = useRef(new Animated.Value(0)).current;
     const {colors} = useTheme();
@@ -52,7 +57,7 @@ export const ProfileScreen = () => {
     }
 
     if (loading) {
-        // TODO: something here
+        // TODO: SOMETHING HERE
         return (
             <MainContainer statusBarStyle="light-content">
                 <View>
@@ -67,6 +72,7 @@ export const ProfileScreen = () => {
     }
 
     return (
+        // TODO: DELETE WHEN ADDED LOGOUT
         // <MainContainer marginTop statusBarStyle="light-content">
         //     <UserInfo user={user} />
         //     <TouchableWithoutFeedback onPress={() => logOut()}>
@@ -75,11 +81,9 @@ export const ProfileScreen = () => {
         // </MainContainer>
         <MainContainer safeAreaDisabled statusBarStyle="light-content">
             <View style={s.container}>
-                {/* Settings button */}
                 <View style={[s.settings, {top: insets.top}]}>
                     <Feather name="settings" color="white" size={16} />
                 </View>
-                {/* Refresh arrow */}
                 <Animated.View
                     style={[
                         s.refresh,
@@ -102,7 +106,6 @@ export const ProfileScreen = () => {
                     ]}>
                     <Feather name="arrow-down" color="white" size={25} />
                 </Animated.View>
-                {/* Name */}
                 <Animated.View
                     style={[
                         s.nameContainer,
@@ -123,9 +126,8 @@ export const ProfileScreen = () => {
                             ],
                         },
                     ]}>
-                    <Text style={[s.name, {color: colors.white}]}>Aleksey Tsvetkov</Text>
+                    <Text style={[s.name, {color: colors.white}]}>{user?.name}</Text>
                 </Animated.View>
-                {/* Banner */}
                 <AnimatedImageBackground
                     source={{
                         uri: PROFILE_BANNER_URI,
@@ -160,7 +162,6 @@ export const ProfileScreen = () => {
                         ]}
                     />
                 </AnimatedImageBackground>
-                {/* Profile */}
                 <Animated.ScrollView
                     showsVerticalScrollIndicator={false}
                     onScroll={Animated.event(
