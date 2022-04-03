@@ -12,7 +12,7 @@ import {signOut} from '_app/utils';
 import {navigation} from '_app/services/navigations';
 import {useMeQuery} from '_app/generated/graphql';
 import {Surface, Text, useTheme} from '_app/design-system';
-import {MainContainer, ProfileTabs, UserInfo} from '_app/components';
+import {Avatar, MainContainer, ProfileTabs, UserInfo} from '_app/components';
 
 import {s} from './styles';
 
@@ -31,7 +31,6 @@ const HEADER_HEIGHT_NARROWED = 90;
 
 const PROFILE_BANNER_URI =
     'https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80';
-const PROFILE_PICTURE_URI = 'https://avatars.githubusercontent.com/u/7137819?v=4';
 
 const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground);
 
@@ -183,32 +182,28 @@ export const ProfileScreen = () => {
                     ]}>
                     <Surface style={s.container}>
                         <View style={[s.container, s.userInfoContainer]}>
-                            <Animated.Image
-                                source={{
-                                    uri: PROFILE_PICTURE_URI,
+                            <Avatar
+                                uri={user?.avatar}
+                                innerStyle={{
+                                    ...s.avatarContainer,
+                                    borderColor: colors.background,
+                                    transform: [
+                                        {
+                                            scale: scrollY.interpolate({
+                                                inputRange: [0, HEADER_HEIGHT_EXPANDED],
+                                                outputRange: [1, 0.6],
+                                                extrapolate: 'clamp',
+                                            }),
+                                        },
+                                        {
+                                            translateY: scrollY.interpolate({
+                                                inputRange: [0, HEADER_HEIGHT_EXPANDED],
+                                                outputRange: [0, 16],
+                                                extrapolate: 'clamp',
+                                            }),
+                                        },
+                                    ],
                                 }}
-                                style={[
-                                    s.avatarContainer,
-                                    {
-                                        borderColor: colors.background,
-                                        transform: [
-                                            {
-                                                scale: scrollY.interpolate({
-                                                    inputRange: [0, HEADER_HEIGHT_EXPANDED],
-                                                    outputRange: [1, 0.6],
-                                                    extrapolate: 'clamp',
-                                                }),
-                                            },
-                                            {
-                                                translateY: scrollY.interpolate({
-                                                    inputRange: [0, HEADER_HEIGHT_EXPANDED],
-                                                    outputRange: [0, 16],
-                                                    extrapolate: 'clamp',
-                                                }),
-                                            },
-                                        ],
-                                    },
-                                ]}
                             />
                             {!!user && <UserInfo user={user} />}
                         </View>
