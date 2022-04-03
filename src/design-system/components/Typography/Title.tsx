@@ -6,17 +6,13 @@ import StyledText from './StyledText';
 
 type Props = React.ComponentProps<typeof Text> & {
     children: React.ReactNode;
-    style: TextStyle;
+    style?: TextStyle;
 };
 
 // @component-group Typography
 
 /**
  * Typography component for showing a title.
- *
- * <div class="screenshots">
- *   <img src="screenshots/title.png" />
- * </div>
  *
  * ## Usage
  * ```js
@@ -38,9 +34,8 @@ export default Title;
 
 const styles = StyleSheet.create({
     text: {
-        fontSize: 20,
-        lineHeight: 30,
-        marginVertical: 2,
-        letterSpacing: 0.15,
+        fontSize: 16,
+        lineHeight: 24,
+        fontWeight: '600',
     },
 });

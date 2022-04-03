@@ -5,3 +5,5 @@ export * from './Home';
 export * from './Profile';
 export * from './Map';
 export * from './Gallery';
+export * from './Want';
+export * from './Visited';
