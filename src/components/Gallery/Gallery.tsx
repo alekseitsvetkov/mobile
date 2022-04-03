@@ -1,21 +1,15 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 
-import {Alert, FlatList, Image as RNImage, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Button, FlatList, Image as RNImage, TouchableOpacity, View} from 'react-native';
 
-import {useTranslation} from 'react-i18next';
+import i18n from 'i18n-js';
 
-import {normalize} from '_app/utils/dimensions';
-import {ThemeColors} from '_app/types/theme';
 import {navigation} from '_app/services/navigations';
-import {Button} from '_app/layout';
-import {AppContext} from '_app/context';
-import {tBase, tTitle} from '_app/constants';
+import {Surface, Text} from '_app/design-system';
 
 import {s} from './styles';
 
 export const Gallery = ({images}: GalleryProps) => {
-    const {t} = useTranslation();
-    const {theme} = useContext(AppContext);
     const [currentPage, setCurrentPage] = useState(1);
 
     const Image = ({item}) => {
@@ -43,7 +37,7 @@ export const Gallery = ({images}: GalleryProps) => {
     };
 
     return (
-        <View style={[s.container, styles(theme).container]}>
+        <View style={s.container}>
             <FlatList
                 data={[...images, {id: 'plusImage', plusImage: true}]}
                 horizontal={true}
@@ -51,21 +45,20 @@ export const Gallery = ({images}: GalleryProps) => {
                 renderItem={({item}) => {
                     if (item.plusImage) {
                         return (
-                            <View style={[s.plusImage, styles(theme).plusImage]}>
-                                <Text style={[tTitle, styles(theme).title]}>
-                                    {images.length === 0 ? t('card:no_images') : t('card:contribute')}
+                            <Surface style={s.plusImage}>
+                                <Text style={s.title}>
+                                    {images.length === 0 ? i18n.t('no_images') : i18n.t('contribute')}
                                 </Text>
-                                {images.length === 0 && (
-                                    <Text style={[tBase, styles(theme).desc]}>{t('card:contribute')}</Text>
-                                )}
-                                <Text style={[tBase, styles(theme).secondDesc]}>{t('card:add_your_photo')}</Text>
+                                {images.length === 0 && <Text style={s.desc}>{i18n.t('contribute')}</Text>}
+                                <Text style={s.secondDesc}>{i18n.t('add_your_photo')}</Text>
                                 <Button
-                                    label={t('card:submit_photo')}
-                                    onPress={() => Alert.alert(t('utils:wip'))}
-                                    loading={false}
-                                    containerStyle={styles(theme).button}
+                                    // label={i18n.t('card:submit_photo')}
+                                    title={i18n.t('submit_photo')}
+                                    onPress={() => Alert.alert(i18n.t('wip'))}
+                                    //loading={false}
+                                    //containerStyle={s.button}
                                 />
-                            </View>
+                            </Surface>
                         );
                     }
                     return <Image item={item} />;
@@ -77,39 +70,10 @@ export const Gallery = ({images}: GalleryProps) => {
             />
 
             <View style={s.pager}>
-                <Text style={styles(theme).text}>
+                <Text style={s.text}>
                     {currentPage}/{images.length + 1}
                 </Text>
             </View>
         </View>
     );
 };
-
-const styles = (theme = {} as ThemeColors) =>
-    StyleSheet.create({
-        container: {
-            borderBottomColor: theme.gray01,
-            borderBottomWidth: 1,
-        },
-        text: {
-            color: theme.white,
-        },
-        title: {
-            marginBottom: normalize(10),
-            color: theme.text01,
-        },
-        desc: {
-            marginBottom: normalize(5),
-            color: theme.text01,
-        },
-        secondDesc: {
-            marginBottom: normalize(15),
-            color: theme.text01,
-        },
-        plusImage: {
-            backgroundColor: theme.gray04,
-        },
-        button: {
-            backgroundColor: theme.placeholder,
-        },
-    });

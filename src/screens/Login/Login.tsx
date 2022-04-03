@@ -1,27 +1,26 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, View} from 'react-native';
 
-import SplashScreen from 'react-native-splash-screen';
+import i18n from 'i18n-js';
 import * as WebBrowser from 'expo-web-browser';
 import Constants from 'expo-constants';
 import * as Google from 'expo-auth-session/providers/google';
 
-import {loadToken, saveToken} from '_app/utils/storage';
-import {normalize} from '_app/utils/dimensions';
-import {signOut} from '_app/utils/authentication';
-import {ThemeColors} from '_app/types/theme';
+import {loadToken, saveToken} from '_app/utils';
+import {signOut} from '_app/utils';
 import {navigation} from '_app/services/navigations';
-import {Button, LoadingIndicator} from '_app/layout';
 import {useSignInWithGoogleMutation} from '_app/generated/graphql';
+import {Surface, Text, Title} from '_app/design-system';
 import {AppContext} from '_app/context';
-import {IconSizes, tLogo} from '_app/constants';
 import {EDGES, MainContainer} from '_app/components';
+
+import {s} from './styles';
 
 WebBrowser.maybeCompleteAuthSession();
 
 export const LoginScreen = () => {
-    const {theme, updateMe} = useContext(AppContext);
+    const {updateMe} = useContext(AppContext);
     const [initializing, setInitializing] = useState(true);
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
@@ -78,23 +77,28 @@ export const LoginScreen = () => {
         }
 
         setInitializing(false);
-        SplashScreen.hide();
     }, []);
 
     useEffect(() => {
         initialize();
     }, [initialize]);
 
-    let content = <LoadingIndicator color={theme.accent} size={IconSizes.x1} />;
+    let content = (
+        <Surface>
+            <Text>Loading</Text>
+        </Surface>
+    );
 
     if (!initializing) {
         content = (
-            <View style={styles(theme).container}>
-                <Text style={[tLogo, styles(theme).formTitle]}>Skeetry</Text>
+            <View style={s.container}>
+                <Title style={s.formTitle}>Skeetry</Title>
 
                 <Button
-                    loading={!request || loading}
-                    label="Sign in with Google"
+                    disabled={!request || loading}
+                    // loading={!request || loading}
+                    // label="Sign in with Google"
+                    title={i18n.t('sign_in_with_google')}
                     onPress={() => {
                         promptAsync();
                     }}
@@ -109,20 +113,3 @@ export const LoginScreen = () => {
         </MainContainer>
     );
 };
-
-const styles = (theme = {} as ThemeColors) =>
-    StyleSheet.create({
-        container: {
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingHorizontal: normalize(20),
-        },
-        formTitle: {
-            marginBottom: normalize(30),
-            color: theme.text01,
-        },
-        testText: {
-            padding: normalize(20),
-        },
-    });

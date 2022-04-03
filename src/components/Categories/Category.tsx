@@ -1,31 +1,23 @@
 import React from 'react';
 
-import {Text, View} from 'react-native';
+import {Image, View} from 'react-native';
 
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-import {withLocalization} from '_app/utils/helpers';
-import {navigation} from '_app/services/navigations';
-import {tBase} from '_app/constants';
+import {Text, useTheme} from '_app/design-system';
+import {ACTIVE_OPACITY} from '_app/constants';
 
 import {s} from './styles';
 
 export const Category = ({item}: TCategoryProps) => {
-    const {name, emoji, locale, localizations} = item;
+    const {fonts, colors} = useTheme();
+    const {name, imageUri, locale, localizations} = item;
 
     return (
-        <TouchableOpacity
-            onPress={() =>
-                navigation.navigate('ItemsByCategory', {
-                    item,
-                })
-            }
-            activeOpacity={0.8}
-            style={s.category}>
-            <View style={s.categoryEmoji}>
-                <Text>{emoji}</Text>
-            </View>
-            <Text style={tBase}>{withLocalization('name', name, locale, localizations)}</Text>
+        <TouchableOpacity activeOpacity={ACTIVE_OPACITY} style={s.category}>
+            <Image source={{uri: imageUri}} resizeMode="cover" style={[s.image, s.absoluteFillObject]} />
+            <View style={s.overlay} />
+            <Text style={[s.categoryName, {color: colors.white, ...fonts.medium}]}>{name}</Text>
         </TouchableOpacity>
     );
 };

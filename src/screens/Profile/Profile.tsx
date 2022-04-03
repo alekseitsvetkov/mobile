@@ -1,195 +1,219 @@
-import React, {useCallback, useContext, useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 
-import {FlatList, RefreshControl, StyleSheet, Text, useColorScheme} from 'react-native';
+import {Animated, ImageBackground, View} from 'react-native';
 
-import {useTranslation} from 'react-i18next';
-import {useScrollToTop} from '@react-navigation/native';
-import {useActionSheet} from '@expo/react-native-action-sheet';
+import Feather from 'react-native-vector-icons/Feather';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+// import i18n from 'i18n-js';
+import {BlurView} from 'expo-blur';
+import dayjs from 'dayjs';
 
-import {signOut} from '_app/utils/authentication';
-import {ThemeColors} from '_app/types/theme';
+import {signOut} from '_app/utils';
 import {navigation} from '_app/services/navigations';
-import {Button} from '_app/layout';
-import {OrderDirection, useMeQuery, useVisitedQuery, useWantedQuery} from '_app/generated/graphql';
-import {AppContext} from '_app/context';
-import {MainContainer} from '_app/components';
+import {useMeQuery} from '_app/generated/graphql';
+import {Surface, Text, useTheme} from '_app/design-system';
+import {Avatar, MainContainer, ProfileTabs, UserInfo} from '_app/components';
 
 import {s} from './styles';
-import {Empty, renderHeader, renderItem} from './elements';
+
+const localizedFormat = require('dayjs/plugin/localizedFormat');
+dayjs.extend(localizedFormat);
+require('dayjs/locale/es');
+require('dayjs/locale/ru');
+
+const logOut = () => {
+    signOut();
+    navigation.navigate('Auth');
+};
+
+export const HEADER_HEIGHT_EXPANDED = 35;
+const HEADER_HEIGHT_NARROWED = 90;
+
+const PROFILE_BANNER_URI =
+    'https://images.unsplash.com/photo-1508672019048-805c876b67e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1500&q=80';
+
+const AnimatedImageBackground = Animated.createAnimatedComponent(ImageBackground);
+
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+
+// const currentLocale = i18n.currentLocale().split('-')[0];
 
 export const ProfileScreen = () => {
-    const ref = useRef(null);
-    const {t} = useTranslation();
-    const {theme, selectedList, selectList} = useContext(AppContext);
-    const scheme = useColorScheme();
-
-    const {showActionSheetWithOptions} = useActionSheet();
-    const [refreshing, setRefreshing] = useState(false);
-    const [wanted, setWanted] = useState([]);
-    const [visited, setVisited] = useState([]);
-
-    const {loading, data, error, refetch} = useMeQuery();
-
     const {
-        data: dataWanted,
-        loading: loadingWanted,
-        error: errorWanted,
-        refetch: refetchWanted,
-        fetchMore: fetchMoreWanted,
-    } = useWantedQuery({
-        variables: {
-            first: 5,
-            orderBy: {
-                direction: OrderDirection.Asc,
-            },
-        },
-        notifyOnNetworkStatusChange: true,
-    });
+        loading,
+        data,
+        error,
+        //refetch
+    } = useMeQuery();
+    const insets = useSafeAreaInsets();
+    const scrollY = useRef(new Animated.Value(0)).current;
+    const {colors} = useTheme();
 
-    useEffect(() => {
-        if (dataWanted && wanted.length === 0) {
-            setWanted(dataWanted.wanted.edges);
-        }
-    }, [dataWanted]);
+    const user = data?.me;
 
-    const wantedEndReached = async () => {
-        if (wanted) {
-            const lastWanted = wanted[wanted.length - 1].node.id;
-            const newData = await fetchMoreWanted({
-                variables: {
-                    first: 5,
-                    after: lastWanted,
-                    orderBy: {
-                        direction: OrderDirection.Asc,
-                    },
-                },
-            });
-            setWanted((prevState) => [...prevState, ...newData.data.wanted.edges]);
-        }
-    };
-
-    const {
-        data: dataVisited,
-        loading: loadingVisited,
-        error: errorVisited,
-        refetch: refetchVisited,
-        fetchMore: fetchMoreVisited,
-    } = useVisitedQuery({
-        variables: {
-            first: 5,
-            orderBy: {
-                direction: OrderDirection.Asc,
-            },
-        },
-        notifyOnNetworkStatusChange: true,
-    });
-
-    useEffect(() => {
-        if (dataVisited && visited.length === 0) {
-            setVisited(dataVisited.visited.edges);
-        }
-    }, [dataVisited]);
-
-    const visitedEndReached = async () => {
-        if (wanted) {
-            const lastVisited = visited[visited.length - 1].node.id;
-            const newData = await fetchMoreVisited({
-                variables: {
-                    first: 5,
-                    after: lastVisited,
-                    orderBy: {
-                        direction: OrderDirection.Asc,
-                    },
-                },
-            });
-            setVisited((prevState) => [...prevState, ...newData.data.visited.edges]);
-        }
-    };
-
-    const onRefresh = useCallback(() => {
-        setRefreshing(true);
-        refetch();
-        true && refetchWanted();
-        true && refetchVisited();
-        setRefreshing(false);
-    }, [refetch, refetchWanted, refetchVisited]);
-
-    useScrollToTop(ref);
+    if (error) {
+        logOut();
+    }
 
     if (loading) {
         return (
-            <MainContainer>
-                <Text style={styles(theme).text}>Loading...</Text>
+            <MainContainer statusBarStyle="light-content">
+                <Text>Loading</Text>
             </MainContainer>
         );
     }
 
-    const logOut = async () => {
-        await signOut();
-        navigation.navigate('Auth');
-    };
-
-    if (error || errorWanted || errorVisited) {
-        return (
-            <MainContainer>
-                <Text style={styles(theme).text}>Error. Please try later...</Text>
-                <Button label={t('utils:logout')} onPress={() => logOut()} loading={false} />
-            </MainContainer>
-        );
+    if (!user) {
+        logOut();
     }
 
-    const user = data!.me;
-
-    const isMe = true;
-
-    const getData = () => {
-        switch (selectedList) {
-            case 'want':
-                return wanted;
-            case 'visited':
-                return visited;
-
-            default:
-                return 'want';
-        }
-    };
-
-    const type = selectedList === 'moments' ? 'moments' : 'list';
-
+    // TODO: NEED TO SEPARATE
     return (
-        <MainContainer statusBarStyle="light-content">
-            <FlatList
-                ref={ref}
-                ListHeaderComponent={renderHeader({
-                    user,
-                    t,
-                    isMe,
-                    theme,
-                    scheme,
-                    route: null,
-                    showActionSheetWithOptions,
-                    selectList,
-                })}
-                ListEmptyComponent={() => <Empty t={t} theme={theme} type={type} />}
-                numColumns={2}
-                horizontal={false}
-                data={selectedList === 'moments' ? null : getData()}
-                columnWrapperStyle={s.listWrapper}
-                contentContainerStyle={{}}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.node.id}
-                showsVerticalScrollIndicator={false}
-                decelerationRate="fast"
-                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-                onEndReached={() => (true ? wantedEndReached() : visitedEndReached())}
-            />
+        // TODO: DELETE WHEN ADDED LOGOUT
+        // <MainContainer marginTop statusBarStyle="light-content">
+        //     <UserInfo user={user} />
+        //     <TouchableWithoutFeedback onPress={() => logOut()}>
+        //         <Text style={{paddingHorizontal: 16}}>{i18n.t('logout')}</Text>
+        //     </TouchableWithoutFeedback>
+        // </MainContainer>
+        <MainContainer safeAreaDisabled statusBarStyle="light-content">
+            <View style={s.container}>
+                <View style={[s.settings, {top: insets.top}]}>
+                    <Feather name="settings" color="white" size={16} />
+                </View>
+                <Animated.View
+                    style={[
+                        s.refresh,
+                        {
+                            top: insets.top + 6,
+                            opacity: scrollY.interpolate({
+                                inputRange: [-20, 0],
+                                outputRange: [1, 0],
+                            }),
+                            transform: [
+                                {
+                                    rotate: scrollY.interpolate({
+                                        inputRange: [-45, -35],
+                                        outputRange: ['180deg', '0deg'],
+                                        extrapolate: 'clamp',
+                                    }),
+                                },
+                            ],
+                        },
+                    ]}>
+                    <Feather name="arrow-down" color="white" size={25} />
+                </Animated.View>
+                <Animated.View
+                    style={[
+                        s.nameContainer,
+                        {
+                            top: insets.top + 6,
+                            opacity: scrollY.interpolate({
+                                inputRange: [90, 110],
+                                outputRange: [0, 1],
+                            }),
+                            transform: [
+                                {
+                                    translateY: scrollY.interpolate({
+                                        inputRange: [90, 120],
+                                        outputRange: [30, 0],
+                                        extrapolate: 'clamp',
+                                    }),
+                                },
+                            ],
+                        },
+                    ]}>
+                    <Text style={[s.name, {color: colors.white}]}>{user?.name}</Text>
+                </Animated.View>
+                <AnimatedImageBackground
+                    source={{
+                        uri: PROFILE_BANNER_URI,
+                    }}
+                    style={[
+                        s.banner,
+                        {
+                            height: HEADER_HEIGHT_EXPANDED + HEADER_HEIGHT_NARROWED,
+                            transform: [
+                                {
+                                    scale: scrollY.interpolate({
+                                        inputRange: [-200, 0],
+                                        outputRange: [5, 1],
+                                        extrapolateLeft: 'extend',
+                                        extrapolateRight: 'clamp',
+                                    }),
+                                },
+                            ],
+                        },
+                    ]}>
+                    <AnimatedBlurView
+                        tint="dark"
+                        intensity={70}
+                        style={[
+                            s.bannerOverlay,
+                            {
+                                opacity: scrollY.interpolate({
+                                    inputRange: [-50, 0, 50, 100],
+                                    outputRange: [1, 0, 0, 1],
+                                }),
+                            },
+                        ]}
+                    />
+                </AnimatedImageBackground>
+                <Animated.ScrollView
+                    showsVerticalScrollIndicator={false}
+                    onScroll={Animated.event(
+                        [
+                            {
+                                nativeEvent: {
+                                    contentOffset: {y: scrollY},
+                                },
+                            },
+                        ],
+                        {useNativeDriver: true},
+                    )}
+                    style={[
+                        s.scrollContainer,
+                        {
+                            marginTop: HEADER_HEIGHT_NARROWED,
+                            paddingTop: HEADER_HEIGHT_EXPANDED,
+                        },
+                    ]}>
+                    <Surface style={s.container}>
+                        <View style={[s.container, s.userInfoContainer]}>
+                            <Avatar
+                                uri={user?.avatar}
+                                innerStyle={{
+                                    ...s.avatarContainer,
+                                    borderColor: colors.background,
+                                    transform: [
+                                        {
+                                            scale: scrollY.interpolate({
+                                                inputRange: [0, HEADER_HEIGHT_EXPANDED],
+                                                outputRange: [1, 0.6],
+                                                extrapolate: 'clamp',
+                                            }),
+                                        },
+                                        {
+                                            translateY: scrollY.interpolate({
+                                                inputRange: [0, HEADER_HEIGHT_EXPANDED],
+                                                outputRange: [0, 16],
+                                                extrapolate: 'clamp',
+                                            }),
+                                        },
+                                    ],
+                                }}
+                            />
+                            {!!user && <UserInfo user={user} />}
+                        </View>
+
+                        <View style={s.container}>
+                            <View style={s.tabsContainer}>
+                                <ProfileTabs />
+                            </View>
+                        </View>
+                    </Surface>
+                </Animated.ScrollView>
+            </View>
         </MainContainer>
     );
 };
-
-const styles = (theme = {} as ThemeColors) =>
-    StyleSheet.create({
-        text: {
-            color: theme.text01,
-        },
-    });

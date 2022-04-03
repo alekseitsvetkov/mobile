@@ -1,48 +1,50 @@
 import React, {useContext, useEffect, useState} from 'react';
 
-import {ActionSheetIOS, Pressable, StyleSheet, Text, TouchableHighlight, View, useColorScheme} from 'react-native';
+import {ActionSheetIOS, Pressable, TouchableHighlight, useColorScheme} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {ScrollView} from 'react-native-gesture-handler';
-import {useTranslation} from 'react-i18next';
+import i18n from 'i18n-js';
 import {useActionSheet} from '@expo/react-native-action-sheet';
 
-import {languageTag} from '_app/utils/helpers';
-import {ThemeColors} from '_app/types/theme';
 import {useAddCityMutation, useCityQuery, useMoveCityMutation, useRemoveCityMutation} from '_app/generated/graphql';
+import {Surface, Text} from '_app/design-system';
 import {AppContext} from '_app/context';
-import {PLATFORM, mapGfxStyle} from '_app/constants';
+import {
+    PLATFORM,
+    // mapGfxStyle
+} from '_app/constants';
 import {Gallery} from '_app/components';
 
 import {s} from './styles';
 
 // TODO: refactor mutations and conditions, split into different components and files
 export const CardScreen = ({route, navigation}) => {
-    const {t} = useTranslation();
     const scheme = useColorScheme();
-    const {me, theme} = useContext(AppContext);
+    const {me} = useContext(AppContext);
 
     const {item} = route.params;
     const {showActionSheetWithOptions} = useActionSheet();
     const [currentCity, setCurrentCity] = useState(item);
 
-    const ruName = item.alternateName
-        ? item.alternateName.find((a) => {
-              if (a.isoLang === 'ru' && a.isPreferredName === true) {
-                  return a;
-              }
+    // const ruName = item.alternateName
+    //     ? item.alternateName.find((a) => {
+    //           if (a.isoLang === 'ru' && a.isPreferredName === true) {
+    //               return a;
+    //           }
 
-              if (a.isoLang === 'ru' && !a.isHistoric) {
-                  return a;
-              }
+    //           if (a.isoLang === 'ru' && !a.isHistoric) {
+    //               return a;
+    //           }
 
-              return null;
-          })
-        : null;
+    //           return null;
+    //       })
+    //     : null;
 
-    const title = languageTag === 'ru' && ruName && ruName.alternateName ? ruName.alternateName : currentCity.name;
+    // const title = languageTag === 'ru' && ruName && ruName.alternateName ? ruName.alternateName : currentCity.name;
+
+    const title = currentCity.name;
 
     const {
         data: itemData,
@@ -159,9 +161,9 @@ export const CardScreen = ({route, navigation}) => {
             ? ActionSheetIOS.showActionSheetWithOptions(
                   {
                       options: [
-                          `${t('utils:cancel')}`,
-                          `${alreadyWanted ? t('utils:visited') : t('utils:want')}`,
-                          `${t('utils:delete')}`,
+                          `${i18n.t('cancel')}`,
+                          `${alreadyWanted ? i18n.t('visited') : i18n.t('want')}`,
+                          `${i18n.t('delete')}`,
                       ],
                       destructiveButtonIndex: 2,
                       cancelButtonIndex: 0,
@@ -180,9 +182,9 @@ export const CardScreen = ({route, navigation}) => {
             : showActionSheetWithOptions(
                   {
                       options: [
-                          `${t('utils:cancel')}`,
-                          `${alreadyWanted ? t('utils:visited') : t('utils:want')}`,
-                          `${t('utils:delete')}`,
+                          `${i18n.t('cancel')}`,
+                          `${alreadyWanted ? i18n.t('visited') : i18n.t('want')}`,
+                          `${i18n.t('delete')}`,
                       ],
                       cancelButtonIndex: 0,
                       destructiveButtonIndex: 2,
@@ -200,75 +202,67 @@ export const CardScreen = ({route, navigation}) => {
               );
     };
 
-    const insets = useSafeAreaInsets();
-
     return (
-        <ScrollView
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={[s.container, styles(theme).container, {paddingBottom: insets.bottom}]}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[s.container]}>
             <Gallery images={currentCity.images} />
-            <View style={s.content}>
-                <View style={[s.section, styles(theme).section]}>
-                    <Text style={[s.name, styles(theme).text]}>
+            <Surface style={s.content}>
+                <Surface style={s.section}>
+                    <Text style={[s.name, s.text]}>
                         {title}
                         {/* {currentCity.state
               ? currentCity.state.country.emoji + ' ' + currentCity.name
               : currentCity.country.emoji + ' ' + currentCity.name} */}
                     </Text>
-                </View>
-                <View style={[s.section, styles(theme).section]}>
-                    <View style={s.cardButtons}>
+                </Surface>
+                <Surface style={[s.section, s.section]}>
+                    <Surface style={s.cardButtons}>
                         {!alreadyWanted && !alreadyVisited && !loading ? (
                             <>
                                 <TouchableHighlight
-                                    underlayColor={theme.gray01}
-                                    style={[s.button, styles(theme).button]}
+                                    //underlayColor={theme.gray01}
+                                    style={s.button}
                                     onPress={() => handlePress('want')}>
-                                    <Text style={[s.buttonText, styles(theme).text]}>{t('utils:want')}</Text>
+                                    <Text style={[s.buttonText, s.text]}>{i18n.t('want')}</Text>
                                 </TouchableHighlight>
                                 <TouchableHighlight
-                                    underlayColor={theme.gray01}
-                                    style={[s.button, styles(theme).button]}
+                                    // underlayColor={theme.gray01}
+                                    style={s.button}
                                     onPress={() => handlePress('visited')}>
-                                    <Text style={[s.buttonText, styles(theme).text]}>{t('utils:visited')}</Text>
+                                    <Text style={[s.buttonText, s.text]}>{i18n.t('visited')}</Text>
                                 </TouchableHighlight>
                             </>
                         ) : (
                             <TouchableHighlight
-                                underlayColor={theme.gray01}
-                                style={[
-                                    s.button,
-                                    (alreadyWanted || alreadyVisited || loading) && s.buttonFull,
-                                    styles(theme).button,
-                                ]}
+                                // underlayColor={theme.gray01}
+                                style={[s.button, (alreadyWanted || alreadyVisited || loading) && s.buttonFull]}
                                 onPress={() => !loading && onPressSheet()}>
-                                <View style={[s.buttonWithIcon]}>
+                                <Surface style={[s.buttonWithIcon]}>
                                     <Text
                                         style={[
                                             s.buttonText,
                                             (alreadyWanted || alreadyVisited || loading) && s.buttonWithIconText,
-                                            styles(theme).text,
+                                            s.text,
                                         ]}>
                                         {loading
-                                            ? t('utils:loading')
+                                            ? i18n.t('loading')
                                             : alreadyWanted
-                                            ? t('utils:want')
-                                            : t('utils:visited')}
+                                            ? i18n.t('want')
+                                            : i18n.t('visited')}
                                     </Text>
-                                    <Icon name="more-horizontal" style={s.buttonIcon} size={18} color={theme.gray01} />
-                                </View>
+                                    <Icon name="more-horizontal" style={s.buttonIcon} size={18} color={'#ddd'} />
+                                </Surface>
                             </TouchableHighlight>
                         )}
-                    </View>
-                </View>
+                    </Surface>
+                </Surface>
                 {item.overview && (
-                    <View style={[s.section, styles(theme).section]}>
-                        <Text style={[s.sectionTitle, styles(theme).text]}>{t('card:overview')}</Text>
-                        <Text style={[styles(theme).text]}>{item.overview}</Text>
-                    </View>
+                    <Surface style={s.section}>
+                        <Text style={[s.sectionTitle, s.text]}>{i18n.t('overview')}</Text>
+                        <Text style={s.text}>{item.overview}</Text>
+                    </Surface>
                 )}
-                <View style={[s.section, styles(theme).section]}>
-                    <Text style={[s.sectionTitle, styles(theme).text]}>{t('utils:location')}</Text>
+                <Surface style={s.section}>
+                    <Text style={[s.sectionTitle, s.text]}>{i18n.t('location')}</Text>
                     <Pressable
                         onPress={() =>
                             navigation.navigate('Map', {
@@ -286,7 +280,7 @@ export const CardScreen = ({route, navigation}) => {
                             mapType="standard"
                             moveOnMarkerPress={false}
                             pointerEvents="none"
-                            customMapStyle={mapGfxStyle}
+                            //customMapStyle={mapGfxStyle}
                             initialRegion={{
                                 latitude: Number(currentCity.latitude),
                                 longitude: Number(currentCity.longitude),
@@ -302,24 +296,8 @@ export const CardScreen = ({route, navigation}) => {
                             />
                         </MapView>
                     </Pressable>
-                </View>
-            </View>
+                </Surface>
+            </Surface>
         </ScrollView>
     );
 };
-
-const styles = (theme = {} as ThemeColors) =>
-    StyleSheet.create({
-        container: {
-            backgroundColor: theme.base,
-        },
-        text: {
-            color: theme.text01,
-        },
-        section: {
-            borderColor: theme.gray01,
-        },
-        button: {
-            backgroundColor: theme.gray01,
-        },
-    });

@@ -1,27 +1,27 @@
 import React from 'react';
 
-import {Animated, TouchableWithoutFeedback} from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import {normalize} from '_app/utils/dimensions';
 import {navigation} from '_app/services/navigations';
-import {colors} from '_app/constants';
+import {Surface, useTheme} from '_app/design-system';
 
 const CloseModal = () => {
+    const {colors} = useTheme();
     return (
         <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
-            <Animated.View
+            <Surface
+                withShadow
                 style={{
-                    backgroundColor: colors.white,
                     borderRadius: 100,
                     alignItems: 'center',
-                    paddingVertical: normalize(6),
-                    paddingHorizontal: normalize(6),
-                    marginLeft: normalize(20),
+                    paddingVertical: 6,
+                    paddingHorizontal: 6,
+                    marginLeft: 20,
                 }}>
-                <Icon name="x" size={18} color={colors.black} />
-            </Animated.View>
+                <Icon name="x" size={18} color={colors.primary} />
+            </Surface>
         </TouchableWithoutFeedback>
     );
 };

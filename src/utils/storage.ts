@@ -12,10 +12,10 @@ export const removeToken = async () => {
     return await AsyncStorage.removeItem('@skeetry_token');
 };
 
-export const saveThemeType = async (themeType: string) => {
-    return await AsyncStorage.setItem('@skeetry_theme', themeType);
+export const loadPersistence = async () => {
+    return await AsyncStorage.getItem('@skeetry_persistence');
 };
 
-export const loadThemeType = async () => {
-    return await AsyncStorage.getItem('@skeetry_theme');
+export const savePersistence = async (persistence: string) => {
+    return await AsyncStorage.setItem('@skeetry_persistence', persistence);
 };

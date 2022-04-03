@@ -1,25 +1,24 @@
 import React, {useRef, useState} from 'react';
 
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 
-import {useTranslation} from 'react-i18next';
+import i18n from 'i18n-js';
 import {useScrollToTop} from '@react-navigation/native';
 
-import {normalize} from '_app/utils/dimensions';
-import {HorizontalListPlaceholder, Input} from '_app/layout';
-import {OrderDirection, useCitiesQuery, useUsersQuery} from '_app/generated/graphql';
+import {OrderDirection, useCitiesQuery} from '_app/generated/graphql';
+import {Searchbar, Text} from '_app/design-system';
 import {Card, MainContainer, UserCard} from '_app/components';
 
-export const SearchScreen = () => {
-    const {t} = useTranslation();
+import {s} from './styles';
 
+export const SearchScreen = () => {
     const ref = useRef<ScrollView>(null);
-    const [input, setInput] = useState('');
+    const [searchValue, setSearchValue] = useState('');
 
     const {data: dataSearch, loading: loadingSearch} = useCitiesQuery({
         variables: {
             first: 5,
-            query: input,
+            query: searchValue,
             orderBy: {
                 direction: OrderDirection.Desc,
             },
@@ -27,66 +26,66 @@ export const SearchScreen = () => {
         notifyOnNetworkStatusChange: true,
     });
 
-    const {data: dataUsers, loading: loadingUsers} = useUsersQuery({
-        variables: {
-            first: 5,
-            query: input,
-            orderBy: {
-                direction: OrderDirection.Desc,
-            },
-        },
-        notifyOnNetworkStatusChange: true,
-    });
-
-    const handleChange = async (value) => {
-        setInput(value);
-    };
+    // const {data: dataUsers, loading: loadingUsers} = useUsersQuery({
+    //     variables: {
+    //         first: 5,
+    //         query: searchValue,
+    //         orderBy: {
+    //             direction: OrderDirection.Desc,
+    //         },
+    //     },
+    //     notifyOnNetworkStatusChange: true,
+    // });
 
     useScrollToTop(ref);
 
     const searchList = dataSearch?.cities.edges;
-    const usersList = dataUsers?.users.edges;
-
-    console.log({searchList});
+    // const usersList = dataUsers?.users.edges;
 
     return (
-        <MainContainer>
-            <View style={{paddingHorizontal: normalize(20)}}>
-                <Input ref={null} placeholder={t('search:search')} onChangeText={handleChange} />
+        <MainContainer statusBarStyle="light-content" marginTop>
+            <View style={s.searchbarContainer}>
+                <Searchbar
+                    autoCapitalize="none"
+                    autoFocus
+                    autoCorrect={false}
+                    placeholder={i18n.t('where_do_you_want_to_go')}
+                    value={searchValue}
+                    onChangeText={setSearchValue}
+                />
             </View>
-            {searchList?.length === 0 && usersList?.length === 0 && (
-                <Text style={[{alignItems: 'center', padding: 20}]}>{t('search:not_found')}</Text>
-            )}
-            {input.length !== 0 && (
+            {/* {searchList?.length === 0 && usersList?.length === 0 && (
+                <Text style={s.contentContainer}>{i18n.t('search_not_found')}</Text>
+            )} */}
+            {searchList?.length === 0 && <Text style={s.contentContainer}>{i18n.t('search_not_found')}</Text>}
+            {searchValue.length !== 0 && (
                 <View>
-                    {loadingSearch && <HorizontalListPlaceholder size="small" />}
+                    {/* {loadingSearch && <HorizontalListPlaceholder size="small" />} */}
                     {searchList?.length !== 0 && (
                         <ScrollView
                             horizontal
                             showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={{alignItems: 'center', padding: 20}}>
+                            contentContainerStyle={s.centerContainer}>
                             {searchList?.map((i) => (
-                                <View key={i.node.id} style={{marginRight: 20}}>
+                                <View key={i.node.id} style={s.cardContainer}>
                                     <Card item={i.node} size="small" />
                                 </View>
                             ))}
                         </ScrollView>
                     )}
-                    {loadingUsers && <HorizontalListPlaceholder size="small" />}
-                    {usersList?.length !== 0 && (
+                    {/* {loadingUsers && <HorizontalListPlaceholder size="small" />} */}
+                    {/* {usersList?.length !== 0 && (
                         <ScrollView
                             horizontal
                             showsHorizontalScrollIndicator={false}
-                            contentContainerStyle={{alignItems: 'center', padding: 20}}>
+                            contentContainerStyle={s.centerContainer}>
                             {usersList?.map((i) => {
-                                const {id, avatar, username, name} = i.node;
+                                const {id, avatar, name} = i.node;
 
-                                return (
-                                    <UserCard key={id} node={i.node} avatar={avatar} username={username} name={name} />
-                                );
+                                return <UserCard key={id} node={i.node} avatar={avatar} name={name} />;
                             })}
                         </ScrollView>
-                    )}
+                    )} */}
                 </View>
             )}
         </MainContainer>

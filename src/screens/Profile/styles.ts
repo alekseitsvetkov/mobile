@@ -1,84 +1,78 @@
 import {StyleSheet} from 'react-native';
 
-import {SCREEN_WIDTH, normalize} from '_app/utils/dimensions';
-import {avatarSize, colors, radius, tBase, tSmallRegular, tTitle} from '_app/constants';
-
-export const itemWidth = SCREEN_WIDTH / 2 - 20;
-
 export const s = StyleSheet.create({
-    headerArea: {
-        height: normalize(50),
+    container: {},
+    settings: {
+        zIndex: 2,
+        position: 'absolute',
+        right: 20,
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        height: 30,
+        width: 30,
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    profilePanel: {
-        width: '100%',
-        alignItems: 'flex-end',
-        paddingBottom: normalize(10),
-        marginBottom: normalize(10),
-        marginTop: normalize(16),
-        paddingHorizontal: normalize(20),
+    refresh: {
+        zIndex: 2,
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        alignItems: 'center',
     },
-    profileHeader: {
-        paddingBottom: normalize(20),
-        marginBottom: normalize(20),
-        borderBottomColor: colors.mainGray,
-        borderBottomWidth: 1,
-        paddingHorizontal: normalize(10),
+    nameContainer: {
+        zIndex: 2,
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        alignItems: 'center',
+        paddingBottom: 16,
+        overflow: 'hidden',
     },
-    profileHeaderWrap: {
-        display: 'flex',
+    banner: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+    },
+    bannerOverlay: {
+        ...StyleSheet.absoluteFillObject,
+        zIndex: 2,
+    },
+    scrollContainer: {
+        zIndex: 30,
+        marginBottom: 16,
+        overflow: 'hidden',
+    },
+    userInfoContainer: {
+        paddingHorizontal: 16,
+    },
+    avatarContainer: {
+        width: 75,
+        height: 75,
+        borderRadius: 12,
+        borderWidth: 4,
+        marginTop: -30,
+        marginLeft: -4,
+    },
+    tabsContainer: {
+        // TODO: TEMPORARY SOLUTION
+        height: 800,
+    },
+    avatar: {
+        marginTop: -60,
+        marginLeft: -4,
+        paddingBottom: 8,
+    },
+    row: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: '100%',
+        paddingVertical: 3,
     },
     name: {
-        ...tBase,
+        fontSize: 14,
         fontWeight: '600',
-        color: colors.black,
-        marginBottom: normalize(2),
-        maxWidth: SCREEN_WIDTH - (avatarSize + normalize(30)),
     },
-    username: {
-        ...tBase,
-        marginBottom: normalize(2),
-        maxWidth: SCREEN_WIDTH - (avatarSize + normalize(30)),
-    },
-    bio: {
-        ...tBase,
-        // 30 = 20 side paddings + avatar padding
-        maxWidth: SCREEN_WIDTH - (avatarSize + normalize(30)),
-    },
-    profileStats: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-        paddingBottom: normalize(20),
-        marginBottom: normalize(20),
-        borderBottomColor: colors.mainGray,
-        borderBottomWidth: 1,
-        paddingHorizontal: normalize(20),
-    },
-    card: {
-        minWidth: itemWidth,
-        maxWidth: itemWidth,
-        marginVertical: normalize(6),
-        marginHorizontal: normalize(6),
-        position: 'relative',
-    },
-    cardImage: {
-        width: itemWidth,
-        height: normalize(150),
-        borderRadius: radius.base,
-    },
-    containerWrap: {
-        width: '100%',
-        alignItems: 'center',
-        marginTop: normalize(30),
-    },
-    listWrapper: {
-        justifyContent: 'space-between',
-        marginHorizontal: normalize(20),
-        marginBottom: normalize(60),
+    icon: {
+        marginRight: 2,
     },
 });

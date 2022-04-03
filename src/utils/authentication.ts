@@ -1,5 +1,3 @@
-// import { Errors } from '_app/constants';
-// import { messaging, crashlytics, auth } from './firebase';
 import {StorageErrorTypes, removeToken} from './storage';
 
 export const handleLoginError = async (errorType: string) => {

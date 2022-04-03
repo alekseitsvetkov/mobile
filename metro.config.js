@@ -1,17 +1,14 @@
-const {getDefaultConfig} = require('expo/metro-config');
+const {getDefaultConfig} = require('@expo/metro-config');
 
-module.exports = (async () => {
-    const config = await getDefaultConfig(__dirname);
+const config = getDefaultConfig(__dirname);
 
-    const {transformer, resolver} = config;
+const {resolver} = config;
 
-    config.transformer = {
-        ...transformer,
-    };
-    config.resolver = {
-        ...resolver,
-        sourceExts: [...resolver.sourceExts, 'cjs'],
-    };
+config.resolver = {
+    ...resolver,
+    sourceExts: [...resolver.sourceExts, 'cjs'],
+};
 
-    return config;
-})();
+config.transformer.minifierConfig.compress.drop_console = true;
+
+module.exports = config;

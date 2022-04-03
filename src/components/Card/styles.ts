@@ -1,7 +1,6 @@
 import {Dimensions, StatusBar, StyleSheet} from 'react-native';
 
-import {SCREEN_WIDTH, normalize} from '_app/utils/dimensions';
-import {CARD_HEIGHT, CARD_SPACING, colors, radius, tBase, tSmallRegular} from '_app/constants';
+import {SCREEN_WIDTH} from '_app/utils';
 
 const itemBaseWidth = Dimensions.get('window').width / 2 - 30;
 
@@ -11,25 +10,25 @@ export const s = StyleSheet.create({
         marginTop: StatusBar.currentHeight || 0,
     },
     item: {
-        borderRadius: radius.base,
+        borderRadius: 12,
     },
     itemImage: {
-        borderRadius: radius.base,
+        borderRadius: 12,
     },
     itemSizeFull: {
-        backgroundColor: colors.mainGray,
+        backgroundColor: '#EEEEEE',
         width: SCREEN_WIDTH - 40,
-        height: CARD_HEIGHT - 20,
+        height: 270 - 20,
     },
     itemFull: {
         width: SCREEN_WIDTH - 40,
     },
     itemSizeWide: {
-        height: normalize(150),
-        width: normalize(240),
+        height: 150,
+        width: 240,
     },
     itemWide: {
-        width: normalize(240),
+        width: 240,
     },
     itemSizeBase: {
         height: itemBaseWidth - 10,
@@ -40,55 +39,55 @@ export const s = StyleSheet.create({
         height: itemBaseWidth - 10,
     },
     itemSizeSmall: {
-        height: normalize(125),
-        width: normalize(125),
+        height: 125,
+        width: 125,
     },
     itemSmall: {
-        width: normalize(125),
+        width: 125,
     },
     focalPoint: {
         ...StyleSheet.absoluteFillObject,
-        width: normalize(20),
-        height: normalize(20),
+        width: 20,
+        height: 20,
         backgroundColor: 'blue',
         borderRadius: 10,
     },
     title: {
-        paddingTop: 4 + CARD_SPACING,
-        paddingBottom: 18 + CARD_SPACING,
+        paddingTop: 4 + 6,
+        paddingBottom: 18 + 6,
         fontSize: 18,
     },
     dot: {
-        margin: normalize(2),
+        margin: 2,
         fontSize: 10,
         color: 'rgba(255,255,255,.6)',
     },
     dotActive: {
-        margin: normalize(2),
+        margin: 2,
         fontSize: 10,
         color: 'rgba(255,255,255,.9)',
     },
     wrapDot: {
         position: 'absolute',
-        bottom: normalize(10),
+        bottom: 10,
         flexDirection: 'row',
         alignSelf: 'center',
     },
     flag: {
-        top: normalize(10),
-        right: normalize(10),
+        top: 10,
+        right: 10,
         position: 'absolute',
-        backgroundColor: colors.white,
-        height: normalize(30),
-        width: normalize(30),
-        borderRadius: radius.full,
+        backgroundColor: '#ffffff',
+        height: 30,
+        width: 30,
+        borderRadius: 100,
         justifyContent: 'center',
         alignItems: 'center',
         shadowOffset: {
-            width: normalize(0),
-            height: normalize(4),
+            width: 0,
+            height: 4,
         },
-        shadowColor: colors.black,
+        shadowColor: '#000000',
         shadowOpacity: 0.1,
         textAlign: 'center',
     },
@@ -98,22 +97,20 @@ export const s = StyleSheet.create({
     rating: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: normalize(12),
+        marginTop: 12,
         alignItems: 'flex-start',
     },
     ratingNumber: {
         marginHorizontal: 2,
     },
     ratingCount: {
-        color: colors.mediumGray,
+        color: '#595959',
     },
     itemTitle: {
-        marginTop: normalize(10),
-        ...tBase,
+        marginTop: 10,
     },
     itemDesc: {
-        marginTop: normalize(2),
-        ...tSmallRegular,
+        marginTop: 2,
         // TODO: color from constants
         color: 'rgba(0,0,0,.5)',
     },

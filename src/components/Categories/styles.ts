@@ -1,28 +1,48 @@
 import {StyleSheet} from 'react-native';
 
-import {normalize} from '_app/utils/dimensions';
-import {colors} from '_app/constants';
-
 export const s = StyleSheet.create({
+    container: {
+        marginTop: 16,
+        marginBottom: 20,
+    },
+    title: {
+        marginHorizontal: 16,
+    },
     categoryWrapper: {
-        marginVertical: normalize(14),
-        marginHorizontal: normalize(14),
-        paddingRight: normalize(20),
+        marginTop: 10,
+        paddingHorizontal: 8,
     },
     category: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: colors.gray100,
-        padding: normalize(12),
-        borderRadius: 12,
-        marginHorizontal: normalize(6),
-        minWidth: normalize(150),
-    },
-    categoryEmoji: {
-        backgroundColor: colors.gray200,
+        justifyContent: 'center',
         borderRadius: 10,
-        padding: normalize(12),
-        marginRight: normalize(10),
+        overflow: 'hidden',
+        marginHorizontal: 8,
+        minWidth: 116,
+        paddingVertical: 20,
+        paddingHorizontal: 20,
+    },
+    image: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: '#000000',
+        opacity: 0.25,
+    },
+    absoluteFillObject: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    },
+    categoryName: {
+        fontSize: 12,
+        letterSpacing: 0.5,
+        zIndex: 10,
     },
 });

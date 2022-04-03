@@ -1,10 +1,11 @@
 import fetch from 'isomorphic-unfetch';
+import Constants from 'expo-constants';
 import {createUploadLink} from 'apollo-upload-client';
 import {onError} from '@apollo/client/link/error';
 import {setContext} from '@apollo/client/link/context';
 import {ApolloClient, InMemoryCache, from} from '@apollo/client';
 
-import {loadToken} from '_app/utils/storage';
+import {loadToken} from '_app/utils';
 import {PLATFORM} from '_app/constants';
 
 const cache = new InMemoryCache();
@@ -15,7 +16,7 @@ const API_LOCAL = PLATFORM.IS_ANDROID ? API_LOCAL_MAIN : API_LOCAL_ANDROID;
 const API_PROD = 'https://api.skeetry.com/graphql';
 
 const httpLink = createUploadLink({
-    uri: process.env.NODE_ENV === 'dev' ? API_LOCAL : API_PROD,
+    uri: Constants?.manifest?.extra?.NODE_ENV === 'dev' ? API_LOCAL : API_PROD,
     credentials: 'include',
     fetch,
 });

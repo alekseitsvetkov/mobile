@@ -1,5 +1,6 @@
-type TAvatarProps = {
-    src?: string;
-    username: string;
-    small?: boolean;
-};
+import {ViewStyle} from 'react-native';
+
+export interface IAvatarProps {
+    uri: string;
+    innerStyle?: ViewStyle;
+}

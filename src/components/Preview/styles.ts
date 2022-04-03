@@ -1,26 +1,20 @@
 import {StyleSheet} from 'react-native';
 
-import {normalize} from '_app/utils/dimensions';
-import {radius, tBase} from '_app/constants/globalStyle';
-import {colors} from '_app/constants';
-
 export const s = StyleSheet.create({
     container: {
-        backgroundColor: colors.gray100,
-        borderRadius: radius.base,
-        margin: normalize(10),
-        padding: normalize(10),
+        backgroundColor: '#F3F4F6',
+        borderRadius: 12,
+        margin: 10,
+        padding: 10,
     },
     title: {
-        ...tBase,
         fontWeight: '600',
         fontSize: 18,
-        paddingVertical: normalize(10),
+        paddingVertical: 10,
         textAlign: 'center',
     },
     paragraph: {
-        ...tBase,
-        paddingVertical: normalize(5),
+        paddingVertical: 5,
     },
     semibold: {
         fontWeight: '600',
