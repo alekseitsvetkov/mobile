@@ -1,11 +1,6 @@
 import {StyleSheet} from 'react-native';
 
 export const s = StyleSheet.create({
-    container: {
-        height: '100%',
-        alignItems: 'center',
-        paddingVertical: 16,
-    },
     tabBarLabelStyle: {
         fontSize: 14,
         fontWeight: '600',
