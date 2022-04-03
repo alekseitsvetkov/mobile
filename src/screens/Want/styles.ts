@@ -6,4 +6,7 @@ export const s = StyleSheet.create({
         paddingVertical: 16,
         paddingHorizontal: 16,
     },
+    listContainer: {
+        paddingBottom: 250,
+    },
 });

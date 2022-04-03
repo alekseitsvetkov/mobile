@@ -5,14 +5,13 @@ import {ScrollView, View} from 'react-native';
 import i18n from 'i18n-js';
 import {useScrollToTop} from '@react-navigation/native';
 
-import {OrderDirection, useCitiesQuery, useUsersQuery} from '_app/generated/graphql';
-import {Searchbar, Text, useTheme} from '_app/design-system';
+import {OrderDirection, useCitiesQuery} from '_app/generated/graphql';
+import {Searchbar, Text} from '_app/design-system';
 import {Card, MainContainer, UserCard} from '_app/components';
 
 import {s} from './styles';
 
 export const SearchScreen = () => {
-    const {colors} = useTheme();
     const ref = useRef<ScrollView>(null);
     const [searchValue, setSearchValue] = useState('');
 
@@ -27,21 +26,21 @@ export const SearchScreen = () => {
         notifyOnNetworkStatusChange: true,
     });
 
-    const {data: dataUsers, loading: loadingUsers} = useUsersQuery({
-        variables: {
-            first: 5,
-            query: searchValue,
-            orderBy: {
-                direction: OrderDirection.Desc,
-            },
-        },
-        notifyOnNetworkStatusChange: true,
-    });
+    // const {data: dataUsers, loading: loadingUsers} = useUsersQuery({
+    //     variables: {
+    //         first: 5,
+    //         query: searchValue,
+    //         orderBy: {
+    //             direction: OrderDirection.Desc,
+    //         },
+    //     },
+    //     notifyOnNetworkStatusChange: true,
+    // });
 
     useScrollToTop(ref);
 
     const searchList = dataSearch?.cities.edges;
-    const usersList = dataUsers?.users.edges;
+    // const usersList = dataUsers?.users.edges;
 
     return (
         <MainContainer statusBarStyle="light-content" marginTop>
@@ -55,9 +54,10 @@ export const SearchScreen = () => {
                     onChangeText={setSearchValue}
                 />
             </View>
-            {searchList?.length === 0 && usersList?.length === 0 && (
+            {/* {searchList?.length === 0 && usersList?.length === 0 && (
                 <Text style={s.contentContainer}>{i18n.t('search_not_found')}</Text>
-            )}
+            )} */}
+            {searchList?.length === 0 && <Text style={s.contentContainer}>{i18n.t('search_not_found')}</Text>}
             {searchValue.length !== 0 && (
                 <View>
                     {/* {loadingSearch && <HorizontalListPlaceholder size="small" />} */}
@@ -74,7 +74,7 @@ export const SearchScreen = () => {
                         </ScrollView>
                     )}
                     {/* {loadingUsers && <HorizontalListPlaceholder size="small" />} */}
-                    {usersList?.length !== 0 && (
+                    {/* {usersList?.length !== 0 && (
                         <ScrollView
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -85,7 +85,7 @@ export const SearchScreen = () => {
                                 return <UserCard key={id} node={i.node} avatar={avatar} name={name} />;
                             })}
                         </ScrollView>
-                    )}
+                    )} */}
                 </View>
             )}
         </MainContainer>

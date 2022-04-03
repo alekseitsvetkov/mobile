@@ -58,9 +58,7 @@ export const ProfileScreen = () => {
     if (loading) {
         return (
             <MainContainer statusBarStyle="light-content">
-                <View>
-                    <Text>Loading</Text>
-                </View>
+                <Text>Loading</Text>
             </MainContainer>
         );
     }
