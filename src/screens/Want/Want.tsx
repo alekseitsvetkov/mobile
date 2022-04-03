@@ -31,7 +31,7 @@ export const Want = () => {
     const renderItem = useCallback(({item}) => {
         const {name, images} = item.node;
 
-        const placeholder = 'https://placehold.jp/30/ccc/fff/300x150.png?text=placeholder+image';
+        const placeholder = `https://placehold.jp/30/ccc/fff/300x150.png?text=${name}`;
         const uri = images.length ? images[0].url : placeholder;
 
         return (
